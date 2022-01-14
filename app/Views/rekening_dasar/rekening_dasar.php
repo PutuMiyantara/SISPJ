@@ -27,7 +27,7 @@
             <a href="<?= base_url('/rekdasar/urusan') ?>" class="btn btn-outline-info">Kode Urusan</a>
             <a href="<?= base_url('/rekdasar/bidang') ?>" class="btn btn-outline-info">Kode Bidang</a>
             <a href="<?= base_url('/rekdasar/kegiatan') ?>" class="btn btn-outline-info">Kode Kegiatan</a>
-            <a href="<?= base_url('/rekdasar/program]') ?>" class="btn btn-outline-info">Kode Program</a>
+            <a href="<?= base_url('/rekdasar/program') ?>" class="btn btn-outline-info">Kode Program</a>
             <a href="<?= base_url('/rekdasar/unit') ?>" class="btn btn-outline-info">Kode Unit</a>
         </div>
         <div class="card-body">

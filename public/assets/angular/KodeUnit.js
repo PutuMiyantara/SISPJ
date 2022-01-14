@@ -1,11 +1,11 @@
-sispj.controller("KodeDinas", function ($scope, $http, $window, $timeout) {
+sispj.controller("KodeUnit", function ($scope, $http, $window, $timeout) {
   $scope.setDefault = function () {
     $scope.error = false;
     $scope.success = false;
   };
 
-  $scope.getKodeDinas = function () {
-    $http.get("/rekdasar/getKodeDinas").then(function (data) {
+  $scope.getKodeUnit = function () {
+    $http.get("/rekdasar/getKodeUnit").then(function (data) {
       $scope.datas = data.data;
       console.log(data)
     },function errorCallback(response) {
@@ -15,8 +15,8 @@ sispj.controller("KodeDinas", function ($scope, $http, $window, $timeout) {
   };
 
   $scope.tambahData = function (){
-    $scope.openModal("#kodeDinas");
-    $scope.modalTitle = "Tambah Kode Rekening Dinas";
+    $scope.openModal("#kodeUnit");
+    $scope.modalTitle = "Tambah Kode Rekening Urusan";
     $scope.modalButton = "Simpan";
     $scope.formSubmit = "ng-submit='insertData()'";
     $scope.id = $scope.kode_rek = $scope.uraian = null;
@@ -34,17 +34,18 @@ sispj.controller("KodeDinas", function ($scope, $http, $window, $timeout) {
   $scope.insertData = function () {
     $scope.setDefault();
       $http
-        .post("/rekdasar/insertKodeDinas", {
+        .post("/rekdasar/insertKodeUnit", {
           kode_rek: $scope.kode_rek,
           uraian: $scope.uraian,
+          jumlah_anggaran: $scope.jumlah_anggaran,
         })
         .then(
           function successCallback(data) {
             console.log(data.data);
             if (data.data.errortext == "") {
               $scope.kode_rek = $scope.uraian = null;
-              $scope.getKodeDinas();
-              $scope.closeModal("#kodeDinas");
+              $scope.getKodeUnit();
+              $scope.closeModal("#kodeUnit");
               $scope.success = true;
               $scope.message = data.data.message;
               $timeout(function () {
@@ -68,15 +69,16 @@ sispj.controller("KodeDinas", function ($scope, $http, $window, $timeout) {
 
   $scope.getDetail = function (id) {
     $scope.setDefault();
-    $http.get("/rekdasar/getDetailKodeDinas/" + id).then(
+    $http.get("/rekdasar/getDetailKodeUnit/" + id).then(
       function successCallback(data) {
-        $scope.openModal("#kodeDinas");
-        $scope.modalTitle = "Detail Kode Dinas";
+        $scope.openModal("#kodeUnit");
+        $scope.modalTitle = "Detail Kode Urusan";
         $scope.submitButton = "Update";
         $scope.actionButton = "Kembali";
 
         $scope.id = data.data[0].id;
         $scope.kode_rek = data.data[0].kode_rek;
+        $scope.jumlah_anggaran = data.data[0].jumlah_anggaran;
         $scope.uraian = data.data[0].uraian;
       },
       function errorCallback(response) {
@@ -89,15 +91,16 @@ sispj.controller("KodeDinas", function ($scope, $http, $window, $timeout) {
   $scope.editData = function () {
     console.log('ini benar edit');
     $http
-      .post("/rekdasar/updateKodeDinas/" + $scope.id , {
+      .post("/rekdasar/updateKodeUnit/" + $scope.id , {
         kode_rek : $scope.kode_rek,
+        jumlah_anggaran : $scope.jumlah_anggaran,
         uraian : $scope.uraian
       })
       .then(
         function successCallback(data) {
           if (data.data.errortext == "") {
             $scope.getDetail($scope.id);
-            $scope.getKodeDinas();
+            $scope.getKodeUnit();
             $scope.success = true;
             $timeout(function () {
               $scope.success = false;
@@ -117,15 +120,15 @@ sispj.controller("KodeDinas", function ($scope, $http, $window, $timeout) {
   $scope.deleteData = function(id){
     var isconfirm =  confirm("Ingin Menghapus Data?");
     if (isconfirm) {
-      $http.post("/rekdasar/deleteKodeDinas",{
+      $http.post("/rekdasar/deleteKodeUnit",{
         id: id,
       }).then(
         function successCallback(data){
-          $scope.getKodeDinas();
+          $scope.getKodeUnit();
           $scope.message = "Data Berhasil Dihapus";
-          $scope.error = true;
+          $scope.success = true;
           $timeout(function(){
-            $scope.error = false;
+            $scope.success = false;
           }, 5000);
         }
       );

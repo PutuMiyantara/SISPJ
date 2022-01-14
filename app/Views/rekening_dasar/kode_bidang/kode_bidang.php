@@ -27,7 +27,7 @@
             <a href="<?= base_url('/rekdasar/urusan') ?>" class="btn btn-outline-info">Kode Urusan</a>
             <a href="<?= base_url('/rekdasar/bidang') ?>" class="btn btn-outline-info active">Kode Bidang</a>
             <a href="<?= base_url('/rekdasar/kegiatan') ?>" class="btn btn-outline-info">Kode Kegiatan</a>
-            <a href="<?= base_url('/rekdasar/program]') ?>" class="btn btn-outline-info">Kode Program</a>
+            <a href="<?= base_url('/rekdasar/program') ?>" class="btn btn-outline-info">Kode Program</a>
             <a href="<?= base_url('/rekdasar/unit') ?>" class="btn btn-outline-info">Kode Unit</a>
         </div>
         <div class="card-body">
@@ -49,6 +49,7 @@
                         <tr>
                             <th style="width: 10px;">No</th>
                             <th>Kode Rekening</th>
+                            <th>Jumlah Anggaran</th>
                             <th>Uraian</th>
                             <th>Action</th>
                         </tr>
@@ -57,6 +58,7 @@
                         <tr>
                             <th>No</th>
                             <th>Kode Rekening</th>
+                            <th>Jumlah Anggaran</th>
                             <th>Uraian</th>
                             <th>Action</th>
                         </tr>
@@ -65,6 +67,7 @@
                         <tr ng-repeat="d in datas">
                             <td>{{ $index +1 }}</td>
                             <td>{{ d.kode_rek }}</td>
+                            <td style="text-align: right;">{{ 'Rp. '+ d.jumlah_anggaran }}</td>
                             <td>{{ d.uraian }}</td>
                             <td style="text-align: center;">
                                 <button type="submit" class="btn btn-info" ng-click="getDetail(d.id)"><i
@@ -80,7 +83,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" tabindex="1" role="dialog" id="KodeBidang">
+    <div class="modal fade" tabindex="1" role="dialog" id="kodeBidang">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form method="POST" enctype="multipart/form-data" name="formKodeBidang" ng-submit="submitData()">
@@ -104,6 +107,15 @@
                                 <div class="form-group row">
                                     <input type="text" class="form-control" name="kode_rek" ng-model="kode_rek"
                                         ng-required="false" ng-readonly="false">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0">
+                            <div class="col"><label>Jumlah Anggaran</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <input type="text" class="form-control" name="jumlah_anggaran"
+                                        ng-model="jumlah_anggaran" ng-required="false" ng-readonly="false">
                                 </div>
                             </div>
                         </div>

@@ -113,6 +113,7 @@ class Validation
 	public $koderekening = [
 		'kode_rek' => 'required',
 		'uraian' => 'required',
+		'jumlah_anggaran' => 'required',
 	];
 	public $koderekening_errors = [
 		'kode_rek' => [
@@ -120,6 +121,9 @@ class Validation
 		],
 		'uraian' => [
 			'required' => 'Uraian Rekening Belum Terisi'
+		],
+		'jumlah_anggaran' => [
+			'required' => 'Jumlah Anngaran Belum Terisi',
 		]
 	];
 }

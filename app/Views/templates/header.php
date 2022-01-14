@@ -31,6 +31,10 @@
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/auth.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/KodeDinas.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/KodeBidang.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('/assets/angular/KodeUrusan.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('/assets/angular/KodeProgram.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('/assets/angular/KodeKegiatan.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('/assets/angular/KodeUnit.js'); ?>"></script>
     <!-- js -->
 
     <meta charset="utf-8">

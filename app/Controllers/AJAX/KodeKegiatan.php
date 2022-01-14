@@ -3,17 +3,17 @@
 namespace App\Controllers\AJAX;
 
 use App\Controllers\BaseController;
-use App\Models\ModelKodeBidang;
+use App\Models\ModelKodeKegiatan;
 
-class KodeBidang extends BaseController{
+class KodeKegiatan extends BaseController{
     public function __construct()
     {
-        $this->mKodeBidang = new ModelKodeBidang();
+        $this->mKodeKegiatan = new ModelKodeKegiatan();
     }
 
     public function index()
     {
-        echo json_encode($this->mKodeBidang->getKodeBidang(null));
+        echo json_encode($this->mKodeKegiatan->getKodeKegiatan(null));
     }
 
     public function insertData(){
@@ -22,7 +22,7 @@ class KodeBidang extends BaseController{
         $message = '';
 
         if($this->validator->run($dataJSON, 'koderekening')){
-            if ($this->mKodeBidang->insertData($dataJSON)) {
+            if ($this->mKodeKegiatan->insertData($dataJSON)) {
                 $message = 'Berhasil Menyimpan Data';
             }
             else{
@@ -38,7 +38,7 @@ class KodeBidang extends BaseController{
 
     public function getDetail($id){
         $where = array('id' => $id);
-        echo json_encode($this->mKodeBidang->getKodeBidang($where));
+        echo json_encode($this->mKodeKegiatan->getKodeKegiatan($where));
     }
     
     public function updateData($id){
@@ -49,7 +49,7 @@ class KodeBidang extends BaseController{
         $message = '';
         if ($this->validator->run($dataJSON, 'koderekening')) {
             # code...
-            if ($this->mKodeBidang->updateData($where, $dataJSON)) {
+            if ($this->mKodeKegiatan->updateData($where, $dataJSON)) {
                 # code...
                 $message = "Berhasil Menyimpan Data";
             } else{
@@ -66,7 +66,7 @@ class KodeBidang extends BaseController{
 
     public function deleteData(){
         $where = $this->request->getJSON(true);
-        $this->mKodeBidang->deleteData($where);
+        $this->mKodeKegiatan->deleteData($where);
         return true;
     }
 

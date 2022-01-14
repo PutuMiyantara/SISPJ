@@ -19,7 +19,7 @@ sispj.controller("KodeDinas", function ($scope, $http, $window, $timeout) {
     $scope.modalTitle = "Tambah Kode Rekening Dinas";
     $scope.modalButton = "Simpan";
     $scope.formSubmit = "ng-submit='insertData()'";
-    $scope.id = $scope.kode_rek = $scope.uraian = null;
+    $scope.id = $scope.kode_rek = $scope.uraian = $scope.jumlah_anggaran =  null;
   }
 
   $scope.submitData = function(){
@@ -36,6 +36,7 @@ sispj.controller("KodeDinas", function ($scope, $http, $window, $timeout) {
       $http
         .post("/rekdasar/insertKodeDinas", {
           kode_rek: $scope.kode_rek,
+          jumlah_anggaran: $scope.jumlah_anggaran,
           uraian: $scope.uraian,
         })
         .then(
@@ -77,6 +78,7 @@ sispj.controller("KodeDinas", function ($scope, $http, $window, $timeout) {
 
         $scope.id = data.data[0].id;
         $scope.kode_rek = data.data[0].kode_rek;
+        $scope.jumlah_anggaran = data.data[0].jumlah_anggaran;
         $scope.uraian = data.data[0].uraian;
       },
       function errorCallback(response) {
@@ -87,10 +89,10 @@ sispj.controller("KodeDinas", function ($scope, $http, $window, $timeout) {
   };
 
   $scope.editData = function () {
-    console.log('ini benar edit');
     $http
       .post("/rekdasar/updateKodeDinas/" + $scope.id , {
         kode_rek : $scope.kode_rek,
+        jumlah_anggaran : $scope.jumlah_anggaran,
         uraian : $scope.uraian
       })
       .then(
@@ -123,9 +125,9 @@ sispj.controller("KodeDinas", function ($scope, $http, $window, $timeout) {
         function successCallback(data){
           $scope.getKodeDinas();
           $scope.message = "Data Berhasil Dihapus";
-          $scope.error = true;
+          $scope.success = true;
           $timeout(function(){
-            $scope.error = false;
+            $scope.success = false;
           }, 5000);
         }
       );

@@ -95,24 +95,52 @@ $routes->post('/user/deleteUser', 'User::deleteData', ['namespace' => 'App\Contr
 $routes->get('/rekdasar', 'RekeningDasar::index', ['namespace'=> 'App\Controllers\Main', 'role' => [1,2,3], 'ajax' =>false]);
 $routes->get('/rekdasar/tambah', 'RekeningDasar::index', ['namespace'=> 'App\Controller\Main', 'role' => [1,2,3], 'ajax' =>false]);
 
-// Rekening Dasar Kode Dinas Main
+// Rekening Dasar Kode Dinas
 $routes->get('/rekdasar/dinas', 'RekeningDasar::kodeDinas', ['namespace'=> 'App\Controllers\Main', 'role' => [1,2,3], 'ajax' =>false]);
-// Rekening Dasar Kode Dinas AJAX
 $routes->get('/rekdasar/getKodeDinas', 'KodeDinas::index', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 $routes->post('/rekdasar/insertKodeDinas', 'KodeDinas::insertData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 $routes->get('/rekdasar/getDetailKodeDinas/(:num)', 'KodeDinas::getDetail/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 $routes->post('/rekdasar/updateKodeDinas/(:num)', 'KodeDinas::updateData/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 $routes->post('/rekdasar/deleteKodeDinas', 'KodeDinas::deleteData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 
+// Rekening Dasar Kode Urusan
 $routes->get('/rekdasar/urusan', 'RekeningDasar::kodeUrusan', ['namespace'=> 'App\Controllers\Main', 'role' => [1,2,3], 'ajax' =>false]);
+$routes->get('/rekdasar/getKodeUrusan', 'KodeUrusan::index', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekdasar/insertKodeUrusan', 'KodeUrusan::insertData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->get('/rekdasar/getDetailKodeUrusan/(:num)', 'KodeUrusan::getDetail/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekdasar/updateKodeUrusan/(:num)', 'KodeUrusan::updateData/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekdasar/deleteKodeUrusan', 'KodeUrusan::deleteData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 
+// Rekening Dasar Kode Bidang
 $routes->get('/rekdasar/bidang', 'RekeningDasar::kodeBidang', ['namespace'=> 'App\Controllers\Main', 'role' => [1,2,3], 'ajax' =>false]);
+$routes->get('/rekdasar/getKodeBidang', 'KodeBidang::index', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekdasar/insertKodeBidang', 'KodeBidang::insertData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->get('/rekdasar/getDetailKodeBidang/(:num)', 'KodeBidang::getDetail/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekdasar/updateKodeBidang/(:num)', 'KodeBidang::updateData/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekdasar/deleteKodeBidang', 'KodeBidang::deleteData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 
-$routes->get('/rekdasar/program', 'RekeningDasar::kodeProgam', ['namespace'=> 'App\Controllers\Main', 'role' => [1,2,3], 'ajax' =>false]);
+// Rekening Dasar Kode Program
+$routes->get('/rekdasar/program', 'RekeningDasar::kodeProgram', ['namespace'=> 'App\Controllers\Main', 'role' => [1,2,3], 'ajax' =>false]);
+$routes->get('/rekdasar/getKodeProgram', 'KodeProgram::index', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekdasar/insertKodeProgram', 'KodeProgram::insertData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->get('/rekdasar/getDetailKodeProgram/(:num)', 'KodeProgram::getDetail/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekdasar/updateKodeProgram/(:num)', 'KodeProgram::updateData/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekdasar/deleteKodeProgram', 'KodeProgram::deleteData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 
-$routes->get('/rekdasar/kegiatan', 'RekeningDsar::kodeKegiatan', ['namespace'=> 'App\Controllers\Main', 'role' => [1,2,3], 'ajax' =>false]);
+// Rekening Dasar Kode Kegiatan
+$routes->get('/rekdasar/kegiatan', 'RekeningDasar::kodeKegiatan', ['namespace'=> 'App\Controllers\Main', 'role' => [1,2,3], 'ajax' =>false]);
+$routes->get('/rekdasar/getKodeKegiatan', 'KodeKegiatan::index', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekdasar/insertKodeKegiatan', 'KodeKegiatan::insertData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->get('/rekdasar/getDetailKodeKegiatan/(:num)', 'KodeKegiatan::getDetail/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekdasar/updateKodeKegiatan/(:num)', 'KodeKegiatan::updateData/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekdasar/deleteKodeKegiatan', 'KodeKegiatan::deleteData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 
 $routes->get('/rekdasar/unit', 'RekeningDasar::kodeUnit', ['namespace'=> 'App\Controllers\Main', 'role' => [1,2,3], 'ajax' =>false]);
+$routes->get('/rekdasar/getKodeUnit', 'KodeUnit::index', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekdasar/insertKodeUnit', 'KodeUnit::insertData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->get('/rekdasar/getDetailKodeUnit/(:num)', 'KodeUnit::getDetail/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekdasar/updateKodeUnit/(:num)', 'KodeUnit::updateData/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekdasar/deleteKodeUnit', 'KodeUnit::deleteData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 
 // Rekening Belanja
 $routes->get('/rekbelanja', 'RekeningBelanja::index', ['namespace'=> 'App\Controller\Main', 'role' => [1,2,3], 'ajax' =>false]);
