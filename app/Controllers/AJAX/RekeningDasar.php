@@ -3,17 +3,17 @@
 namespace App\Controllers\AJAX;
 
 use App\Controllers\BaseController;
-use App\Models\ModelKodeUnit;
+use App\Models\ModelRekeningDasar;
 
-class KodeUnit extends BaseController{
+class RekeningDasar extends BaseController{
     public function __construct()
     {
-        $this->mKodeUnit = new ModelKodeUnit();
+        $this->mRekeningDasar = new ModelRekeningDasar();
     }
 
     public function index()
     {
-        echo json_encode($this->mKodeUnit->getKodeUnit(null));
+        echo json_encode($this->mRekeningDasar->getRekeningDasar(null));
     }
 
     public function insertData(){
@@ -21,8 +21,8 @@ class KodeUnit extends BaseController{
         $errortext[] ='';
         $message = '';
 
-        if($this->validator->run($dataJSON, 'koderekeningunit')){
-            if ($this->mKodeUnit->insertData($dataJSON)) {
+        if($this->validator->run($dataJSON, 'koderekeningdasar')){
+            if ($this->mRekeningDasar->insertData($dataJSON)) {
                 $message = 'Berhasil Menyimpan Data';
             }
             else{
@@ -37,8 +37,8 @@ class KodeUnit extends BaseController{
     }
 
     public function getDetail($id){
-        $where = array('id' => $id);
-        echo json_encode($this->mKodeUnit->getKodeUnit($where));
+        $where = array('tb_rekening_dasar.id' => $id);
+        echo json_encode($this->mRekeningDasar->getRekeningDasar($where));
     }
     
     public function updateData($id){
@@ -47,9 +47,9 @@ class KodeUnit extends BaseController{
         $errortext[] ='';
 
         $message = '';
-        if ($this->validator->run($dataJSON, 'koderekeningunit')) {
+        if ($this->validator->run($dataJSON, 'koderekeningdasar')) {
             # code...
-            if ($this->mKodeUnit->updateData($where, $dataJSON)) {
+            if ($this->mRekeningDasar->updateData($where, $dataJSON)) {
                 # code...
                 $message = "Berhasil Menyimpan Data";
             } else{
@@ -66,7 +66,7 @@ class KodeUnit extends BaseController{
 
     public function deleteData(){
         $where = $this->request->getJSON(true);
-        $this->mKodeUnit->deleteData($where);
+        $this->mRekeningDasar->deleteData($where);
         return true;
     }
 

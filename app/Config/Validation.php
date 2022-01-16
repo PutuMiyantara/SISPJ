@@ -108,22 +108,129 @@ class Validation
 	];
 
 	//--------------------------------------------------------------------
-	// Rules Kode Rekening Dasar
+	// Rules Kode Rekening Dasar Dinas
 	//--------------------------------------------------------------------
-	public $koderekening = [
-		'kode_rek' => 'required',
-		'uraian' => 'required',
-		'jumlah_anggaran' => 'required',
+	public $koderekeningdinas = [
+		'kode_rek_dinas' => 'required',
+		'nama_rek_dinas' => 'required',
 	];
-	public $koderekening_errors = [
-		'kode_rek' => [
+	public $koderekeningdinas_errors = [
+		'kode_rek_dinas' => [
 			'required' => 'Kode Rekening Belum Terisi'
 		],
-		'uraian' => [
-			'required' => 'Uraian Rekening Belum Terisi'
+		'nama_rek_dinas' => [
+			'required' => 'Nama Rekening Belum Terisi'
+		]
+	];
+	//--------------------------------------------------------------------
+	// Rules Kode Rekening Dasar Urusan
+	//--------------------------------------------------------------------
+	public $koderekeningurusan = [
+		'kode_rek_urusan' => 'required',
+		'nama_rek_urusan' => 'required',
+	];
+	public $koderekeningurusan_errors = [
+		'kode_rek_urusan' => [
+			'required' => 'Kode Rekening Belum Terisi'
 		],
-		'jumlah_anggaran' => [
-			'required' => 'Jumlah Anngaran Belum Terisi',
+		'nama_rek_urusan' => [
+			'required' => 'Nama Rekening Belum Terisi'
+		]
+	];
+	//--------------------------------------------------------------------
+	// Rules Kode Rekening Dasar Bidang
+	//--------------------------------------------------------------------
+	public $koderekeningbidang = [
+		'kode_rek_bidang' => 'required',
+		'nama_rek_bidang' => 'required',
+	];
+	public $koderekeningbidang_errors = [
+		'kode_rek_bidang' => [
+			'required' => 'Kode Rekening Belum Terisi'
+		],
+		'nama_rek_bidang' => [
+			'required' => 'Nama Rekening Belum Terisi'
+		]
+	];
+	//--------------------------------------------------------------------
+	// Rules Kode Rekening Dasar Program
+	//--------------------------------------------------------------------
+	public $koderekeningprogram = [
+		'kode_rek_program' => 'required',
+		'nama_rek_program' => 'required',
+	];
+	public $koderekeningprogram_errors = [
+		'kode_rek_program' => [
+			'required' => 'Kode Rekening Belum Terisi'
+		],
+		'nama_rek_program' => [
+			'required' => 'Nama Rekening Belum Terisi'
+		]
+	];
+	//--------------------------------------------------------------------
+	// Rules Kode Rekening Dasar Kegiatan
+	//--------------------------------------------------------------------
+	public $koderekeningkegiatan = [
+		'kode_rek_kegiatan' => 'required',
+		'nama_rek_kegiatan' => 'required',
+	];
+	public $koderekeningkegiatan_errors = [
+		'kode_rek_kegiatan' => [
+			'required' => 'Kode Rekening Belum Terisi'
+		],
+		'nama_rek_kegiatan' => [
+			'required' => 'Nama Rekening Belum Terisi'
+		]
+	];
+	//--------------------------------------------------------------------
+	// Rules Kode Rekening Dasar Unit
+	//--------------------------------------------------------------------
+	public $koderekeningunit = [
+		'kode_rek_unit' => 'required',
+		'nama_rek_unit' => 'required',
+	];
+	public $koderekeningunit_errors = [
+		'kode_rek_unit' => [
+			'required' => 'Kode Rekening Belum Terisi'
+		],
+		'nama_rek_unit' => [
+			'required' => 'Nama Rekening Belum Terisi'
+		]
+	];
+
+	//--------------------------------------------------------------------
+	// Rules  Rekening Dasar 
+	//--------------------------------------------------------------------
+	public $rekeningdasar = [
+		'nama_rekening_dasar' => 'required',
+		'kode_rek_dinas' => 'required',
+		'kode_rek_urusan' => 'required',
+		'kode_rek_bidang' => 'required',
+		'kode_rek_program' => 'required',
+		'kode_rek_kegiatan' => 'required',
+		'kode_rek_unit' => 'required',
+		'tahun_anggaran' => 'required',
+		'jumlah_anggaran_rekening_dasar' => 'required',
+	];
+	public $rekeningdasar_errors = [
+		'nama_rekening_dasar' => [
+			'required' => 'Nama Rekening Belum Terisi'
+		],'kode_rek_dinas' => [
+			'required' => 'Kode Dinas Belum Terisi'
+		],'kode_rek_urusan' => [
+			'required' => 'Kode Urusan Belum Terisi'
+		],'kode_rek_bidang' => [
+			'required' => 'Kode Bidang Belum Terisi'
+		],'kode_rek_program' => [
+			'required' => 'Kode Program Belum Terisi'
+		],'kode_rek_kegiatan' => [
+			'required' => 'Kode Kegiatan Belum Terisi'
+		],'kode_rek_unit' => [
+			'required' => 'Kode Unit Belum Terisi'
+		],'tahun_anggaran' => [
+			'required' => 'Tahun Anggaran Belum Terisi'
+		],'jumlah_anggaran_rekening_dasar' => [
+			'required' => 'Jumlah Anggaran Belum Terisi'
 		]
 	];
 }

@@ -19,7 +19,7 @@ sispj.controller("KodeBidang", function ($scope, $http, $window, $timeout) {
     $scope.modalTitle = "Tambah Kode Rekening Bidang";
     $scope.modalButton = "Simpan";
     $scope.formSubmit = "ng-submit='insertData()'";
-    $scope.id = $scope.kode_rek = $scope.uraian = $scope.jumlah_anggaran =  null;
+    $scope.id = $scope.kode_rek_bidang = $scope.nama_rek_bidang =  null;
   }
 
   $scope.submitData = function(){
@@ -35,15 +35,14 @@ sispj.controller("KodeBidang", function ($scope, $http, $window, $timeout) {
     $scope.setDefault();
       $http
         .post("/rekdasar/insertKodeBidang", {
-          kode_rek: $scope.kode_rek,
-          jumlah_anggaran: $scope.jumlah_anggaran,
-          uraian: $scope.uraian,
+          kode_rek_bidang: $scope.kode_rek_bidang,
+          nama_rek_bidang: $scope.nama_rek_bidang,
         })
         .then(
           function successCallback(data) {
             console.log(data.data);
             if (data.data.errortext == "") {
-              $scope.kode_rek = $scope.uraian = null;
+              $scope.kode_rek_bidang = $scope.uraian = null;
               $scope.getKodeBidang();
               $scope.closeModal("#kodeBidang");
               $scope.success = true;
@@ -77,9 +76,8 @@ sispj.controller("KodeBidang", function ($scope, $http, $window, $timeout) {
         $scope.actionButton = "Kembali";
 
         $scope.id = data.data[0].id;
-        $scope.kode_rek = data.data[0].kode_rek;
-        $scope.jumlah_anggaran = data.data[0].jumlah_anggaran;
-        $scope.uraian = data.data[0].uraian;
+        $scope.kode_rek_bidang = data.data[0].kode_rek_bidang;
+        $scope.nama_rek_bidang = data.data[0].nama_rek_bidang;
       },
       function errorCallback(response) {
         console.log(response);
@@ -92,9 +90,8 @@ sispj.controller("KodeBidang", function ($scope, $http, $window, $timeout) {
     console.log('ini benar edit');
     $http
       .post("/rekdasar/updateKodeBidang/" + $scope.id , {
-        kode_rek : $scope.kode_rek,
-        jumlah_anggaran : $scope.jumlah_anggaran,
-        uraian : $scope.uraian
+        kode_rek_bidang : $scope.kode_rek_bidang,
+        nama_rek_bidang : $scope.nama_rek_bidang
       })
       .then(
         function successCallback(data) {

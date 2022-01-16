@@ -91,9 +91,13 @@ $routes->get('/user/getDetail/(:num)', 'User::getDetail/$1', ['namespace' => 'Ap
 $routes->post('/user/updateData/(:num)', 'User::updateData/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => [1, 2, 3], 'ajax' => true]);
 $routes->post('/user/deleteUser', 'User::deleteData', ['namespace' => 'App\Controllers\AJAX', 'role' =>3, 'ajax' => true]);
 
-// Rekening Dasar Main
+// Rekening Dasar
 $routes->get('/rekdasar', 'RekeningDasar::index', ['namespace'=> 'App\Controllers\Main', 'role' => [1,2,3], 'ajax' =>false]);
-$routes->get('/rekdasar/tambah', 'RekeningDasar::index', ['namespace'=> 'App\Controller\Main', 'role' => [1,2,3], 'ajax' =>false]);
+$routes->get('/rekdasar/getRekeningDasar', 'RekeningDasar::index', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekdasar/insertRekeningDasar', 'RekeningDasar::insertData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->get('/rekdasar/getDetailRekeningDasar/(:num)', 'RekeningDasar::getDetail/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekdasar/updateRekeningDasar/(:num)', 'RekeningDasar::updateData/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekdasar/deleteRekeningDasar', 'RekeningDasar::deleteData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 
 // Rekening Dasar Kode Dinas
 $routes->get('/rekdasar/dinas', 'RekeningDasar::kodeDinas', ['namespace'=> 'App\Controllers\Main', 'role' => [1,2,3], 'ajax' =>false]);

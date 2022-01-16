@@ -2,18 +2,18 @@
 <div class="container-fluid" ng-controller="RekeningDasar">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Data User</h1>
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Rekening Dasar</h1>
+                    <h1>Data Kode Rekening Dasar</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Rekening Dasar</li>
+                        <li class="breadcrumb-item"><a href="#">Rekening Dasar</a></li>
+                        <li class="breadcrumb-item"><a href="#">Kode Rekening Dasar</a></li>
                     </ol>
                 </div>
             </div>
@@ -32,7 +32,7 @@
         </div>
         <div class="card-body">
             <div>
-                <div class="alert alert-danger alert-dismissable" ng-show="errror">
+                <div class="alert alert-danger alert-dismissable" ng-show="error">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{message}}
                 </div>
                 <div class="alert alert-success alert-dismissable" ng-show="success">
@@ -40,11 +40,18 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <a href="/rekdasar/dinas/tambah" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-                    style="margin-bottom: 10px;"><i class="fas fa-plus fa-sm text-white-50"></i>Tambah
-                    Data</a>
+
+                <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-bottom: 10px;"
+                    ng-click="tambahData()"><i class="fas fa-plus fa-sm text-white-50"></i>Tambah
+                    Data</button>
+                <div style="float: right;">
+                    <select>
+                        <option>2021</option>
+                        <option>2022</option>
+                    </select>
+                </div>
                 <table datatable="ng" dt-options="vm.dtOptions" class="table table-bordered" width="100%"
-                    cellspacing="0" ng-init="getUser()">
+                    cellspacing="0" ng-init="getRekeningDasar()">
                     <thead>
                         <tr>
                             <th style="width: 10px;">No</th>
@@ -55,7 +62,8 @@
                             <th>Kode Program</th>
                             <th>Kode Kegiatan</th>
                             <th>Kode Unit</th>
-                            <th>Action</th>
+                            <th>Jumlah Anggaran</th>
+                            <th style="width: 80px;">Action</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -68,23 +76,26 @@
                             <th>Kode Program</th>
                             <th>Kode Kegiatan</th>
                             <th>Kode Unit</th>
+                            <th>Jumlah Anggaran</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
                     <tbody>
                         <tr ng-repeat="d in datas">
                             <td>{{ $index +1 }}</td>
-                            <td>{{ d.kode_dinas }}</td>
-                            <td>{{ d.kode_urusan }}</td>
-                            <td>{{ d.kude_bidang }}</td>
-                            <td>{{ d.kode_program }}</td>
-                            <td>{{ d.kode_kegiatan }}</td>
-                            <td>{{ d.kode_unit }}</td>
+                            <td>{{ d.nama_rekening_dasar }}</td>
+                            <td>{{ d.kode_rek_dinas }}</td>
+                            <td>{{ d.kode_rek_urusan }}</td>
+                            <td>{{ d.kode_rek_bidang }}</td>
+                            <td>{{ d.kode_rek_program }}</td>
+                            <td>{{ d.kode_rek_kegiatan }}</td>
+                            <td>{{ d.kode_rek_unit }}</td>
+                            <td>Rp. {{ d.jumlah_anggaran_rekening_dasar }}</td>
                             <td style="text-align: center;">
                                 <button type="submit" class="btn btn-info" ng-click="getDetail(d.id)"><i
-                                        class="fa fa-edit"> Detail</i></button>
+                                        class="fa fa-edit"></i></button>
                                 <button type="submit" class="btn btn-danger" ng-click="deleteData(d.id)"><i
-                                        class="fa fa-edit"> Delete</i></button>
+                                        class="fa fa-trash"></i></button>
                             </td>
                         </tr>
                     </tbody>
@@ -94,11 +105,10 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" tabindex="1" role="dialog" id="detailEditUser">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" tabindex="1" role="dialog" id="rekeningDasar">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <form method="POST" enctype="multipart/form-data" name="formUser" id="formDetailUser"
-                    ng-submit="editData()">
+                <form method="POST" enctype="multipart/form-data" name="formRekeningDasar" ng-submit="submitData()">
                     <div class="modal-header">
                         <h4 class="modal-title" ng-model="modalTitle">{{modalTitle}}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -114,87 +124,84 @@
                             </div>
                         </div>
                         <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Nama</label></div>
+                            <div class="col"><label>Kode Rekening</label></div>
+                            <div class="form-group row">
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="kode_rek_dinas"
+                                        ng-model="kode_rek_dinas" ng-required="false" ng-readonly="false">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="kode_rek_urusan"
+                                        ng-model="kode_rek_urusan" ng-required="false" ng-readonly="false">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="kode_rek_bidang"
+                                        ng-model="kode_rek_bidang" ng-required="false" ng-readonly="false">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="kode_rek_program"
+                                        ng-model="kode_rek_program" ng-required="false" ng-readonly="false">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="kode_rek_kegiatan"
+                                        ng-model="kode_rek_kegiatan" ng-required="false" ng-readonly="false">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="kode_rek_unit"
+                                        ng-model="kode_rek_unit" ng-required="false" ng-readonly="false">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0">
+                            <div class="col"><label>Nama Rekening</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
-                                    <input type="text" class="form-control" name="nama" ng-model="nama"
-                                        ng-required="true" ng-readonly="false">
+                                    <textarea class="form-control" name="nama_rekening_dasar"
+                                        ng-model="nama_rekening_dasar" ng-required="false" ng-readonly="false">
+                                    </textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Email</label><br>
-                                <small style="color: red;"
-                                    ng-show="formUser.email.$touched && formUser.email.$error.required">Masukan Alamat
-                                    Email</small>
-                                <small style="color: red;"
-                                    ng-show="formUser.email.$dirty && formUser.email.$error.email">Masukan Email dengan
-                                    Benar</small>
-                            </div>
+                            <div class="col"><label>Tahun Anggaran</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
-                                    <input type="email" class="form-control" name="email" ng-model="email"
-                                        ng-required="true"
-                                        ng-style="formUser.email.$dirty && formUser.email.$invalid && {'border':'solid red'}"
-                                        ng-readonly="readOnly">
+                                    <input type="year" class="form-control" name="tahun_anggaran"
+                                        ng-model="tahun_anggaran" ng-required="false" ng-readonly="false">
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col">
-                                <label>Password</label><br>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6">
-                                    <small style="color: red;"
-                                        ng-show="formUser.password.$touched && formUser.password.$error.required">Masukan
-                                        Password</small>
-                                    <small style="color: red;"
-                                        ng-if="formUser.password.$dirty && password.length < 8">Minimal
-                                        8 Karakter</small>
+                            <div class="col"><label>Jumlah Anggaran</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <input type="text" class="form-control" name="jumlah_anggaran_rekening_dasar"
+                                        ng-model="jumlah_anggaran_rekening_dasar" ng-required="false"
+                                        ng-readonly="false">
                                 </div>
-                                <div class="col-sm-6"><small ng-style="s_msg">{{msg}}</small></div>
-                                <div class="col-sm-6">
-                                    <input type="{{typepass}}" name="password" class="form-control"
-                                        placeholder="Password" ng-model="password" ng-change="check()"
-                                        ng-style="spassword">
-                                </div>
-                                <div class="col-sm-5">
-                                    <input type="{{typepass}}" class="form-control" name="repass"
-                                        placeholder="Repeat Password" ng-model="repass" ng-change="check()"
-                                        ng-style="srepass">
-                                </div>
-                                <div><span class="{{showHide}}" style="cursor: pointer; margin-top: 10px"
-                                        ng-click="showPassword()" style="align-content: center"></span></div>
                             </div>
                         </div>
                         <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Status Aktif</label></div>
-                            <div class="form-group row">
-                                <div class="col-sm-12 mb-6 mb-sm-0">
-                                    <small style="color: red;"
-                                        ng-show="formUser.status.$touched && formUser.status.$error.required">Pilih
-                                        Status Aktif Pegawai</small>
-                                    <select name="status" class="form-control" ng-model="status" ng-required="true"
-                                        ng-disabled="readOnly">
-                                        <option value="1">Aktif</option>
-                                        <option value="2">Tidak Aktif</option>
-                                    </select>
+                            <div class="col"><label>Keterangan</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <textarea class="form-control" name="keterangan_rekening_dasar"
+                                        ng-model="keterangan_rekening_dasar" ng-required="false"
+                                        ng-readonly="false"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <input type="text" name="idUser" ng-model="iduser" ng-hide="true">
-                        <!-- <input type="text" name="file_lama" ng-model="file_lama" ng-hide="false"> -->
+                        <input type="text" name="id" ng-model="id" ng-hide="false" ng-readonly="true">
                         <button type="submit" class="btn btn-success col-sm-3 mb-6"><i class="fas fa-save">
-                                Update</i></button>
+                            </i> {{ modalButton }}</button>
                         <button type="button" class="btn btn-danger col-sm-3 mb-6"
-                            ng-click="closeModal('#detailEditUser')">Kembali</button>
+                            ng-click="closeModal('#kodeDinas')">Kembali</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <!-- Modal -->
+    <!-- End Modal -->
 </div>

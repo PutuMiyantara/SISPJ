@@ -49,8 +49,7 @@
                         <tr>
                             <th style="width: 10px;">No</th>
                             <th>Kode Rekening</th>
-                            <th>Jumlah Anngaran</th>
-                            <th>Uraian</th>
+                            <th>Nama Rekening</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -58,17 +57,15 @@
                         <tr>
                             <th>No</th>
                             <th>Kode Rekening</th>
-                            <th>Jumlah Anngaran</th>
-                            <th>Uraian</th>
+                            <th>Nama Rekening</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
                     <tbody>
                         <tr ng-repeat="d in datas">
                             <td>{{ $index +1 }}</td>
-                            <td>{{ d.kode_rek }}</td>
-                            <td style="text-align: right;">{{ 'Rp.' + d.jumlah_anggaran }}</td>
-                            <td>{{ d.uraian }}</td>
+                            <td>{{ d.kode_rek_dinas }}</td>
+                            <td>{{ d.nama_rek_dinas }}</td>
                             <td style="text-align: center;">
                                 <button type="submit" class="btn btn-info" ng-click="getDetail(d.id)"><i
                                         class="fa fa-edit"> Detail</i></button>
@@ -105,26 +102,17 @@
                             <div class="col"><label>Kode Rekening</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
-                                    <input type="text" class="form-control" name="kode_rek" ng-model="kode_rek"
-                                        ng-required="false" ng-readonly="false">
+                                    <input type="text" class="form-control" name="kode_rek_dinas"
+                                        ng-model="kode_rek_dinas" ng-required="false" ng-readonly="false">
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Jumlah Anggaran (Rp.)</label></div>
+                            <div class="col"><label>Nama Rekening</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
-                                    <input type="text" class="form-control" name="jumlah_anggaran"
-                                        ng-model="jumlah_anggaran" ng-required="false" ng-readonly="false">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Uraian</label></div>
-                            <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row">
-                                    <textarea class="form-control" name="uraian" ng-model="uraian" ng-required="false"
-                                        ng-readonly="false"></textarea>
+                                    <textarea class="form-control" name="nama_rek_dinas" ng-model="nama_rek_dinas"
+                                        ng-required="false" ng-readonly="false"></textarea>
                                 </div>
                             </div>
                         </div>

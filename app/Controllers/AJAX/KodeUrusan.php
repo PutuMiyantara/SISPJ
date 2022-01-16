@@ -21,7 +21,7 @@ class KodeUrusan extends BaseController{
         $errortext[] ='';
         $message = '';
 
-        if($this->validator->run($dataJSON, 'koderekening')){
+        if($this->validator->run($dataJSON, 'koderekeningurusan')){
             if ($this->mKodeUrusan->insertData($dataJSON)) {
                 $message = 'Berhasil Menyimpan Data';
             }
@@ -47,7 +47,7 @@ class KodeUrusan extends BaseController{
         $errortext[] ='';
 
         $message = '';
-        if ($this->validator->run($dataJSON, 'koderekening')) {
+        if ($this->validator->run($dataJSON, 'koderekeningurusan')) {
             # code...
             if ($this->mKodeUrusan->updateData($where, $dataJSON)) {
                 # code...
