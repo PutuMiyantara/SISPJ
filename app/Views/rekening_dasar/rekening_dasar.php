@@ -124,31 +124,94 @@
                             </div>
                         </div>
                         <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Kode Rekening</label></div>
+                            <div class="col">
+                                <label>Kode Rekening</label>
+                            </div>
                             <div class="form-group row">
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="kode_rek_dinas"
-                                        ng-model="kode_rek_dinas" ng-required="false" ng-readonly="false">
+                                        ng-model="kode_rek_dinas" ng-required="false" ng-readonly="false"
+                                        ng-keyup="searchRekDinas(kode_rek_dinas)" ng-style="kode_rek_dinas_style">
+                                    <ul class="list-group" ng-hide="hide_rek_dinas"
+                                        style="height: 100px;overflow: auto;">
+                                        <li class="list-group-item list-group-item-action"
+                                            ng-repeat="kode_dinas in filterRekDinas"
+                                            ng-click="fillRekDinas(kode_dinas.id ,kode_dinas.kode_rek_dinas)">
+                                            <a href=""
+                                                style="color: black; text-align: right; text-decoration: none;">{{kode_dinas.kode_rek_dinas}}</a>
+                                        </li>
+                                    </ul>
                                 </div>
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="kode_rek_urusan"
-                                        ng-model="kode_rek_urusan" ng-required="false" ng-readonly="false">
+                                        ng-model="kode_rek_urusan" ng-required="false" ng-readonly="false"
+                                        ng-keyup="searchRekUrusan(kode_rek_urusan)" ng-style="kode_rek_urusan_style">
+                                    <ul class="list-group" ng-hide="hide_rek_urusan"
+                                        style="height: 100px;overflow: auto;">
+                                        <li class="list-group-item list-group-item-action"
+                                            ng-repeat="kode_urusan in filterRekUrusan"
+                                            ng-click="fillRekUrusan(kode_urusan.id ,kode_urusan.kode_rek_urusan)">
+                                            <a href=""
+                                                style="color: black; text-align: right; text-decoration: none;">{{kode_urusan.kode_rek_urusan}}</a>
+                                        </li>
+                                    </ul>
                                 </div>
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="kode_rek_bidang"
-                                        ng-model="kode_rek_bidang" ng-required="false" ng-readonly="false">
-                                </div>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="kode_rek_program"
-                                        ng-model="kode_rek_program" ng-required="false" ng-readonly="false">
+                                        ng-model="kode_rek_bidang" ng-required="false" ng-readonly="false"
+                                        ng-keyup="searchRekBidang(kode_rek_bidang)" ng-style="kode_rek_bidang_style">
+                                    <ul class="list-group" ng-hide="hide_rek_bidang"
+                                        style="height: 100px;overflow: auto;">
+                                        <li class="list-group-item list-group-item-action"
+                                            ng-repeat="kode_bidang in filterRekbidang"
+                                            ng-click="fillRekBidang(kode_bidang.id ,kode_bidang.kode_rek_bidang)">
+                                            <a href=""
+                                                style="color: black; text-align: right; text-decoration: none;">{{kode_bidang.kode_rek_bidang}}</a>
+                                        </li>
+                                    </ul>
                                 </div>
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="kode_rek_kegiatan"
-                                        ng-model="kode_rek_kegiatan" ng-required="false" ng-readonly="false">
+                                        ng-model="kode_rek_kegiatan" ng-required="false" ng-readonly="false"
+                                        ng-keyup="searchRekKegiatan(kode_rek_kegiatan)"
+                                        ng-style="kode_rek_kegiatan_style">
+                                    <ul class="list-group" ng-hide="hide_rek_kegiatan"
+                                        style="height: 100px;overflow: auto;">
+                                        <li class="list-group-item list-group-item-action"
+                                            ng-repeat="kode_kegiatan in filterRekKegiatan"
+                                            ng-click="fillRekKegiatan(kode_kegiatan.id ,kode_kegiatan.kode_rek_kegiatan)">
+                                            <a href=""
+                                                style="color: black; text-align: right; text-decoration: none;">{{kode_kegiatan.kode_rek_kegiatan}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="kode_rek_program"
+                                        ng-model="kode_rek_program" ng-required="false" ng-readonly="false"
+                                        ng-keyup="searchRekProgram(kode_rek_program)" ng-style="kode_rek_program_style">
+                                    <ul class="list-group" ng-hide="hide_rek_program"
+                                        style="height: 100px;overflow: auto;">
+                                        <li class="list-group-item list-group-item-action"
+                                            ng-repeat="kode_program in filterRekProgram"
+                                            ng-click="fillRekProgram(kode_program.id ,kode_program.kode_rek_program)">
+                                            <a href=""
+                                                style="color: black; text-align: right; text-decoration: none;">{{kode_program.kode_rek_program}}</a>
+                                        </li>
+                                    </ul>
                                 </div>
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="kode_rek_unit"
-                                        ng-model="kode_rek_unit" ng-required="false" ng-readonly="false">
+                                        ng-model="kode_rek_unit" ng-required="false" ng-readonly="false"
+                                        ng-keyup="searchRekUnit(kode_rek_unit)" ng-style="kode_rek_unit_style">
+                                    <ul class="list-group" ng-hide="hide_rek_unit"
+                                        style="height: 100px;overflow: auto;">
+                                        <li class="list-group-item list-group-item-action"
+                                            ng-repeat="kode_kegiatan in filterRekUnit"
+                                            ng-click="fillRekUnit(kode_kegiatan.id ,kode_kegiatan.kode_rek_unit)">
+                                            <a href=""
+                                                style="color: black; text-align: right; text-decoration: none;">{{kode_kegiatan.kode_rek_unit}}</a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -182,12 +245,46 @@
                             </div>
                         </div>
                         <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Keterangan</label></div>
+                            <div class="col"><label>Pejabat KPA PPK</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
-                                    <textarea class="form-control" name="keterangan_rekening_dasar"
-                                        ng-model="keterangan_rekening_dasar" ng-required="false"
-                                        ng-readonly="false"></textarea>
+                                    <input type="text" class="form-control" name="id_kpa_ppk" ng-model="id_kpa_ppk"
+                                        ng-required="false" ng-readonly="false">
+                                    <ul class="list-group" ng-hide="hide_kpa_ppk" style="height: 100px;overflow: auto;">
+                                        <li class="list-group-item list-group-item-action"
+                                            ng-repeat="kpa_ppk in filterKpaPpk"
+                                            ng-click="fillKpaPpk(kpa_ppk.id ,kpa_ppk.nama_pegawai, kpa_ppk.nip)">
+                                            <a href=""
+                                                style="color: black; text-align: right; text-decoration: none;">{{kode_kegiatan.kode_rek_unit}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0">
+                            <div class="col"><label>Pejabat PPTK</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <input type="text" class="form-control" name="id_pptk" ng-model="id_pptk"
+                                        ng-required="false" ng-readonly="false">
+                                    <ul class="list-group" ng-hide="hide_pptk" style="height: 100px;overflow: auto;">
+                                        <li class="list-group-item list-group-item-action"
+                                            ng-repeat="pptk in filterPptk"
+                                            ng-click="fillPptk(pptk.id ,pptk.nama_pegawai, pptk.nip)">
+                                            <a href=""
+                                                style="color: black; text-align: right; text-decoration: none;">{{kode_kegiatan.kode_rek_unit}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0">
+                            <div class="col"><label>Bendahara</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <input type="text" class="form-control" name="jumlah_anggaran_rekening_dasar"
+                                        ng-model="jumlah_anggaran_rekening_dasar" ng-required="false"
+                                        ng-readonly="false">
                                 </div>
                             </div>
                         </div>
