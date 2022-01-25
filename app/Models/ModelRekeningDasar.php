@@ -27,6 +27,9 @@ class ModelRekeningDasar extends Model
             $builder->join('tb_kode_program', 'tb_kode_program.id = tb_rekening_dasar.id_kode_program');
             $builder->join('tb_kode_kegiatan', 'tb_kode_kegiatan.id = tb_rekening_dasar.id_kode_kegiatan');
             $builder->join('tb_kode_unit', 'tb_kode_unit.id = tb_rekening_dasar.id_kode_unit');
+            $builder->join('tb_kpa_ppk', 'tb_kpa_ppk.id = tb_rekening_dasar.id_kpa_ppk');
+            $builder->join('tb_pptk', 'tb_pptk.id = tb_rekening_dasar.id_pptk');
+            $builder->join('tb_bendahara', 'tb_bendahara.id = tb_rekening_dasar.id_bendahara');
             $query = $builder->getWhere($id);
         }
         return $query->getResult();

@@ -91,6 +91,20 @@ $routes->get('/user/getDetail/(:num)', 'User::getDetail/$1', ['namespace' => 'Ap
 $routes->post('/user/updateData/(:num)', 'User::updateData/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => [1, 2, 3], 'ajax' => true]);
 $routes->post('/user/deleteUser', 'User::deleteData', ['namespace' => 'App\Controllers\AJAX', 'role' =>3, 'ajax' => true]);
 
+// Penannggung Jawab
+$routes->get('/penanggungjawab', 'PenanggungJawab::index', ['namespace' => 'App\Controllers\Main', 'role' => 3, 'ajax' => false]);
+
+$routes->get('/penanggungjawab/kpa_ppk', 'PenanggungJawab::kpa_ppk', ['namespace' => 'App\Controllers\Main', 'role' => 3, 'ajax' => false]);
+$routes->get('/penanggungjawab/getKpaPpk', 'KpaPpk::index', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/penanggungjawab/insertKpaPpk', 'KpaPpk::insertData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->get('/penanggungjawab/getDetailKpaPpk/(:num)', 'KpaPpk::getDetail/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/penanggungjawab/updateKpaPpk/(:num)', 'KpaPpk::updateData/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/penanggungjawab/deleteKpaPpk', 'KpaPpk::deleteData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+
+$routes->get('/penanggungjawab/pptk', 'PenanggungJawab::pptk', ['namespace' => 'App\Controllers\Main', 'role' => 3, 'ajax' => false]);
+$routes->get('/penanggungjawab/bendahara', 'PenanggungJawab::bendahara', ['namespace' => 'App\Controllers\Main', 'role' => 3, 'ajax' => false]);
+
+
 // Rekening Dasar
 $routes->get('/rekdasar', 'RekeningDasar::index', ['namespace'=> 'App\Controllers\Main', 'role' => [1,2,3], 'ajax' =>false]);
 $routes->get('/rekdasar/getRekeningDasar', 'RekeningDasar::index', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);

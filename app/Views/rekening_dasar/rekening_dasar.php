@@ -248,14 +248,14 @@
                             <div class="col"><label>Pejabat KPA PPK</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
-                                    <input type="text" class="form-control" name="id_kpa_ppk" ng-model="id_kpa_ppk"
+                                    <input type="text" class="form-control" name="nama_kpa_ppk" ng-model="nama_kpa_ppk"
                                         ng-required="false" ng-readonly="false">
                                     <ul class="list-group" ng-hide="hide_kpa_ppk" style="height: 100px;overflow: auto;">
                                         <li class="list-group-item list-group-item-action"
                                             ng-repeat="kpa_ppk in filterKpaPpk"
-                                            ng-click="fillKpaPpk(kpa_ppk.id ,kpa_ppk.nama_pegawai, kpa_ppk.nip)">
+                                            ng-click="fillKpaPpk(kpa_ppk.id ,kpa_ppk.nama_kpa_ppk, kpa_ppk.nip_kpa_ppk)">
                                             <a href=""
-                                                style="color: black; text-align: right; text-decoration: none;">{{kode_kegiatan.kode_rek_unit}}</a>
+                                                style="color: black; text-align: right; text-decoration: none;">{{kpa_ppk.nama_kpa_ppk}}</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -265,26 +265,34 @@
                             <div class="col"><label>Pejabat PPTK</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
-                                    <input type="text" class="form-control" name="id_pptk" ng-model="id_pptk"
+                                    <input type="text" class="form-control" name="nama_pptk" ng-model="nama_pptk"
                                         ng-required="false" ng-readonly="false">
                                     <ul class="list-group" ng-hide="hide_pptk" style="height: 100px;overflow: auto;">
                                         <li class="list-group-item list-group-item-action"
                                             ng-repeat="pptk in filterPptk"
-                                            ng-click="fillPptk(pptk.id ,pptk.nama_pegawai, pptk.nip)">
+                                            ng-click="fillPptk(pptk.id ,pptk.nama_pptk, pptk.nip_pptk)">
                                             <a href=""
-                                                style="color: black; text-align: right; text-decoration: none;">{{kode_kegiatan.kode_rek_unit}}</a>
+                                                style="color: black; text-align: right; text-decoration: none;">{{pptk.nama_pptk}}</a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Bendahara</label></div>
+                            <div class="col"><label>Bendahara Pengeluaran</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
-                                    <input type="text" class="form-control" name="jumlah_anggaran_rekening_dasar"
-                                        ng-model="jumlah_anggaran_rekening_dasar" ng-required="false"
-                                        ng-readonly="false">
+                                    <input type="text" class="form-control" name="nama_bendahara"
+                                        ng-model="nama_bendahara" ng-required="false" ng-readonly="false">
+                                    <ul class="list-group" ng-hide="hide_bendahara"
+                                        style="height: 100px;overflow: auto;">
+                                        <li class="list-group-item list-group-item-action"
+                                            ng-repeat="bendahara in filterBendahara"
+                                            ng-click="fillBendahara(bendahara.id ,bendahara.nama_bendahara, bendahara.nip_bendahara)">
+                                            <a href=""
+                                                style="color: black; text-align: right; text-decoration: none;">{{bendahara.nama_bendahara}})</a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>

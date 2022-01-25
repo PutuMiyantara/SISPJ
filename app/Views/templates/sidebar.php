@@ -71,6 +71,10 @@ $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>
                                                     else : echo '';
                                                     endif;
                                                     ?>" href="/user">User</a>
+                        <a class="collapse-item <?php if ($uri->getPath() == '/penanggungjawab') : echo 'active';
+                                                    else : echo '';
+                                                    endif;
+                                                    ?>" href="/penanggungjawab">Penanggung Jawab Anggaran</a>
                     </div>
                 </div>
             </li>

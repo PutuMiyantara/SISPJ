@@ -1,14 +1,12 @@
-sispj.controller("RekeningDasar", function ($scope, $http, $window, $timeout) {
+sispj.controller("KpaPpk", function ($scope, $http, $window, $timeout) {
   $scope.setDefault = function () {
     $scope.error = false;
     $scope.success = false;
-    $scope.hide_kpa_ppk = true;
-    $scope.hide_pptk = true;
-    $scope.hide_bendahara = true;
+    $scope.nip_kpa_ppk = $scope.nama_kpa_ppk = null;
   };
 
-  $scope.getRekeningDasar = function () {
-    $http.get("/rekdasar/getRekeningDasar").then(function (data) {
+  $scope.getKpaPpk = function () {
+    $http.get("/penanggungjawab/getKpaPpk").then(function (data) {
       $scope.datas = data.data;
       console.log(data)
     },function errorCallback(response) {
@@ -16,40 +14,13 @@ sispj.controller("RekeningDasar", function ($scope, $http, $window, $timeout) {
       alert("error");
     });
   };
+
   $scope.tambahData = function (){
-    $scope.openModal("#rekeningDasar");
-    $scope.modalTitle = "Tambah Kode Rekening Urusan";
+    $scope.openModal("#kpaPpk");
+    $scope.modalTitle = "Tambah Penanggung Jawab KPA PPK";
     $scope.modalButton = "Simpan";
     $scope.formSubmit = "ng-submit='insertData()'";
-    $scope.id = 
-    $scope.nama_rekening_dasar = 
-    $scope.kode_rek_dinas = 
-    $scope.kode_rek_urusan = 
-    $scope.kode_rek_bidang = 
-    $scope.kode_rek_program = 
-    $scope.kode_rek_kegiatan = 
-    $scope.kode_rek_unit = 
-    $scope.tahun_anggaran = 
-    $scope.jumlah_anggaran_rekening_dasar = 
-    $scope.keterangan_rekening_dasar =
-    $scope.kode_rek_dinas_style = 
-    $scope.kode_rek_urusan_style = 
-    $scope.kode_rek_bidang_style = 
-    $scope.kode_rek_kegiatan_style = 
-    $scope.kode_rek_program_style = 
-    $scope.kode_rek_unit_style = null;
-
-    $scope.hide_rek_dinas = 
-    $scope.hide_rek_urusan = 
-    $scope.hide_rek_bidang = 
-    $scope.hide_rek_kegiatan = 
-    $scope.hide_rek_program = 
-    $scope.hide_rek_unit = 
-    $scope.hide_rek_dinas = 
-    $scope.hide_kpa_ppk= 
-    $scope.hide_pptk = 
-    $scope.id_bendahara = true;
-  }
+  };
 
   $scope.submitData = function(){
     if ($scope.id == null) {
@@ -58,32 +29,22 @@ sispj.controller("RekeningDasar", function ($scope, $http, $window, $timeout) {
     else{
       $scope.editData()
     }
-  }
+  };
 
   $scope.insertData = function () {
-    $scope.setDefault();
       $http
-        .post("/rekdasar/insertRekeningDasar", {
-          kode_rek_dinas: $scope.kode_rek_dinas,
-          kode_rek_urusan: $scope.kode_rek_urusan,
-          kode_rek_bidang: $scope.kode_rek_bidang,
-          kode_rek_program: $scope.kode_rek_program,
-          kode_rek_kegiatan: $scope.kode_rek_kegiatan,
-          kode_rek_unit: $scope.kode_rek_unit,
-          nama_rekening_dasar: $scope.nama_rekening_dasar,
-          tahun_anggaran: $scope.tahun_anggaran,
-          jumlah_anggaran_rekening_dasar: $scope.jumlah_anggaran_rekening_dasar,
-          id_kpa_ppk: $scope.id_kpa_ppk,
-          id_pptk: $scope.id_pptk,
-          id_bendahara: $scope.id_bendahara,
+        .post("/penanggungjawab/insertKpaPpk", {
+          nip_kpa_ppk: $scope.nip_kpa_ppk,
+          nama_kpa_ppk: $scope.nama_kpa_ppk,
         })
         .then(
           function successCallback(data) {
             console.log(data.data);
             if (data.data.errortext == "") {
+              $scope.setDefault();
               $scope.id = $scope.kode_rek = $scope.uraian =  null;
-              $scope.getRekeningDasar();
-              $scope.closeModal("#rekeningDasar");
+              $scope.getKpaPpk();
+              $scope.closeModal("#kpaPpk");
               $scope.success = true;
               $scope.message = data.data.message;
               $timeout(function () {
@@ -107,27 +68,17 @@ sispj.controller("RekeningDasar", function ($scope, $http, $window, $timeout) {
 
   $scope.getDetail = function (id) {
     $scope.setDefault();
-    $http.get("/rekdasar/getDetailRekeningDasar/" + id).then(
+    $http.get("/penanggungjawab/getDetailKpaPpk/" + id).then(
       function successCallback(data) {
-        $scope.openModal("#rekeningDasar");
+        $scope.openModal("#kpaPpk");
         $scope.modalTitle = "Detail Kode Urusan";
         $scope.submitButton = "Update";
         $scope.actionButton = "Kembali";
         console.log(data);
 
         $scope.id = data.data[0].id;
-        $scope.nama_rekening_dasar = data.data[0].nama_rekening_dasar;
-        $scope.kode_rek_dinas = data.data[0].kode_rek_dinas;
-        $scope.kode_rek_urusan = data.data[0].kode_rek_urusan;
-        $scope.kode_rek_bidang = data.data[0].kode_rek_bidang;
-        $scope.kode_rek_program = data.data[0].kode_rek_program;
-        $scope.kode_rek_kegiatan = data.data[0].kode_rek_kegiatan;
-        $scope.kode_rek_unit = data.data[0].kode_rek_unit;
-        $scope.tahun_anggaran = data.data[0].tahun_anggaran;
-        $scope.jumlah_anggaran_rekening_dasar = data.data[0].jumlah_anggaran_rekening_dasar;
         $scope.nama_kpa_ppk = data.data[0].nama_kpa_ppk;
-        $scope.nama_pptk = data.data[0].nama_pptk;
-        $scope.nama_bendahara = data.data[0].nama_bendahara;
+        $scope.nip_kpa_ppk = data.data[0].nip_kpa_ppk;
       },
       function errorCallback(response) {
         console.log(response);
@@ -147,7 +98,7 @@ sispj.controller("RekeningDasar", function ($scope, $http, $window, $timeout) {
         function successCallback(data) {
           if (data.data.errortext == "") {
             $scope.getDetail($scope.id);
-            $scope.getRekeningDasar();
+            $scope.getKpaPpk();
             $scope.success = true;
             $timeout(function () {
               $scope.success = false;

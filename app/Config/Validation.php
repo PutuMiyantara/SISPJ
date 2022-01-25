@@ -233,4 +233,19 @@ class Validation
 			'required' => 'Jumlah Anggaran Belum Terisi'
 		]
 	];
+
+	public $kpappk = [
+		'nip_kpa_ppk' => ['required', 'is_unique[tb_kpa_ppk.nip_kpa_ppk]'],
+		'nama_kpa_ppk' => ['required', 'is_unique[tb_kpa_ppk.nip_kpa_ppk]'],
+	];
+	public $kpappk_errors = [
+		'nip_kpa_ppk' => [
+			'required' => 'NIP KPA PPK Belum Terisi',
+			'is_unique' => 'Pegawai Sudah Terdapat Di Dalam Sistem'
+		],
+		'nama_kpa_ppk' => [
+			'required' => 'Nama KPA PPK Belum Terisi',
+			'is_unique' => 'Pegawai Sudah Terdapat Di Dalam Sistem'
+		]
+	];
 }

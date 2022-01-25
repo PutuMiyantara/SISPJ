@@ -36,6 +36,7 @@
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/KodeKegiatan.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/KodeUnit.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/RekeningDasar.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('/assets/angular/KpaPpk.js'); ?>"></script>
     <!-- js -->
 
     <meta charset="utf-8">
