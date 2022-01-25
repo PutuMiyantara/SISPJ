@@ -36,6 +36,16 @@ CREATE TABLE IF NOT EXISTS `tb_belanja` (
 
 -- Data exporting was unselected.
 
+-- Dumping structure for table db_sispj.tb_bendahara
+CREATE TABLE IF NOT EXISTS `tb_bendahara` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `nip_bendahara` varchar(255) DEFAULT NULL,
+  `nama_bendahara` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
 -- Dumping structure for table db_sispj.tb_kode_belanja_sub1
 CREATE TABLE IF NOT EXISTS `tb_kode_belanja_sub1` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -129,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `tb_kode_dinas` (
   `nama_rek_dinas` varchar(255) DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COMMENT='utuk mencatat kode dinas pada rekenig';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1 COMMENT='utuk mencatat kode dinas pada rekenig';
 
 -- Data exporting was unselected.
 
@@ -173,7 +183,17 @@ CREATE TABLE IF NOT EXISTS `tb_kode_urusan` (
   `nama_rek_urusan` varchar(50) DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COMMENT='mencatat kode rekening untuk urusan';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COMMENT='mencatat kode rekening untuk urusan';
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table db_sispj.tb_kpa_ppk
+CREATE TABLE IF NOT EXISTS `tb_kpa_ppk` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `nip_kpa_ppk` varchar(255) DEFAULT NULL,
+  `nama_kpa_ppk` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
@@ -221,6 +241,16 @@ CREATE TABLE IF NOT EXISTS `tb_order` (
   CONSTRAINT `rekening_belanja` FOREIGN KEY (`id_rekening_belanja`) REFERENCES `tb_rekening_belanja` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `rekening_dasar` FOREIGN KEY (`id_rekening_dasar`) REFERENCES `tb_rekening_dasar` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='hasil relasi tabel rekening dasar dan rekening belanja';
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table db_sispj.tb_pptk
+CREATE TABLE IF NOT EXISTS `tb_pptk` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `nip_pptk` varchar(255) DEFAULT NULL,
+  `nama_pptk` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
@@ -289,6 +319,9 @@ CREATE TABLE IF NOT EXISTS `tb_rekening_dasar` (
   `keterangan_rekening_dasar` varchar(255) DEFAULT NULL,
   `tahun_anggaran` year(4) DEFAULT NULL,
   `jumlah_anggaran_rekening_dasar` bigint(20) DEFAULT NULL COMMENT 'jumlah anggaran yang didapat',
+  `id_kpa_ppk` bigint(20) DEFAULT NULL,
+  `id_pptk` bigint(20) DEFAULT NULL,
+  `id_bendahara` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `tahun_anggaran` (`tahun_anggaran`) USING BTREE,
   KEY `kode_bidang` (`id_kode_bidang`),
@@ -297,12 +330,18 @@ CREATE TABLE IF NOT EXISTS `tb_rekening_dasar` (
   KEY `kdoe_unit` (`id_kode_unit`),
   KEY `kode_dinas` (`id_kode_dinas`),
   KEY `kode_urusan` (`id_kode_urusan`),
+  KEY `kpa_ppk` (`id_kpa_ppk`),
+  KEY `pptk` (`id_pptk`),
+  KEY `bendahara` (`id_bendahara`),
+  CONSTRAINT `bendahara` FOREIGN KEY (`id_bendahara`) REFERENCES `tb_bendahara` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `kdoe_unit` FOREIGN KEY (`id_kode_unit`) REFERENCES `tb_kode_unit` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `kode_bidang` FOREIGN KEY (`id_kode_bidang`) REFERENCES `tb_kode_bidang` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `kode_dinas` FOREIGN KEY (`id_kode_dinas`) REFERENCES `tb_kode_dinas` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `kode_kegiatan` FOREIGN KEY (`id_kode_kegiatan`) REFERENCES `tb_kode_kegiatan` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `kode_program` FOREIGN KEY (`id_kode_program`) REFERENCES `tb_kode_program` (`id`) ON UPDATE CASCADE,
-  CONSTRAINT `kode_urusan` FOREIGN KEY (`id_kode_urusan`) REFERENCES `tb_kode_urusan` (`id`) ON UPDATE CASCADE
+  CONSTRAINT `kode_urusan` FOREIGN KEY (`id_kode_urusan`) REFERENCES `tb_kode_urusan` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `kpa_ppk` FOREIGN KEY (`id_kpa_ppk`) REFERENCES `tb_kpa_ppk` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `pptk` FOREIGN KEY (`id_pptk`) REFERENCES `tb_pptk` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='tabel hasil relasi dari tabel kode_dinas, kode_urusan, kode_bidang, kode_program, kode_kegiatan, kode_unit ';
 
 -- Data exporting was unselected.
