@@ -7,7 +7,7 @@ class PenanggungJawab extends BaseController
 {
     public function index()
     {
-        parent::MasterView('/penanggung_jawab/penanggug_jawab', []);
+        parent::MasterView('/penanggung_jawab/penanggung_jawab', []);
     }
     public function kpa_ppk()
     {

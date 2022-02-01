@@ -11,9 +11,15 @@ class RekeningDasar extends BaseController{
         $this->mRekeningDasar = new ModelRekeningDasar();
     }
 
-    public function index()
+    public function index($tahun)
     {
-        echo json_encode($this->mRekeningDasar->getRekeningDasar(null));
+        if ($tahun == 1) {
+            # code...
+            echo json_encode($this->mRekeningDasar->getRekeningDasar(null));
+        } else{
+            $where = array('tahun_anggaran' => $tahun);
+            echo json_encode($this->mRekeningDasar->getRekeningDasar($where));
+        }
     }
 
     public function insertData(){
@@ -41,6 +47,10 @@ class RekeningDasar extends BaseController{
         echo json_encode($this->mRekeningDasar->getRekeningDasar($where));
     }
     
+    public function getTahunAnggaran(){
+        echo json_encode($this->mRekeningDasar->getTahunAnggaran());
+    }
+
     public function updateData($id){
         $where = array('id' => $id);
         $dataJSON = $this->request->getJSON(true);

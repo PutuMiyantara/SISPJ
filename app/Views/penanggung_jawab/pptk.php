@@ -1,5 +1,5 @@
 <!-- Begin Page Content -->
-<div class="container-fluid" ng-controller="KodeBidang">
+<div class="container-fluid" ng-controller="Pptk">
 
     <!-- Page Heading -->
     <!-- Content Header (Page header) -->
@@ -23,7 +23,7 @@
         <div class="card-header py-3">
             <a href="<?= base_url('/penanggungjawab') ?>" class="btn btn-outline-info">Penanggung Jawab Anggaran</a>
             <a href="<?= base_url('/penanggungjawab/kpa_ppk') ?>" class="btn btn-outline-info">KPA PPK</a>
-            <a href="<?= base_url('/penanggungjawab/pptk') ?>" class="btn btn-outline-info">PPTK</a>
+            <a href="<?= base_url('/penanggungjawab/pptk') ?>" class="btn btn-outline-info active">PPTK</a>
             <a href="<?= base_url('/penanggungjawab/bendahara') ?>" class="btn btn-outline-info">Bendahara</a>
         </div>
         <div class="card-body">
@@ -40,7 +40,7 @@
                     ng-click="tambahData()"><i class="fas fa-plus fa-sm text-white-50"></i>Tambah
                     Data</button>
                 <table datatable="ng" dt-options="vm.dtOptions" class="table table-bordered" width="100%"
-                    cellspacing="0" ng-init="getKodeBidang()">
+                    cellspacing="0" ng-init="getPptk()">
                     <thead>
                         <tr>
                             <th style="width: 10px;">No</th>
@@ -76,10 +76,10 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" tabindex="1" role="dialog" id="kodeBidang">
+    <div class="modal fade" tabindex="1" role="dialog" id="pptk">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form method="POST" enctype="multipart/form-data" name="formKodeBidang" ng-submit="submitData()">
+                <form method="POST" enctype="multipart/form-data" name="formPptk" ng-submit="submitData()">
                     <div class="modal-header">
                         <h4 class="modal-title" ng-model="modalTitle">{{modalTitle}}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -118,7 +118,7 @@
                         <button type="submit" class="btn btn-success col-sm-3 mb-6"><i class="fas fa-save">
                             </i> {{ modalButton }}</button>
                         <button type="button" class="btn btn-danger col-sm-3 mb-6"
-                            ng-click="closeModal('#kodeBidang')">Kembali</button>
+                            ng-click="closeModal('#pptk')">Kembali</button>
                     </div>
                 </form>
             </div>

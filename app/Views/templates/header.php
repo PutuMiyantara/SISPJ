@@ -23,7 +23,10 @@
     <script src="<?= base_url('/assets/angularjs/dataTable/jquery.dataTables.min.js') ?>"></script>
     <link href="<?= base_url('/assets/angularjs/dataTable/css/jquery.dataTables.min.css') ?>" rel="stylesheet">
     <!-- data table -->
-
+    <!-- search select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- search select2 -->
     <!-- js -->
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/sispj.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/user.js'); ?>"></script>
@@ -37,6 +40,10 @@
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/KodeUnit.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/RekeningDasar.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/KpaPpk.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('/assets/angular/Pptk.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('/assets/angular/Bendahara.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('/assets/angular/KodeBelanjaSub1.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('/assets/angular/KodeBelanjaSub2.js'); ?>"></script>
     <!-- js -->
 
     <meta charset="utf-8">

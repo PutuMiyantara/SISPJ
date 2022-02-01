@@ -1,79 +1,191 @@
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper" ng-controller="kodesub1">
+<!-- Begin Page Content -->
+<div class="container-fluid" ng-controller="KodeBelanjaSub1">
+
+    <!-- Page Heading -->
     <!-- Content Header (Page header) -->
-    <div class="content-header">
+    <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Kode Belanja Sub 1</h1>
-                </div><!-- /.col -->
+                    <h1>Data Kode Rekening Dinas</h1>
+                </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Master Data</li>
-                        <li class="breadcrumb-item active">Rekening Dasar</li>
-                        <li class="breadcrumb-item active">Kode Belanja Sub 1</li>
+                        <li class="breadcrumb-item"><a href="#">Rekening Belanja</a></li>
+                        <li class="breadcrumb-item"><a href="#">Kode Rekening Belanja Sub 1</a></li>
                     </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <a href="/kodesub1/tambah" class="d-none d-sm-inline-block btn btn-primary shadow-sm"
-                                style="margin-bottom: 10px;"><i class="fa fa-plus text-white-100"></i> Tambah
-                                Data</a>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <table id="example1" class="table table-hover text-nowrap" ng-init="getKodeSub1()">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 10px;">No</th>
-                                        <th>Kode Rekening</th>
-                                        <th>Uraian</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- <tr ng-repeat="item in items track by $index"> -->
-                                    <tr ng-repeat="d in datas">
-                                        <td>{{$index +1}}</td>
-                                        <td>{{ d.kode_belanja_sub1 }}</td>
-                                        <td>{{ d.uraian }}</td>
-                                        <td>
-                                            <button class="btn btn-info">Detail</button>
-                                            <button class="btn btn-danger">Delete</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Kode Rekening</th>
-                                        <th>Uraian</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
+        </div><!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <a href="<?= base_url('/rekbelanja') ?>" class="btn btn-outline-info">Rekening Belanja</a>
+            <a href="<?= base_url('/rekbelanja/kodesub1') ?>" class="btn btn-outline-info active">Kode Sub 1</a>
+            <a href="<?= base_url('/rekbelanja/kodesub2') ?>" class="btn btn-outline-info">Kode Sub 2</a>
+            <a href="<?= base_url('/rekbelanja/kodesub3') ?>" class="btn btn-outline-info">Kode Sub 3</a>
+            <a href="<?= base_url('/rekbelanja/kodesub4') ?>" class="btn btn-outline-info">Kode Sub 4</a>
+            <a href="<?= base_url('/rekbelanja/kodesub5') ?>" class="btn btn-outline-info">Kode Sub 5</a>
+        </div>
+        <div class="card-body">
+            <div>
+                <div class="alert alert-danger alert-dismissable" ng-show="error">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{message}}
+                </div>
+                <div class="alert alert-success alert-dismissable" ng-show="success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{message}}
+                </div>
+            </div>
+            <div class="table-responsive">
+                <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-bottom: 10px;"
+                    ng-click="tambahData()"><i class="fas fa-plus fa-sm text-white-50"></i>Tambah
+                    Data</button>
+                <table datatable="ng" dt-options="vm.dtOptions" class="table table-bordered" width="100%"
+                    cellspacing="0" ng-init="getKodeBelanjaSub1()">
+                    <thead>
+                        <tr>
+                            <th style="width: 10px;">No</th>
+                            <th>Kode Rekening</th>
+                            <th>Nama Rekening</th>
+                            <th>Jumlah Anggaran</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>No</th>
+                            <th>Kode Rekening</th>
+                            <th>Nama Rekening</th>
+                            <th>Jumlah Anggaran</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="d in datas">
+                            <td>{{ $index +1 }}</td>
+                            <td>{{ d.kode_belanja_sub1 }}</td>
+                            <td>{{ d.nama_rekening_belanja_sub1 }}</td>
+                            <td>Rp. {{ d.jumlah_anggaran_belanja_sub1 }}</td>
+                            <td style="text-align: center;">
+                                <button type="submit" class="btn btn-info" ng-click="getDetail(d.id)"><i
+                                        class="fa fa-edit"> Detail</i></button>
+                                <button type="submit" class="btn btn-danger" ng-click="deleteData(d.id)"><i
+                                        class="fa fa-edit"> Delete</i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" tabindex="1" role="dialog" id="kodeBelanjaSub1">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <form method="POST" enctype="multipart/form-data" name="formKodeDinas" ng-submit="submitData()">
+                    <div class="modal-header">
+                        <h4 class="modal-title" ng-model="modalTitle">{{modalTitle}}</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class="alert alert-danger alert-dismissable" ng-show="error">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{message}}
+                            </div>
+                            <div class="alert alert-success alert-dismissable" ng-show="success">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{message}}
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0">
+                            <div class="col"><label>Kode Rekening</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <input type="text" class="form-control" name="kode_belanja_sub1"
+                                        ng-model="formModel.kode_belanja_sub1" ng-required="false" ng-readonly="false">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0">
+                            <div class="col"><label>Nama Kode Belanja</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <input class="form-control" name="nama_rekening_belanja_sub1"
+                                        ng-model="formModel.nama_rekening_belanja_sub1" ng-required="false"
+                                        ng-readonly="false">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0">
+                            <div class="col"><label>Jumlah Anggaran Belanja Sub 1</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <input class="form-control" name="jumlah_anggaran_belanja_sub1"
+                                        ng-model="formModel.jumlah_anggaran_belanja_sub1" ng-required="false"
+                                        ng-readonly="false">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0" ng-hide="false">
+                            <div class="col"><label>Rekening Induk</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <select class="itemName form-control" name="selUser" id="selUser"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0" ng-hide="hideForAddSub">
+                            <div class="col"><label>Tahun Anggaran</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <input class="form-control" name="tahun_anggaran"
+                                        ng-model="formModel.tahun_anggaran" ng-required="false">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="text" name="id" ng-model="id" ng-hide="false" ng-readonly="true">
+                        <button type="submit" class="btn btn-success col-sm-3 mb-6"><i class="fas fa-save">
+                            </i> {{ modalButton }}</button>
+                        <button type="button" class="btn btn-danger col-sm-3 mb-6"
+                            ng-click="closeModal('#kodeDinas')">Kembali</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
 </div>
-<!-- /.content-wrapper -->
+<script type="text/javascript">
+// $(document).ready(function() {
+
+$('.itemName ').select2({
+    ajax: {
+        url: '<?= base_url() ?>rekbelanja/searchRekDasar',
+        // type: "post",
+        dataType: 'json',
+        delay: 250,
+        data: function(params) {
+            return {
+                test: params.term // search term
+            };
+        },
+        processResults: function(data) {
+            var results = [];
+            $.each(data, function(index, item) {
+                results.push({
+                    id: item.nama_rekening_dasar
+                });
+            });
+            return {
+                results = results
+            };
+        }
+    }
+});
+// });
+</script>

@@ -22,7 +22,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <a href="<?= base_url('/penanggungjawab') ?>" class="btn btn-outline-info">Penanggung Jawab Anggaran</a>
-            <a href="<?= base_url('/penanggungjawab/kpa_ppk') ?>" class="btn btn-outline-info">KPA PPK</a>
+            <a href="<?= base_url('/penanggungjawab/kpa_ppk') ?>" class="btn btn-outline-info active">KPA PPK</a>
             <a href="<?= base_url('/penanggungjawab/pptk') ?>" class="btn btn-outline-info">PPTK</a>
             <a href="<?= base_url('/penanggungjawab/bendahara') ?>" class="btn btn-outline-info">Bendahara</a>
         </div>

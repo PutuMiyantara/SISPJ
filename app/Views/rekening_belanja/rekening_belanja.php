@@ -1,103 +1,145 @@
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+<!-- Begin Page Content -->
+<div class="container-fluid" ng-controller="KodeDinas">
+
+    <!-- Page Heading -->
     <!-- Content Header (Page header) -->
-    <div class="content-header">
+    <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Rekening Belanja</h1>
-                </div><!-- /.col -->
+                    <h1>Data Kode Rekening Dinas</h1>
+                </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Master Data</li>
-                        <li class="breadcrumb-item active">Rekening Belanja</li>
-                        <li class="breadcrumb-item active">Rekening Belanja</li>
+                        <li class="breadcrumb-item"><a href="#">Rekening Belanja</a></li>
+                        <li class="breadcrumb-item"><a href="#">Kode Rekening Belanja Sub 1</a></li>
                     </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Daftar Rekening Belanja</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <table id="example1" class="table table-hover text-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 10px;">No</th>
-                                        <th>Kode Rekening</th>
-                                        <th>Nama Rekening</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Misc</td>
-                                        <td>Dillo 0.8</td>
-                                        <td>Embedded devices</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Misc</td>
-                                        <td>Links</td>
-                                        <td>Text only</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Misc</td>
-                                        <td>Lynx</td>
-                                        <td>Text only</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Misc</td>
-                                        <td>IE Mobile</td>
-                                        <td>Windows Mobile 6</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Misc</td>
-                                        <td>PSP browser</td>
-                                        <td>PSP</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Other browsers</td>
-                                        <td>All others</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Kode Rekening</th>
-                                        <th>Nama Rekening</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
+        </div><!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <a href="<?= base_url('/rekbelanja') ?>" class="btn btn-outline-info active">Rekening Belanja</a>
+            <a href="<?= base_url('/rekbelanja/kodesub1') ?>" class="btn btn-outline-info">Kode Sub 1</a>
+            <a href="<?= base_url('/rekbelanja/kodesub2') ?>" class="btn btn-outline-info">Kode Sub 2</a>
+            <a href="<?= base_url('/rekbelanja/kodesub3') ?>" class="btn btn-outline-info">Kode Sub 3</a>
+            <a href="<?= base_url('/rekbelanja/kodesub4') ?>" class="btn btn-outline-info">Kode Sub 4</a>
+            <a href="<?= base_url('/rekbelanja/kodesub5') ?>" class="btn btn-outline-info">Kode Sub 5</a>
+        </div>
+        <div class="card-body">
+            <div>
+                <div class="alert alert-danger alert-dismissable" ng-show="error">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{message}}
+                </div>
+                <div class="alert alert-success alert-dismissable" ng-show="success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{message}}
+                </div>
+            </div>
+            <div class="table-responsive">
+                <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-bottom: 10px;"
+                    ng-click="tambahData()"><i class="fas fa-plus fa-sm text-white-50"></i>Tambah
+                    Data</button>
+                <table datatable="ng" dt-options="vm.dtOptions" class="table table-bordered" width="100%"
+                    cellspacing="0" ng-init="getKodeDinas()">
+                    <thead>
+                        <tr>
+                            <th style="width: 10px;">No</th>
+                            <th>Kode Rekening</th>
+                            <th>Nama Rekening</th>
+                            <th>Jumlah Anggaran</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>No</th>
+                            <th>Kode Rekening</th>
+                            <th>Nama Rekening</th>
+                            <th>Jumlah Anggaran</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="d in datas">
+                            <td>{{ $index +1 }}</td>
+                            <td>{{ d.kode_belanja_sub1 }}</td>
+                            <td>{{ d.nama_rekening_belanja_sub1 }}</td>
+                            <td>{{ d.jumlah_anggaran_belanja_sub1 }}</td>
+                            <td style="text-align: center;">
+                                <button type="submit" class="btn btn-info" ng-click="getDetail(d.id)"><i
+                                        class="fa fa-edit"> Detail</i></button>
+                                <button type="submit" class="btn btn-danger" ng-click="deleteData(d.id)"><i
+                                        class="fa fa-edit"> Delete</i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" tabindex="1" role="dialog" id="kodeDinas">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="POST" enctype="multipart/form-data" name="formKodeDinas" ng-submit="submitData()">
+                    <div class="modal-header">
+                        <h4 class="modal-title" ng-model="modalTitle">{{modalTitle}}</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class="alert alert-danger alert-dismissable" ng-show="error">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{message}}
+                            </div>
+                            <div class="alert alert-success alert-dismissable" ng-show="success">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{message}}
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0">
+                            <div class="col"><label>Kode Rekening</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <input type="text" class="form-control" name="kode_rekening_belanja_sub1"
+                                        ng-model="kode_rekening_belanja_sub1" ng-required="false" ng-readonly="false">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0">
+                            <div class="col"><label>Nama Rekening</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <textarea class="form-control" name="nama_rekening_belanja_sub1"
+                                        ng-model="nama_rekening_belanja_sub1" ng-required="false"
+                                        ng-readonly="false"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0">
+                            <div class="col"><label>Jumlah Anggaran</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <textarea class="form-control" name="jumlah_anggaran_belanja_sub1"
+                                        ng-model="jumlah_anggaran_belanja_sub1" ng-required="false"
+                                        ng-readonly="false"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="text" name="id" ng-model="id" ng-hide="false" ng-readonly="true">
+                        <button type="submit" class="btn btn-success col-sm-3 mb-6"><i class="fas fa-save">
+                            </i> {{ modalButton }}</button>
+                        <button type="button" class="btn btn-danger col-sm-3 mb-6"
+                            ng-click="closeModal('#kodeDinas')">Kembali</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
 </div>
-<!-- /.content-wrapper -->

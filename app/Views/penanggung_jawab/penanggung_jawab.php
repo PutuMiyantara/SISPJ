@@ -1,5 +1,5 @@
 <!-- Begin Page Content -->
-<div class="container-fluid" ng-controller="KodeBidang">
+<div class="container-fluid" ng-controller="">
 
     <!-- Page Heading -->
     <!-- Content Header (Page header) -->

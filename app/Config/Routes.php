@@ -102,12 +102,23 @@ $routes->post('/penanggungjawab/updateKpaPpk/(:num)', 'KpaPpk::updateData/$1', [
 $routes->post('/penanggungjawab/deleteKpaPpk', 'KpaPpk::deleteData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 
 $routes->get('/penanggungjawab/pptk', 'PenanggungJawab::pptk', ['namespace' => 'App\Controllers\Main', 'role' => 3, 'ajax' => false]);
-$routes->get('/penanggungjawab/bendahara', 'PenanggungJawab::bendahara', ['namespace' => 'App\Controllers\Main', 'role' => 3, 'ajax' => false]);
+$routes->get('/penanggungjawab/getPptk', 'Pptk::index', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/penanggungjawab/insertPptk', 'Pptk::insertData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->get('/penanggungjawab/getDetailPptk/(:num)', 'Pptk::getDetail/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/penanggungjawab/updatePptk/(:num)', 'Pptk::updateData/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/penanggungjawab/deletePptk', 'Pptk::deleteData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 
+$routes->get('/penanggungjawab/bendahara', 'PenanggungJawab::bendahara', ['namespace' => 'App\Controllers\Main', 'role' => 3, 'ajax' => false]);
+$routes->get('/penanggungjawab/getBendahara', 'Bendahara::index', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/penanggungjawab/insertBendahara', 'Bendahara::insertData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->get('/penanggungjawab/getDetailBendahara/(:num)', 'Bendahara::getDetail/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/penanggungjawab/updateBendahara/(:num)', 'Bendahara::updateData/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/penanggungjawab/deleteBendahara', 'Bendahara::deleteData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 
 // Rekening Dasar
 $routes->get('/rekdasar', 'RekeningDasar::index', ['namespace'=> 'App\Controllers\Main', 'role' => [1,2,3], 'ajax' =>false]);
-$routes->get('/rekdasar/getRekeningDasar', 'RekeningDasar::index', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->get('/rekdasar/getRekeningDasar/(:num)', 'RekeningDasar::index/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->get('/rekdasar/getTahunAnggaran', 'RekeningDasar::getTahunAnggaran', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 $routes->post('/rekdasar/insertRekeningDasar', 'RekeningDasar::insertData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 $routes->get('/rekdasar/getDetailRekeningDasar/(:num)', 'RekeningDasar::getDetail/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 $routes->post('/rekdasar/updateRekeningDasar/(:num)', 'RekeningDasar::updateData/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
@@ -161,7 +172,23 @@ $routes->post('/rekdasar/updateKodeUnit/(:num)', 'KodeUnit::updateData/$1', ['na
 $routes->post('/rekdasar/deleteKodeUnit', 'KodeUnit::deleteData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 
 // Rekening Belanja
-$routes->get('/rekbelanja', 'RekeningBelanja::index', ['namespace'=> 'App\Controller\Main', 'role' => [1,2,3], 'ajax' =>false]);
+$routes->get('/rekbelanja', 'RekeningBelanja::index', ['namespace'=> 'App\Controllers\Main', 'role' => [1,2,3], 'ajax' =>false]);
+// Rekening Belanja Kode Sub1
+$routes->get('/rekbelanja/kodesub1', 'RekeningBelanja::sub1', ['namespace'=> 'App\Controllers\Main', 'role' => [1,2,3], 'ajax' =>false]);
+$routes->get('/rekbelanja/searchRekDasar', 'KodeBelanjaSub1::searchRekDasar', ['namespace' => 'App\Controllers\AJAX']);
+$routes->get('/rekbelanja/getKodeBelanjaSub1', 'KodeBelanjaSub1::index', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekbelanja/insertKodeBelanjaSub1', 'KodeBelanjaSub1::insertData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->get('/rekbelanja/getDetailKodeBelanjaSub1/(:num)', 'KodeBelanjaSub1::getDetail/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekbelanja/updateKodeBelanjaSub1/(:num)', 'KodeBelanjaSub1::updateData/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekbelanja/deleteKodeBelanjaSub1', 'KodeBelanjaSub1::deleteData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+
+// Rekening Belanja Kode Sub2
+$routes->get('/rekbelanja/kodesub2', 'RekeningBelanja::sub2', ['namespace'=> 'App\Controllers\Main', 'role' => [1,2,3], 'ajax' =>false]);
+$routes->get('/rekbelanja/getKodeBelanjaSub2', 'KodeBelanjaSub2::index', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekbelanja/insertKodeBelanjaSub2', 'KodeBelanjaSub2::insertData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->get('/rekbelanja/getDetailKodeBelanjaSub2/(:num)', 'KodeBelanjaSub2::getDetail/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekbelanja/updateKodeBelanjaSub2/(:num)', 'KodeBelanjaSub2::updateData/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/rekbelanja/deleteKodeBelanjaSub2', 'KodeBelanjaSub2::deleteData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 /**
  * --------------------------------------------------------------------
  * Additional Routing

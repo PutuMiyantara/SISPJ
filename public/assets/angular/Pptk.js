@@ -1,12 +1,12 @@
-sispj.controller("KpaPpk", function ($scope, $http, $window, $timeout) {
+sispj.controller("Pptk", function ($scope, $http, $window, $timeout) {
   $scope.setDefault = function () {
     $scope.error = false;
     $scope.success = false;
-    $scope.nip_kpa_ppk = $scope.nama_kpa_ppk = null;
+    $scope.nip_pptk = $scope.nama_pptk = null;
   };
 
-  $scope.getKpaPpk = function () {
-    $http.get("/penanggungjawab/getKpaPpk").then(function (data) {
+  $scope.getPptk = function () {
+    $http.get("/penanggungjawab/getPptk").then(function (data) {
       $scope.datas = data.data;
       console.log(data)
     },function errorCallback(response) {
@@ -16,7 +16,7 @@ sispj.controller("KpaPpk", function ($scope, $http, $window, $timeout) {
   };
 
   $scope.tambahData = function (){
-    $scope.openModal("#kpaPpk");
+    $scope.openModal("#pptk");
     $scope.modalTitle = "Tambah Penanggung Jawab KPA PPK";
     $scope.modalButton = "Simpan";
     $scope.formSubmit = "ng-submit='insertData()'";
@@ -33,9 +33,9 @@ sispj.controller("KpaPpk", function ($scope, $http, $window, $timeout) {
 
   $scope.insertData = function () {
       $http
-        .post("/penanggungjawab/insertKpaPpk", {
-          nip_kpa_ppk: $scope.nip_kpa_ppk,
-          nama_kpa_ppk: $scope.nama_kpa_ppk,
+        .post("/penanggungjawab/insertPptk", {
+          nip_pptk: $scope.nip_pptk,
+          nama_pptk: $scope.nama_pptk,
         })
         .then(
           function successCallback(data) {
@@ -43,8 +43,8 @@ sispj.controller("KpaPpk", function ($scope, $http, $window, $timeout) {
             if (data.data.errortext == "") {
               $scope.setDefault();
               $scope.id = $scope.kode_rek = $scope.uraian =  null;
-              $scope.getKpaPpk();
-              $scope.closeModal("#kpaPpk");
+              $scope.getPptk();
+              $scope.closeModal("#pptk");
               $scope.success = true;
               $scope.message = data.data.message;
               $timeout(function () {
@@ -68,17 +68,17 @@ sispj.controller("KpaPpk", function ($scope, $http, $window, $timeout) {
 
   $scope.getDetail = function (id) {
     $scope.setDefault();
-    $http.get("/penanggungjawab/getDetailKpaPpk/" + id).then(
+    $http.get("/penanggungjawab/getDetailPptk/" + id).then(
       function successCallback(data) {
-        $scope.openModal("#kpaPpk");
+        $scope.openModal("#pptk");
         $scope.modalTitle = "Detail Kode Urusan";
         $scope.submitButton = "Update";
         $scope.actionButton = "Kembali";
         console.log(data);
 
         $scope.id = data.data[0].id;
-        $scope.nama_kpa_ppk = data.data[0].nama_kpa_ppk;
-        $scope.nip_kpa_ppk = data.data[0].nip_kpa_ppk;
+        $scope.nama_pptk = data.data[0].nama_pptk;
+        $scope.nip_pptk = data.data[0].nip_pptk;
       },
       function errorCallback(response) {
         console.log(response);
@@ -90,15 +90,15 @@ sispj.controller("KpaPpk", function ($scope, $http, $window, $timeout) {
   $scope.editData = function () {
     console.log('ini benar edit');
     $http
-      .post("/penanggungjawab/updateKpaPpk/" + $scope.id , {
-        nip_kpa_ppk : $scope.nip_kpa_ppk,
-        nama_kpa_ppk : $scope.nama_kpa_ppk
+      .post("/penanggungjawab/updatePptk/" + $scope.id , {
+        nip_pptk : $scope.nip_pptk,
+        nama_pptk : $scope.nama_pptk
       })
       .then(
         function successCallback(data) {
           if (data.data.errortext == "") {
             $scope.getDetail($scope.id);
-            $scope.getKpaPpk();
+            $scope.getPptk();
             $scope.success = true;
             $timeout(function () {
               $scope.success = false;
@@ -118,11 +118,11 @@ sispj.controller("KpaPpk", function ($scope, $http, $window, $timeout) {
   $scope.deleteData = function(id){
     var isconfirm =  confirm("Ingin Menghapus Data?");
     if (isconfirm) {
-      $http.post("/penanggungjawab/deleteKpaPpk",{
+      $http.post("/penanggungjawab/deletePptk",{
         id: id,
       }).then(
         function successCallback(data){
-          $scope.getKpaPpk();
+          $scope.getPptk();
           $scope.message = "Data Berhasil Dihapus";
           $scope.success = true;
           $timeout(function(){

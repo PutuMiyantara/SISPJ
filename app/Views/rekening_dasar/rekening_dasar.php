@@ -44,10 +44,11 @@
                 <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-bottom: 10px;"
                     ng-click="tambahData()"><i class="fas fa-plus fa-sm text-white-50"></i>Tambah
                     Data</button>
-                <div style="float: right;">
+                <div style="float: right;" ng-init="tahunAnggaran(tahun)">
                     <select>
-                        <option>2021</option>
-                        <option>2022</option>
+                        <option ng-click="changeTahunAnggaran(Semua)">Semua</option>
+                        <option ng-repeat="t in tahun" ng-click="changeTahunAnggaran(t.tahun_anggaran)">
+                            {{ t.tahun_anggaran }}</option>
                     </select>
                 </div>
                 <table datatable="ng" dt-options="vm.dtOptions" class="table table-bordered" width="100%"
@@ -108,7 +109,7 @@
     <div class="modal fade" tabindex="1" role="dialog" id="rekeningDasar">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <form method="POST" enctype="multipart/form-data" name="formRekeningDasar" ng-submit="submitData()">
+                <form method="POST" enctype="multipart/form-data" name="formModel" ng-submit="submitData()">
                     <div class="modal-header">
                         <h4 class="modal-title" ng-model="modalTitle">{{modalTitle}}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -130,8 +131,9 @@
                             <div class="form-group row">
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="kode_rek_dinas"
-                                        ng-model="kode_rek_dinas" ng-required="false" ng-readonly="false"
-                                        ng-keyup="searchRekDinas(kode_rek_dinas)" ng-style="kode_rek_dinas_style">
+                                        ng-model="formModel.kode_rek_dinas" ne-required="true" ng-readonly="false"
+                                        ng-keyup="searchRekDinas(formModel.kode_rek_dinas)"
+                                        ng-style="formModel.kode_rek_dinas_style">
                                     <ul class="list-group" ng-hide="hide_rek_dinas"
                                         style="height: 100px;overflow: auto;">
                                         <li class="list-group-item list-group-item-action"
@@ -144,8 +146,9 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="kode_rek_urusan"
-                                        ng-model="kode_rek_urusan" ng-required="false" ng-readonly="false"
-                                        ng-keyup="searchRekUrusan(kode_rek_urusan)" ng-style="kode_rek_urusan_style">
+                                        ng-model="formModel.kode_rek_urusan" ne-required="true" ng-readonly="false"
+                                        ng-keyup="searchRekUrusan(formModel.kode_rek_urusan)"
+                                        ng-style="kode_rek_urusan_style">
                                     <ul class="list-group" ng-hide="hide_rek_urusan"
                                         style="height: 100px;overflow: auto;">
                                         <li class="list-group-item list-group-item-action"
@@ -158,8 +161,9 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="kode_rek_bidang"
-                                        ng-model="kode_rek_bidang" ng-required="false" ng-readonly="false"
-                                        ng-keyup="searchRekBidang(kode_rek_bidang)" ng-style="kode_rek_bidang_style">
+                                        ng-model="formModel.kode_rek_bidang" ne-required="true" ng-readonly="false"
+                                        ng-keyup="searchRekBidang(formModel.kode_rek_bidang)"
+                                        ng-style="kode_rek_bidang_style">
                                     <ul class="list-group" ng-hide="hide_rek_bidang"
                                         style="height: 100px;overflow: auto;">
                                         <li class="list-group-item list-group-item-action"
@@ -172,8 +176,8 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="kode_rek_kegiatan"
-                                        ng-model="kode_rek_kegiatan" ng-required="false" ng-readonly="false"
-                                        ng-keyup="searchRekKegiatan(kode_rek_kegiatan)"
+                                        ng-model="formModel.kode_rek_kegiatan" ne-required="true" ng-readonly="false"
+                                        ng-keyup="searchRekKegiatan(formModel.kode_rek_kegiatan)"
                                         ng-style="kode_rek_kegiatan_style">
                                     <ul class="list-group" ng-hide="hide_rek_kegiatan"
                                         style="height: 100px;overflow: auto;">
@@ -187,8 +191,9 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="kode_rek_program"
-                                        ng-model="kode_rek_program" ng-required="false" ng-readonly="false"
-                                        ng-keyup="searchRekProgram(kode_rek_program)" ng-style="kode_rek_program_style">
+                                        ng-model="formModel.kode_rek_program" ne-required="true" ng-readonly="false"
+                                        ng-keyup="searchRekProgram(formModel.kode_rek_program)"
+                                        ng-style="kode_rek_program_style">
                                     <ul class="list-group" ng-hide="hide_rek_program"
                                         style="height: 100px;overflow: auto;">
                                         <li class="list-group-item list-group-item-action"
@@ -201,8 +206,9 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="kode_rek_unit"
-                                        ng-model="kode_rek_unit" ng-required="false" ng-readonly="false"
-                                        ng-keyup="searchRekUnit(kode_rek_unit)" ng-style="kode_rek_unit_style">
+                                        ng-model="formModel.kode_rek_unit" ne-required="true" ng-readonly="false"
+                                        ng-keyup="searchRekUnit(formModel.kode_rek_unit)"
+                                        ng-style="kode_rek_unit_style">
                                     <ul class="list-group" ng-hide="hide_rek_unit"
                                         style="height: 100px;overflow: auto;">
                                         <li class="list-group-item list-group-item-action"
@@ -220,7 +226,7 @@
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
                                     <textarea class="form-control" name="nama_rekening_dasar"
-                                        ng-model="nama_rekening_dasar" ng-required="false" ng-readonly="false">
+                                        ng-model="formModel.nama_rekening_dasar" ne-required="true" ng-readonly="false">
                                     </textarea>
                                 </div>
                             </div>
@@ -230,7 +236,7 @@
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
                                     <input type="year" class="form-control" name="tahun_anggaran"
-                                        ng-model="tahun_anggaran" ng-required="false" ng-readonly="false">
+                                        ng-model="formModel.tahun_anggaran" ne-required="true" ng-readonly="false">
                                 </div>
                             </div>
                         </div>
@@ -239,7 +245,7 @@
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
                                     <input type="text" class="form-control" name="jumlah_anggaran_rekening_dasar"
-                                        ng-model="jumlah_anggaran_rekening_dasar" ng-required="false"
+                                        ng-model="formModel.jumlah_anggaran_rekening_dasar" ne-required="true"
                                         ng-readonly="false">
                                 </div>
                             </div>
@@ -248,9 +254,11 @@
                             <div class="col"><label>Pejabat KPA PPK</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
-                                    <input type="text" class="form-control" name="nama_kpa_ppk" ng-model="nama_kpa_ppk"
-                                        ng-required="false" ng-readonly="false">
-                                    <ul class="list-group" ng-hide="hide_kpa_ppk" style="height: 100px;overflow: auto;">
+                                    <input type="text" class="form-control" name="nama_kpa_ppk"
+                                        ng-model="formModel.nama_kpa_ppk" ne-required="true" ng-readonly="false"
+                                        ng-keyup="searchKpaPpk(nama_kpa_ppk)" ng-style="kpa_ppk_style">
+                                    <ul class="list-group col-sm-12 mb-6 mb-sm-0" ng-hide="hide_kpa_ppk"
+                                        style="height: 100px;overflow: auto;">
                                         <li class="list-group-item list-group-item-action"
                                             ng-repeat="kpa_ppk in filterKpaPpk"
                                             ng-click="fillKpaPpk(kpa_ppk.id ,kpa_ppk.nama_kpa_ppk, kpa_ppk.nip_kpa_ppk)">
@@ -265,9 +273,11 @@
                             <div class="col"><label>Pejabat PPTK</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
-                                    <input type="text" class="form-control" name="nama_pptk" ng-model="nama_pptk"
-                                        ng-required="false" ng-readonly="false">
-                                    <ul class="list-group" ng-hide="hide_pptk" style="height: 100px;overflow: auto;">
+                                    <input type="text" class="form-control" name="nama_pptk"
+                                        ng-model="formModel.nama_pptk" ne-required="true" ng-readonly="false"
+                                        ng-keyup="searchPptk(nama_pptk)" ng-style="pptk_style">
+                                    <ul class="list-group col-sm-12 mb-6 mb-sm-0" ng-hide="hide_pptk"
+                                        style="height: 100px;overflow: auto;">
                                         <li class="list-group-item list-group-item-action"
                                             ng-repeat="pptk in filterPptk"
                                             ng-click="fillPptk(pptk.id ,pptk.nama_pptk, pptk.nip_pptk)">
@@ -279,18 +289,19 @@
                             </div>
                         </div>
                         <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Bendahara Pengeluaran</label></div>
+                            <div class="col"><label>Pejabat Bendahara Pengeluaran</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
                                     <input type="text" class="form-control" name="nama_bendahara"
-                                        ng-model="nama_bendahara" ng-required="false" ng-readonly="false">
-                                    <ul class="list-group" ng-hide="hide_bendahara"
+                                        ng-model="formModel.nama_bendahara" ne-required="true" ng-readonly="false"
+                                        ng-keyup="searchBendahara(nama_bendahara)" ng-style="bendahara_style">
+                                    <ul class="list-group col-sm-12 mb-6 mb-sm-0" ng-hide="hide_bendahara"
                                         style="height: 100px;overflow: auto;">
                                         <li class="list-group-item list-group-item-action"
                                             ng-repeat="bendahara in filterBendahara"
                                             ng-click="fillBendahara(bendahara.id ,bendahara.nama_bendahara, bendahara.nip_bendahara)">
                                             <a href=""
-                                                style="color: black; text-align: right; text-decoration: none;">{{bendahara.nama_bendahara}})</a>
+                                                style="color: black; text-align: right; text-decoration: none;">{{bendahara.nama_bendahara}}</a>
                                         </li>
                                     </ul>
                                 </div>

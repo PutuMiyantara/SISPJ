@@ -3,17 +3,17 @@
 namespace App\Controllers\AJAX;
 
 use App\Controllers\BaseController;
-use App\Models\Modelpptk;
+use App\Models\ModelKodeBelanjaSub2;
 
-class Pptk extends BaseController{
+class KodeBelanjaSub2 extends BaseController{
     public function __construct()
     {
-        $this->mPptk = new Modelpptk();
+        $this->mKodeBelanjaSub2 = new ModelKodeBelanjaSub2();
     }
 
     public function index()
     {
-        echo json_encode($this->mPptk->getPptk(null));
+        echo json_encode($this->mKodeBelanjaSub2->getKodeBelanjaSub2(null));
     }
 
     public function insertData(){
@@ -21,8 +21,8 @@ class Pptk extends BaseController{
         $errortext[] ='';
         $message = '';
 
-        if($this->validator->run($dataJSON, 'pptk')){
-            if ($this->mPptk->insertData($dataJSON)) {
+        if($this->validator->run($dataJSON, 'kodebelanjasu21')){
+            if ($this->mKodeBelanjaSub1->insertData($dataJSON)) {
                 $message = 'Berhasil Menyimpan Data';
             }
             else{
@@ -37,8 +37,8 @@ class Pptk extends BaseController{
     }
 
     public function getDetail($id){
-        $where = array('id' => $id);
-        echo json_encode($this->mPptk->getPptk($where));
+        $where = array('tb_kode_belanja_sub2.id' => $id);
+        echo json_encode($this->mKodeBelanjaSub1->getKodeBelanjaSub1($where));
     }
     
     public function updateData($id){
@@ -47,9 +47,9 @@ class Pptk extends BaseController{
         $errortext[] ='';
 
         $message = '';
-        if ($this->validator->run($dataJSON, 'pptk_edit')) {
+        if ($this->validator->run($dataJSON, 'kodebelanjasub2')) {
             # code...
-            if ($this->mPptk->updateData($where, $dataJSON)) {
+            if ($this->mKodeBelanjaSub1->updateData($where, $dataJSON)) {
                 # code...
                 $message = "Berhasil Menyimpan Data";
             } else{
@@ -66,9 +66,7 @@ class Pptk extends BaseController{
 
     public function deleteData(){
         $where = $this->request->getJSON(true);
-        $this->mPptk->deleteData($where);
+        $this->mKodeBelanjaSub2->deleteData($where);
         return true;
     }
-
-
 }

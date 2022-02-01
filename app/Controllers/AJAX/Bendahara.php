@@ -3,17 +3,17 @@
 namespace App\Controllers\AJAX;
 
 use App\Controllers\BaseController;
-use App\Models\ModelKodeBidang;
+use App\Models\ModelBendahara;
 
-class KodeBidang extends BaseController{
+class Bendahara extends BaseController{
     public function __construct()
     {
-        $this->mKodeBidang = new ModelKodeBidang();
+        $this->mBendahara = new ModelBendahara();
     }
 
     public function index()
     {
-        echo json_encode($this->mKodeBidang->getKodeBidang(null));
+        echo json_encode($this->mBendahara->getBendahara(null));
     }
 
     public function insertData(){
@@ -21,8 +21,8 @@ class KodeBidang extends BaseController{
         $errortext[] ='';
         $message = '';
 
-        if($this->validator->run($dataJSON, 'koderekeningbidang')){
-            if ($this->mKodeBidang->insertData($dataJSON)) {
+        if($this->validator->run($dataJSON, 'bendahara')){
+            if ($this->mBendahara->insertData($dataJSON)) {
                 $message = 'Berhasil Menyimpan Data';
             }
             else{
@@ -38,7 +38,7 @@ class KodeBidang extends BaseController{
 
     public function getDetail($id){
         $where = array('id' => $id);
-        echo json_encode($this->mKodeBidang->getKodeBidang($where));
+        echo json_encode($this->mBendahara->getBendahara($where));
     }
     
     public function updateData($id){
@@ -47,9 +47,9 @@ class KodeBidang extends BaseController{
         $errortext[] ='';
 
         $message = '';
-        if ($this->validator->run($dataJSON, 'koderekeningbidang')) {
+        if ($this->validator->run($dataJSON, 'bendahara_edit')) {
             # code...
-            if ($this->mKodeBidang->updateData($where, $dataJSON)) {
+            if ($this->mBendahara->updateData($where, $dataJSON)) {
                 # code...
                 $message = "Berhasil Menyimpan Data";
             } else{
@@ -66,7 +66,7 @@ class KodeBidang extends BaseController{
 
     public function deleteData(){
         $where = $this->request->getJSON(true);
-        $this->mKodeBidang->deleteData($where);
+        $this->mBendahara->deleteData($where);
         return true;
     }
 

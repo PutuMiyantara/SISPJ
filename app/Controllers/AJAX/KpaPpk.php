@@ -47,7 +47,7 @@ class KpaPpk extends BaseController{
         $errortext[] ='';
 
         $message = '';
-        if ($this->validator->run($dataJSON, 'kpappk')) {
+        if ($this->validator->run($dataJSON, 'kpappk_edit')) {
             # code...
             if ($this->mKpaPpk->updateData($where, $dataJSON)) {
                 # code...

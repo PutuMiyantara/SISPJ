@@ -4,28 +4,18 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ModelKodeBelanjaSub1 extends Model
+class ModelKodeBelanjaSub2 extends Model
 {
-    // public function getSearchRekDasar($test){
-    public function getSearchRekDasar(){
+    public function getKodeBelanjaSub2($id){
         $db = db_connect();
-        $builder = $db->table('tb_rekening_dasar');
-        $builder->select('*');
-        $builder->like('nama_rekening_dasar', 'Dinas Koperasi');
-        $query = $builder->get();
-        return $query->getResultArray();
-    }
-    public function getKodeBelanjaSub1($id){
-        $db = db_connect();
-        $builder = $db->table('tb_kode_belanja_sub1');
+        $builder = $db->table('tb_kode_belanja_sub2');
         if ($id == null) {
             # code...
             $builder->select('*');
             $query = $builder->get();
         } else{
-            // $builder->select('kode_belanja_sub1, nama_rekening_belanja_sub1, jumlah_anggaran_belanja_sub1, id_rekening_dasar, kode_rek_dinas, kode_rek_urusan, kode_rek_bidang, kode_rek_program, kode_rek_kegiatan, kode_rek_unit, tahun_anggaran');
-            $builder->select('tb_kode_belanja_sub1.id, kode_belanja_sub1, nama_rekening_belanja_sub1, jumlah_anggaran_belanja_sub1, id_rekening_dasar, kode_rek_dinas, kode_rek_urusan, kode_rek_bidang, kode_rek_program, kode_rek_kegiatan, kode_rek_unit, tahun_anggaran, nama_rekening_dasar, id_rekening_dasar');
-            $builder->join('tb_rekening_dasar', 'tb_rekening_dasar.id = tb_kode_belanja_sub1.id_rekening_dasar');
+            $builder->select('tb_kode_belanja_sub2.id, kode_belanja_sub2, nama_rekening_belanja_sub2, jumlah_anggaran_belanja_sub2, id_rekening_dasar, kode_rek_dinas, kode_rek_urusan, kode_rek_bidang, kode_rek_program, kode_rek_kegiatan, kode_rek_unit, tahun_anggaran, nama_rekening_dasar, id_rekening_dasar');
+            $builder->join('tb_rekening_dasar', 'tb_rekening_dasar.id = tb_kode_belanja_sub2.id_rekening_dasar');
             $builder->join('tb_kode_dinas', 'tb_kode_dinas.id = tb_rekening_dasar.id_kode_dinas');
             $builder->join('tb_kode_urusan', 'tb_kode_urusan.id = tb_rekening_dasar.id_kode_urusan');
             $builder->join('tb_kode_bidang', 'tb_kode_bidang.id = tb_rekening_dasar.id_kode_bidang');
@@ -42,14 +32,14 @@ class ModelKodeBelanjaSub1 extends Model
 
     public function insertData($data){
         $db = db_connect();
-        $builder = $db->table('tb_kode_belanja_sub1');
+        $builder = $db->table('tb_kode_belanja_sub2');
         $builder->insert($data);
         return true;
     }
 
     public function updateData($where, $data){
         $db = db_connect();
-        $builder = $db->table('tb_kode_belanja_sub1');
+        $builder = $db->table('tb_kode_belanja_sub2');
         $builder->where($where);
         $builder->update($data);
         return true;
@@ -57,7 +47,7 @@ class ModelKodeBelanjaSub1 extends Model
 
     public function deleteData($where){
         $db = db_connect();
-        $builder = $db->table('tb_kode_belanja_sub1');
+        $builder = $db->table('tb_kode_belanja_sub2');
         $builder->delete($where);
         return true;
     }

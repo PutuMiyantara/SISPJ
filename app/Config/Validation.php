@@ -248,4 +248,149 @@ class Validation
 			'is_unique' => 'Pegawai Sudah Terdapat Di Dalam Sistem'
 		]
 	];
+
+	public $kpappk_edit = [
+		'nip_kpa_ppk' => ['required'],
+		'nama_kpa_ppk' => ['required'],
+	];
+	public $kpappk_edit_errors = [
+		'nip_kpa_ppk' => [
+			'required' => 'NIP KPA PPK Belum Terisi'
+		],
+		'nama_kpa_ppk' => [
+			'required' => 'Nama KPA PPK Belum Terisi'
+		]
+	];
+
+	public $pptk = [
+		'nip_pptk' => ['required', 'is_unique[tb_pptk.nip_pptk]'],
+		'nama_pptk' => ['required', 'is_unique[tb_pptk.nip_pptk]'],
+	];
+	public $pptk_errors = [
+		'nip_pptk' => [
+			'required' => 'NIP PPTK Belum Terisi',
+			'is_unique' => 'Pegawai Sudah Terdapat Di Dalam Sistem'
+		],
+		'nama_pptk' => [
+			'required' => 'Nama PPTK Belum Terisi',
+			'is_unique' => 'Pegawai Sudah Terdapat Di Dalam Sistem'
+		]
+	];
+
+	public $pptk_edit = [
+		'nip_pptk' => ['required'],
+		'nama_pptk' => ['required'],
+	];
+	public $pptk_edit_errors = [
+		'nip_pptk' => [
+			'required' => 'NIP PPTK Belum Terisi'
+		],
+		'nama_pptk' => [
+			'required' => 'Nama PPTK Belum Terisi'
+		]
+	];
+
+	public $bendahara = [
+		'nip_bendahara' => ['required', 'is_unique[tb_bendahara.nip_bendahara]'],
+		'nama_bendahara' => ['required', 'is_unique[tb_bendahara.nip_bendahara]'],
+	];
+	public $bendahara_errors = [
+		'nip_bendahara' => [
+			'required' => 'NIP Bendahara Belum Terisi',
+			'is_unique' => 'Pegawai Sudah Terdapat Di Dalam Sistem'
+		],
+		'nama_bendahara' => [
+			'required' => 'Nama Bendahara Belum Terisi',
+			'is_unique' => 'Pegawai Sudah Terdapat Di Dalam Sistem'
+		]
+	];
+
+	public $bendahara_edit = [
+		'nip_bendahara' => ['required'],
+		'nama_bendahara' => ['required'],
+	];
+	public $bendahara_edit_errors = [
+		'nip_bendahara' => [
+			'required' => 'NIP Bendahara Belum Terisi'
+		],
+		'nama_bendahara' => [
+			'required' => 'Nama Bendahara Belum Terisi'
+		]
+	];
+
+	public $koderekeningdasar = [
+		'id_kode_dinas' => ['required'],
+		'id_kode_urusan' => ['required'],
+		'id_kode_bidang' => ['required'],
+		'id_kode_program' => ['required'],
+		'id_kode_kegiatan' => ['required'],
+		'id_kode_unit' => ['required'],
+		'nama_rekening_dasar' => ['required'],
+		'tahun_anggaran' => ['required'],
+		'jumlah_anggaran_rekening_dasar' => ['required'],
+		'id_kpa_ppk' => ['required'],
+		'id_pptk' => ['required'],
+		'id_bendahara' => ['required']
+	];
+
+	public $koderekeningdasar_errors = [
+		'id_kode_dinas' => [
+			'required' => 'Kode DinasBelum Terisi'
+		],
+		'id_kode_urusan' => [
+			'required' => 'Kode Urusan Belum Terisi'
+		],
+		'id_kode_bidang' => [
+			'required' => 'Kode Bidang Belum Terisi'
+		],
+		'id_kode_program' => [
+			'required' => 'Kode Program Belum Terisi'
+		],
+		'id_kode_kegiatan' => [
+			'required' => 'Kode Kegiatan Belum Terisi'
+		],
+		'id_kode_unit' => [
+			'required' => 'Kode Unit Belum Terisi'
+		],
+		'nama_rekening_dasar' => [
+			'required' => 'Nama Rekening Dasar Belum Terisi'
+		],
+		'tahun_anggaran' => [
+			'required' => 'Tahun Anggaran Belum Terisi'
+		],
+		'jumlah_anggaran_rekening_dasar' => [
+			'required' => 'Jumlah Anggaran Belum Terisi'
+		],
+		'id_kpa_ppk' => [
+			'required' => 'KPA PPK Belum Terisi'
+		],
+		'id_pptk' => [
+			'required' => 'PPTK Belum Terisi'
+		],
+		'id_bendahara' => [
+			'required' => 'Bendahara Belum Terisi'
+		]
+	];
+
+	public $kodebelanjasub1 = [
+		'kode_belanja_sub1' => 'required',
+		'nama_rekening_belanja_sub1' => 'required',
+		'jumlah_anggaran_belanja_sub1' => 'required',
+		'id_rekening_dasar' => 'required'
+	];
+
+	public $kodebelanjasub1_errors = [
+		'kode_belanja_sub1' => [
+			'required' => 'Kode Belanja Belum Terisi'
+		],
+		'nama_rekening_belanja_sub1' => [
+			'required' => 'Nama Rekening Belanja Belum Terisi'
+		],
+		'jumlah_anggaran_belanja_sub1' => [
+			'required' => 'Jumlah Anggaran Belum Terisi'
+		],
+		'id_rekening_dasar' => [
+			'required' => 'Rekening Dasar Belum Terisi'
+		]
+	];
 }
