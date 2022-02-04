@@ -3,7 +3,7 @@
 
     <!-- Page Heading -->
     <!-- Content Header (Page header) -->
-    <section class=" content-header">
+    <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
@@ -39,52 +39,6 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-bottom: 10px;"
-                    ng-click="tambahData()"><i class="fas fa-plus fa-sm text-white-50"></i>Tambah
-                    Data</button>
-                <table datatable="ng" dt-options="vm.dtOptions" class="table table-bordered" width="100%"
-                    cellspacing="0" ng-init="getKodeBelanjaSub1()">
-                    <thead>
-                        <tr>
-                            <th style="width: 10px;">No</th>
-                            <th>Kode Rekening</th>
-                            <th>Nama Rekening</th>
-                            <th>Jumlah Anggaran</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>No</th>
-                            <th>Kode Rekening</th>
-                            <th>Nama Rekening</th>
-                            <th>Jumlah Anggaran</th>
-                            <th>Action</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        <tr ng-repeat="d in datas">
-                            <td>{{ $index +1 }}</td>
-                            <td>{{ d.kode_belanja_sub1 }}</td>
-                            <td>{{ d.nama_rekening_belanja_sub1 }}</td>
-                            <td>Rp. {{ d.jumlah_anggaran_belanja_sub1 }}</td>
-                            <td style="text-align: center;">
-                                <button type="submit" class="btn btn-info" ng-click="getDetail(d.id)"><i
-                                        class="fa fa-edit"> Detail</i></button>
-                                <button type="submit" class="btn btn-danger" ng-click="deleteData(d.id)"><i
-                                        class="fa fa-edit"> Delete</i></button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" role="dialog" role="dialog" aria-hidden="true" id="kodeBelanjaSub1">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
                 <form method="POST" enctype="multipart/form-data" name="formKodeDinas" ng-submit="submitData()">
                     <div class="modal-header">
                         <h4 class="modal-title" ng-model="modalTitle">{{modalTitle}}</h4>
@@ -132,24 +86,29 @@
                         <div class="col-sm-12 mb-6 mb-sm-0" ng-hide="false">
                             <div class="col"><label>Rekening Induk</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row" ng-init="datapangkat()">
-                                    <select style="width: 100%;" id="country_id" class="form-control" name="pangkat"
-                                        ng-options="pangkat.id as pangkat.nama_rekening_dasar for pangkat in gatPangkat"
-                                        ng-model="pangkat" ng-required="true"
-                                        ng-style="formPegawai.pangkat.$touched && formPegawai.pangkat.$invalid && {'border':'solid red'}"
-                                        ng-disabled="readOnly"></select>
+                                <div class="form-group row">
+                                    <select class="country_id form-control" name="country_id" id="country_id">
+                                        <?php
+                                            foreach ($list as $key) {
+                                                # code...
+                                                ?>
+                                        <option value="<?= $key['id'] ?>"><?= $key['nama_rekening_dasar'] ?></option>
+                                        <?php
+                                            }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="col-sm-12 mb-6 mb-sm-0" ng-hide="false">
-                            <div class="col"><label>Rekening Induk</label></div>
+                        <div class="col-sm-12 mb-6 mb-sm-0" ng-hide="false">
+                            <div class="col"><label>Test Select</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row" ng-init="optionRekDasar()">
-                                    <select class="form-control" ng-options="agama for agama in getAgama"
-                                        ng-model="agama" ng-disabled="readOnly"></select>
+                                <div class="form-group row" ng-init="option()">
+                                    <select class="form-control" name="kelamin" name="testselect" id="testselect"
+                                        ng-options="gender for gender in getGender" ng-model="jns_kelamin"></select>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                         <div class="col-sm-12 mb-6 mb-sm-0" ng-hide="hideForAddSub">
                             <div class="col"><label>Tahun Anggaran</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
@@ -171,47 +130,45 @@
             </div>
         </div>
     </div>
-    <!-- End Modal -->
+
+    <script type="text/javascript">
+    // getData();
+
+    // function getData() {
+    //     $.ajax({
+    //         type: 'GET',
+    //         url: '',
+    //         dataType: 'json',
+    //         success: function(data) {
+    //             console.log(data);
+    //         }
+    //     });
+    // }
+
+    $('#country_id').select2({
+        placeholder: "Select Here",
+        theme: "bootstrap-5"
+    });
+    $('#testselect').select2({
+        placeholder: "Select Here",
+        theme: "bootstrap-5",
+        // ajax: {
+        //     url: "",
+        //     dataType: "json",
+        //     delay: 250,
+        //     data: function(data) {
+        //         return {
+        //             country_id: $('#country_id').val(),
+        //             searchTerm: data.term
+        //         };
+        //         console.log(country_id);
+        //     },
+        //     processResults: function(data) {
+        //         return {
+        //             results: data.data,
+        //         };
+        //     },
+        // },
+    });
+    </script>
 </div>
-<script type="text/javascript">
-// getData();
-
-// function getData() {
-//     $.ajax({
-//         type: 'GET',
-//         url: '',
-//         dataType: 'json',
-//         success: function(data) {
-//             console.log(data);
-//         }
-//     });
-// }
-
-$('#country_id').select2({
-    dropdownParent: $('#kodeBelanjaSub1'),
-    placeholder: "Select Here",
-    theme: "bootstrap-5"
-});
-$('#testselect').select2({
-    dropdownParent: $('#kodeBelanjaSub1'),
-    placeholder: "Select Here",
-    theme: "bootstrap-5",
-    // ajax: {
-    //     url: "",
-    //     dataType: "json",
-    //     delay: 250,
-    //     data: function(data) {
-    //         return {
-    //             country_id: $('#country_id').val(),
-    //             searchTerm: data.term
-    //         };
-    //         console.log(country_id);
-    //     },
-    //     processResults: function(data) {
-    //         return {
-    //             results: data.data,
-    //         };
-    //     },
-    // },
-});
-</script>

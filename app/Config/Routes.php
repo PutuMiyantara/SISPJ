@@ -175,7 +175,10 @@ $routes->post('/rekdasar/deleteKodeUnit', 'KodeUnit::deleteData', ['namespace' =
 $routes->get('/rekbelanja', 'RekeningBelanja::index', ['namespace'=> 'App\Controllers\Main', 'role' => [1,2,3], 'ajax' =>false]);
 // Rekening Belanja Kode Sub1
 $routes->get('/rekbelanja/kodesub1', 'RekeningBelanja::sub1', ['namespace'=> 'App\Controllers\Main', 'role' => [1,2,3], 'ajax' =>false]);
+
 $routes->get('/rekbelanja/searchRekDasar', 'KodeBelanjaSub1::searchRekDasar', ['namespace' => 'App\Controllers\AJAX']);
+$routes->get('/rekbelanja/searchRekDasarTest', 'KodeBelanjaSub1::searchRekDasarTest', ['namespace' => 'App\Controllers\AJAX']);
+
 $routes->get('/rekbelanja/getKodeBelanjaSub1', 'KodeBelanjaSub1::index', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 $routes->post('/rekbelanja/insertKodeBelanjaSub1', 'KodeBelanjaSub1::insertData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 $routes->get('/rekbelanja/getDetailKodeBelanjaSub1/(:num)', 'KodeBelanjaSub1::getDetail/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);

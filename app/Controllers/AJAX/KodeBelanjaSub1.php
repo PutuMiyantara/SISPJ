@@ -17,9 +17,21 @@ class KodeBelanjaSub1 extends BaseController{
     }
 
     public function searchRekDasar(){
-        // $test = $this->input->get('test');
         echo json_encode($this->mKodeBelanjaSub1->getSearchRekDasar());
-        // echo json_encode($this->mKodeBelanjaSub1->getSearchRekDasar($test));
+    }
+
+    public function searchRekDasarTest(){
+        $country_id = $this->request->getVar('country_id');
+        $where = array(
+            'id' => 3
+        );
+        $data[] = [
+            'id' => 2,
+            'name' => 'test',
+        ];
+        $responseData = $data;
+        // return $this->response->setJSON($this->mKodeBelanjaSub1->getSearchRekDasarTest($where));
+        return $this->response->setJSON($responseData);
     }
 
     public function insertData(){

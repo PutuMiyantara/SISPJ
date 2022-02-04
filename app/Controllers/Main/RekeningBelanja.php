@@ -12,6 +12,10 @@ class RekeningBelanja extends BaseController
 
     public function sub1()
     {
+        // $model = new \App\Models\ModelKodeBelanjaSub1();
+        // $data['list'] = $model->getSearchRekDasar();
+        // parent::MasterView('rekening_belanja/kode_belanja_sub1/tambah', $data);
+        // parent::MasterView('rekening_belanja/kode_belanja_sub1/kode_belanja_sub1', $data);
         parent::MasterView('rekening_belanja/kode_belanja_sub1/kode_belanja_sub1', []);
     }
 

@@ -8,7 +8,7 @@ sispj.controller("KodeBelanjaSub1", function ($scope, $http, $window, $timeout) 
   $scope.getKodeBelanjaSub1 = function () {
     $http.get("/rekbelanja/getKodeBelanjaSub1").then(function (data) {
       $scope.datas = data.data;
-      console.log(data)
+      // console.log(data)
     },function errorCallback(response) {
       console.log(response);
       alert("error");
@@ -47,7 +47,7 @@ sispj.controller("KodeBelanjaSub1", function ($scope, $http, $window, $timeout) 
         })
         .then(
           function successCallback(data) {
-            console.log(data.data);
+            // console.log(data.data);
             if (data.data.errortext == "") {
               $scope.kode_rek_kegiatan = $scope.nama = null;
               $scope.getKodeBelanjaSub1();
@@ -164,59 +164,48 @@ sispj.controller("KodeBelanjaSub1", function ($scope, $http, $window, $timeout) 
     modal_popup.modal("hide");
   };
 
-  // searchbox rekening DASAR
-  $http.get("/rekbelanja/searchRekDasar").then(function (data) {
-    $scope.rek_dasar_search = data.data;
-  });
-  $scope.hide_rek_dasar = true;
-  $scope.id_rekening_dasar = null;
-  $scope.searchRekDasar = function (string) {
-    console.log("Rek dasar Search", string);
-    $scope.hide_rek_dasar = false;
-    $scope.error = null;
-    $scope.kode_rek_dasar_style = null;
+  // option search select2 rekening DASAR
+  $scope.optionRekDasar = function () {
+    // ngOptions
+    $scope.getGender = ["Laki-Laki", "Perempuan"];
+    $scope.getAgama = [
+      "Hindu",
+      "Islam",
+      "Buddha",
+      "Kristen",
+      "Katolik",
+      "Konghucu",
+    ];
+    $scope.getKawin = ["Sudah Menikah", "Belum Menikah", "Duda", "Janda"];
+    $scope.getPendidikan = [
+      "SMA Sederajat",
+      "Diploma 1 (D1)",
+      "Diploma 2 (D2)",
+      "Diploma 3 (D3)",
+      "Diploma 4 (D4)",
+      "Sarjana (S1)",
+      "Magister (S2)",
+      "Doktor (S3)",
+    ];
 
-    var output = [];
-    if (string != null) {
-      angular.forEach($scope.rek_dasar_search, function (rekening_dasar) {
-        if (rekening_dasar.nama_rekening_dasar.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
-          output.push(rekening_dasar);
-        }
+    
+
+    $scope.datajabatan = function () {
+      $http.get("/jabatan/getJabatan").then(function (data) {
+        $scope.getJabatan = data.data;
       });
-    } else {
-      angular.forEach($scope.rek_dasar_search, function (rekening_dasar) {
-        output.push(rekening_dasar);
-      });
-    }
-    if (output.length > 0) {
-      $scope.filterRekDasar = output;
-      if (string != null && string.toLowerCase() == output[0].nama_rekening_dasar.toLowerCase()) {
-        $scope.id_kode_dasar = output[0].id;
-        $scope.error = null;
-        $scope.nama_rekening_dasar_style = null;
-        $scope.hide_rek_dasar = true;
-      } else {
-        $scope.nama_rekening_dasar_style = null;
-        $scope.message = "Pilih Data Dibawah";
-      }
-    } else {
-      $scope.hide_rek_dasar = true;
-      $scope.error = true;
-      $scope.message = "Data Tidak Ditemukan";
-      $scope.nama_rekening_dasar_style = { border: "solid red" };
-    }
-    console.log(output);
+    };
+
+    //
+
+    $scope.getStatusAtasanpejpen = ["PNS", "Bupati"];
+    $scope.getStatuspejpen = ["PNS"];
   };
 
-  $scope.filRekDasar = function (id, nama_rekening_dasar) {
-    $scope.id_rekening_dasar = id;
-    $scope.formModel.nama_rekening_dasar = nama_rekening_dasar;
-    $scope.hide_rek_dasar = true;
-    $scope.error = false;
-    $scope.nama_rekening_dasar_style = null;
-  };
-
-  $scope.searchRekDasarTest = function(){
-    $scope.inputSearch = true;
+  $scope.datapangkat = function () {
+    $http.get("/rekbelanja/searchRekDasar").then(function (data) {
+      console.log(data.data);
+      $scope.gatPangkat = data.data;
+    });
   };
 });

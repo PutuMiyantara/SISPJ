@@ -6,15 +6,22 @@ use CodeIgniter\Model;
 
 class ModelKodeBelanjaSub1 extends Model
 {
-    // public function getSearchRekDasar($test){
     public function getSearchRekDasar(){
         $db = db_connect();
         $builder = $db->table('tb_rekening_dasar');
         $builder->select('*');
-        $builder->like('nama_rekening_dasar', 'Dinas Koperasi');
         $query = $builder->get();
         return $query->getResultArray();
     }
+
+    public function getSearchRekDasarTest($where){
+        $db = db_connect();
+        $builder = $db->table('tb_rekening_dasar');
+        $builder->select('*');
+        $query = $builder->getWhere($where);
+        return $query->getResultArray();
+    }
+
     public function getKodeBelanjaSub1($id){
         $db = db_connect();
         $builder = $db->table('tb_kode_belanja_sub1');
