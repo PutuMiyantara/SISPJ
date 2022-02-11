@@ -50,14 +50,14 @@ CREATE TABLE IF NOT EXISTS `tb_bendahara` (
 CREATE TABLE IF NOT EXISTS `tb_kode_belanja_sub1` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `kode_belanja_sub1` varchar(50) DEFAULT NULL,
-  `nama_rekening` varchar(50) DEFAULT NULL,
-  `jumlah_anggaran` bigint(20) DEFAULT NULL,
+  `nama_rekening_belanja_sub1` varchar(50) DEFAULT NULL,
+  `jumlah_anggaran_belanja_sub1` bigint(20) DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   `id_rekening_dasar` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `RelasiRekeningDasar` (`id_rekening_dasar`),
   CONSTRAINT `RelasiRekeningDasar` FOREIGN KEY (`id_rekening_dasar`) REFERENCES `tb_rekening_dasar` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='untuk mencatat kode belanja sub utama';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COMMENT='untuk mencatat kode belanja sub utama';
 
 -- Data exporting was unselected.
 
@@ -65,14 +65,14 @@ CREATE TABLE IF NOT EXISTS `tb_kode_belanja_sub1` (
 CREATE TABLE IF NOT EXISTS `tb_kode_belanja_sub2` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `kode_belanja_sub2` varchar(50) DEFAULT NULL,
-  `nama_rekening` varchar(50) DEFAULT NULL,
-  `jumlah_anggaran` bigint(20) DEFAULT NULL,
+  `nama_rekening_belanja_sub2` varchar(50) DEFAULT NULL,
+  `jumlah_anggaran_belanja_sub2` bigint(20) DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   `id_kode_belanja_sub1` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `RelasiSub1` (`id_kode_belanja_sub1`),
   CONSTRAINT `RelasiSub1` FOREIGN KEY (`id_kode_belanja_sub1`) REFERENCES `tb_kode_belanja_sub1` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='untuk mencatat kode belanja sub kedua';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COMMENT='untuk mencatat kode belanja sub kedua';
 
 -- Data exporting was unselected.
 
@@ -80,14 +80,14 @@ CREATE TABLE IF NOT EXISTS `tb_kode_belanja_sub2` (
 CREATE TABLE IF NOT EXISTS `tb_kode_belanja_sub3` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `kode_belanja_sub3` varchar(50) DEFAULT NULL,
-  `nama_rekening` varchar(50) DEFAULT NULL,
-  `jumlah_anggaran` int(11) DEFAULT NULL,
+  `nama_rekening_belanja_sub3` varchar(50) DEFAULT NULL,
+  `jumlah_anggaran_belanja_sub3` int(11) DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   `id_kode_belanja_sub2` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `RelasiSub2` (`id_kode_belanja_sub2`),
   CONSTRAINT `RelasiSub2` FOREIGN KEY (`id_kode_belanja_sub2`) REFERENCES `tb_kode_belanja_sub2` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='untuk mencatat kode belanja sub ketiga';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='untuk mencatat kode belanja sub ketiga';
 
 -- Data exporting was unselected.
 
@@ -95,8 +95,8 @@ CREATE TABLE IF NOT EXISTS `tb_kode_belanja_sub3` (
 CREATE TABLE IF NOT EXISTS `tb_kode_belanja_sub4` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `kode_belanja_sub4` varchar(50) DEFAULT NULL,
-  `nama_rekening` varchar(50) DEFAULT NULL,
-  `jumlah_anggaran` bigint(20) DEFAULT NULL,
+  `nama_rekening_belanja_sub4` varchar(50) DEFAULT NULL,
+  `jumlah_anggaran_belanja_sub4` bigint(20) DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   `id_kode_belanja_sub3` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -110,8 +110,8 @@ CREATE TABLE IF NOT EXISTS `tb_kode_belanja_sub4` (
 CREATE TABLE IF NOT EXISTS `tb_kode_belanja_sub5` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `kode_belanja_sub5` varchar(50) DEFAULT NULL,
-  `nama_rekening` varchar(50) DEFAULT NULL,
-  `jumlah_anggaran` bigint(20) DEFAULT NULL,
+  `nama_rekening_sub5` varchar(50) DEFAULT NULL,
+  `jumlah_anggaran_sub5` bigint(20) DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   `id_kode_belanja_sub4` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `tb_kode_bidang` (
   `nama_rek_bidang` varchar(255) DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COMMENT='utuk mencatat kode bidang pada nomor rekenig';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='utuk mencatat kode bidang pada nomor rekenig';
 
 -- Data exporting was unselected.
 
@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `tb_kode_dinas` (
   `nama_rek_dinas` varchar(255) DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1 COMMENT='utuk mencatat kode dinas pada rekenig';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COMMENT='utuk mencatat kode dinas pada rekenig';
 
 -- Data exporting was unselected.
 
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `tb_kode_kegiatan` (
   `nama_rek_kegiatan` varchar(255) DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COMMENT='untuk mencatat kode kegiatan pada nomor rekening';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='untuk mencatat kode kegiatan pada nomor rekening';
 
 -- Data exporting was unselected.
 
@@ -161,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `tb_kode_program` (
   `nama_rek_program` varchar(255) DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COMMENT='untuk mencatat kode program pada nomor rekening';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COMMENT='untuk mencatat kode program pada nomor rekening';
 
 -- Data exporting was unselected.
 
@@ -172,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `tb_kode_unit` (
   `nama_rek_unit` varchar(255) DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COMMENT='untuk mencatat kode unit(uptd) pada nomor rekening';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='untuk mencatat kode unit(uptd) pada nomor rekening';
 
 -- Data exporting was unselected.
 
@@ -183,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `tb_kode_urusan` (
   `nama_rek_urusan` varchar(50) DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COMMENT='mencatat kode rekening untuk urusan';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='mencatat kode rekening untuk urusan';
 
 -- Data exporting was unselected.
 
@@ -193,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `tb_kpa_ppk` (
   `nip_kpa_ppk` varchar(255) DEFAULT NULL,
   `nama_kpa_ppk` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
@@ -342,7 +342,7 @@ CREATE TABLE IF NOT EXISTS `tb_rekening_dasar` (
   CONSTRAINT `kode_urusan` FOREIGN KEY (`id_kode_urusan`) REFERENCES `tb_kode_urusan` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `kpa_ppk` FOREIGN KEY (`id_kpa_ppk`) REFERENCES `tb_kpa_ppk` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `pptk` FOREIGN KEY (`id_pptk`) REFERENCES `tb_pptk` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='tabel hasil relasi dari tabel kode_dinas, kode_urusan, kode_bidang, kode_program, kode_kegiatan, kode_unit ';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1 COMMENT='tabel hasil relasi dari tabel kode_dinas, kode_urusan, kode_bidang, kode_program, kode_kegiatan, kode_unit ';
 
 -- Data exporting was unselected.
 
