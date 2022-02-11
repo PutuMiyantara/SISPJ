@@ -16,12 +16,13 @@ sispj.controller("KodeBelanjaSub2", function ($scope, $http, $window, $timeout) 
   };
 
   $scope.tambahData = function (){
+    $scope.hideRekRef = true;
     $scope.openModal("#kodeBelanjaSub2");
     $scope.modalTitle = "Tambah Kode Rekening Dasar";
     $scope.modalButton = "Simpan";
     $scope.formSubmit = "ng-submit='insertData()'";
     $scope.hideForAddSub = true;
-    $scope.id = $scope.kode_rek_kegiatan = $scope.nama_rek_kegiatan = null;
+    $scope.setDefault();
   }
 
   $scope.submitData = function(){
@@ -36,16 +37,16 @@ sispj.controller("KodeBelanjaSub2", function ($scope, $http, $window, $timeout) 
   }
 
   $scope.insertData = function () {
-    $scope.setDefault();
       $http
         .post("/rekbelanja/insertKodeBelanjaSub2", {
-          kode_belanja_sub1: $scope.kode_belanja_sub1,
-          nama_rekening_belanja_sub1: $scope.nama_rekening_belanja_sub1,
-          jumlah_anggaran_belanja_sub1: $scope.jumlah_anggaran_belanja_sub1,
-          id_rekening_dasar: $scope.id_rekening_dasar,
+          kode_belanja_sub2: $scope.formModel.kode_belanja_sub2,
+          nama_rekening_belanja_sub2: $scope.formModel.nama_rekening_belanja_sub2,
+          jumlah_anggaran_belanja_sub2: $scope.formModel.jumlah_anggaran_belanja_sub2,
+          id_kode_belanja_sub1: $scope.formModel.id_kode_belanja_sub1,
         })
         .then(
           function successCallback(data) {
+            
             console.log(data.data);
             if (data.data.errortext == "") {
               $scope.kode_rek_kegiatan = $scope.nama = null;
@@ -56,6 +57,7 @@ sispj.controller("KodeBelanjaSub2", function ($scope, $http, $window, $timeout) 
               $timeout(function () {
                 $scope.success = false;
               }, 5000);
+              $scope.setDefault();
             } else {
               $scope.message = data.data.errortext;
               $scope.error = true;
@@ -75,6 +77,7 @@ sispj.controller("KodeBelanjaSub2", function ($scope, $http, $window, $timeout) 
   $scope.getDetail = function (id) {
     $scope.setDefault();
     $scope.hideForAddSub = false;
+    $scope.hideRekRef = false;
     $http.get("/rekbelanja/getDetailKodeBelanjaSub2/" + id).then(
       function successCallback(data) {
         console.log(data);
@@ -84,19 +87,20 @@ sispj.controller("KodeBelanjaSub2", function ($scope, $http, $window, $timeout) 
         $scope.actionButton = "Kembali";
 
         $scope.id = data.data[0].id;
-        $scope.formModel.kode_belanja_sub1 = data.data[0].kode_belanja_sub1;
-        $scope.formModel.nama_rekening_belanja_sub1 = data.data[0].nama_rekening_belanja_sub1;
-        $scope.formModel.jumlah_anggaran_belanja_sub1 = data.data[0].jumlah_anggaran_belanja_sub1;
+        $scope.formModel.kode_belanja_sub2 = data.data[0].kode_belanja_sub2;
+        $scope.formModel.nama_rekening_belanja_sub2 = data.data[0].nama_rekening_belanja_sub2;
+        $scope.formModel.jumlah_anggaran_belanja_sub2 = data.data[0].jumlah_anggaran_belanja_sub2;
         $scope.formModel.kode_rek_dasar = 
           data.data[0].kode_rek_dinas + '.' + 
           data.data[0].kode_rek_urusan + '.' + 
           data.data[0].kode_rek_bidang + '.' + 
           data.data[0].kode_rek_kegiatan + '.' + 
           data.data[0].kode_rek_program + '.' + 
-          data.data[0].kode_rek_unit;
-        $scope.formModel.nama_rekening_dasar = data.data[0].nama_rekening_dasar;
+          data.data[0].kode_rek_unit + ' - ' + 
+          data.data[0].nama_rekening_dasar;
+        $scope.formModel.id_rekening_dasar = data.data[0].id_rekening_dasar;
+        $scope.formModel.id_kode_belanja_sub1 = data.data[0].id_kode_belanja_sub1;
         $scope.formModel.tahun_anggaran = data.data[0].tahun_anggaran;
-        $scope.id_rekening_dasar = data.data[0].id_rekening_dasar
       },
       function errorCallback(response) {
         console.log(response);
@@ -108,10 +112,10 @@ sispj.controller("KodeBelanjaSub2", function ($scope, $http, $window, $timeout) 
   $scope.editData = function () {
     $http
       .post("/rekbelanja/updateKodeBelanjaSub2/" + $scope.id , {
-        kode_belanja_sub1: $scope.formModel.kode_belanja_sub1,
-        nama_rekening_belanja_sub1: $scope.formModel.nama_rekening_belanja_sub1,
-        jumlah_anggaran_belanja_sub1: $scope.formModel.jumlah_anggaran_belanja_sub1,
-        id_rekening_dasar: $scope.id_rekening_dasar,
+        kode_belanja_sub2: $scope.formModel.kode_belanja_sub2,
+        nama_rekening_belanja_sub2: $scope.formModel.nama_rekening_belanja_sub2,
+        jumlah_anggaran_belanja_sub2: $scope.formModel.jumlah_anggaran_belanja_sub2,
+        id_kode_belanja_sub1: $scope.formModel.id_kode_belanja_sub1,
       })
       .then(
         function successCallback(data) {
@@ -163,57 +167,73 @@ sispj.controller("KodeBelanjaSub2", function ($scope, $http, $window, $timeout) 
     modal_popup.modal("hide");
   };
 
-  // searchbox rekening DASAR
-  var tahunNow = new Date().getFullYear();
-  $http.get("/rekdasar/getRekeningDasar/" + tahunNow).then(function (data) {
-    $scope.rek_dasar_search = data.data;
-  });
-  $scope.hide_rek_dasar = true;
-  $scope.id_rekening_dasar = null;
-  $scope.searchRekDasar = function (string) {
-    console.log("Rek dasar Search", string);
-    $scope.hide_rek_dasar = false;
-    $scope.error = null;
-    $scope.kode_rek_dasar_style = null;
+  $scope.hideRekRef = true;
+  $scope.dataRekDasar = function () {
+    $http.get("/rekbelanja/searchRekDasar").then(function (data) {
+      console.log("dataRekDasar: "+data.data.id);
+      $scope.getRekDasar = data.data;
+    });
+  };
+  
+  $scope.rekDasarChange = function(where) {
+    console.log(where);
+    // formModel.id_rekening_dasar
+    // $scope.formModel.id_kode_belanja_sub1 = null;
+    $scope.dataRekBelanjaSub1(where);
+    
+  };
 
-    var output = [];
-    if (string != null) {
-      angular.forEach($scope.rek_dasar_search, function (rekening_dasar) {
-        if (rekening_dasar.nama_rekening_dasar.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
-          output.push(rekening_dasar);
+  $scope.dataRekBelanjaSub1 = function (where) {
+    if (where != null) {
+      $scope.hideRekRef = false;
+      var  where = 1
+      // tidak kelihatan saat klik detail pada table menu, karena terdapat where di link get nya
+      $http.get("/rekbelanja/searchRekBelanjaSub1/" + where).then(function (data) {
+        console.log(data.data);
+        $scope.getRekRefSub1 = data.data;
+      });
+    }
+  };
+  
+  $scope.rekBelanjaSub1Change = function(id_sub1) {
+    if (id_sub1 != null) {
+      console.log('model rekbelanjasub1 '+$scope.formModel.id_kode_belanja_sub1);
+      console.log('rekbelanjasub1'+id_sub1);
+      $http.get("/rekbelanja/getDetailKodeBelanjaSub1/" + id_sub1).then(
+        function successCallback(data) {
+          console.log('rek belanjasub1 change'+ id_sub1);
+          $scope.formModel.tahun_anggaran = data.data[0].tahun_anggaran;
+        },
+        function errorCallback(response) {
+          console.log(response);
+          alert("error");
         }
-      });
-    } else {
-      angular.forEach($scope.rek_dasar_search, function (rekening_dasar) {
-        output.push(rekening_dasar);
-      });
+      );
     }
-    if (output.length > 0) {
-      $scope.filterRekDasar = output;
-      if (string != null && string.toLowerCase() == output[0].nama_rekening_dasar.toLowerCase()) {
-        $scope.id_kode_dasar = output[0].id;
-        $scope.error = null;
-        $scope.nama_rekening_dasar_style = null;
-        $scope.hide_rek_dasar = true;
-      } else {
-        $scope.nama_rekening_dasar_style = null;
-        $scope.message = "Pilih Data Dibawah";
-      }
-    } else {
-      $scope.hide_rek_dasar = true;
-      $scope.error = true;
-      $scope.message = "Data Tidak Ditemukan";
-      $scope.nama_rekening_dasar_style = { border: "solid red" };
-    }
-    console.log(output);
   };
 
-  $scope.filRekDasar = function (id, nama_rekening_dasar) {
-    $scope.id_rekening_dasar = id;
-    $scope.formModel.nama_rekening_dasar = nama_rekening_dasar;
-    $scope.hide_rek_dasar = true;
-    $scope.error = false;
-    $scope.nama_rekening_dasar_style = null;
-  };
-
+  // $scope.rekBelanjaSub1Change = function(id_sub1) {
+  //   if (id_sub1 != null) {
+  //     console.log('model rekbelanjasub1 '+$scope.formModel.id_kode_belanja_sub1);
+  //     console.log('rekbelanjasub1'+id_sub1);
+  //     $http.get("/rekbelanja/getDetailKodeBelanjaSub1/" + id_sub1).then(
+  //       function successCallback(data) {
+  //         console.log(data);
+  //         $scope.formModel.kode_rek_dasar = 
+  //           data.data[0].kode_rek_dinas + "." +
+  //           data.data[0].kode_rek_urusan + "." +
+  //           data.data[0].kode_rek_bidang + "." +
+  //           data.data[0].kode_rek_program + "." +
+  //           data.data[0].kode_rek_kegiatan + "." +
+  //           data.data[0].kode_rek_unit + " - " +
+  //           data.data[0].nama_rekening_dasar;
+  //         $scope.formModel.tahun_anggaran = data.data[0].tahun_anggaran;
+  //       },
+  //       function errorCallback(response) {
+  //         console.log(response);
+  //         alert("error");
+  //       }
+  //     );
+  //   }
+  // };
 });

@@ -52,6 +52,7 @@
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/Bendahara.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/KodeBelanjaSub1.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/KodeBelanjaSub2.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('/assets/angular/KodeBelanjaSub3.js'); ?>"></script>
     <!-- js -->
 
     <meta charset="utf-8">

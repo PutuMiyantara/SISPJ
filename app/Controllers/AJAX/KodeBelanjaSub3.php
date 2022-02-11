@@ -3,17 +3,17 @@
 namespace App\Controllers\AJAX;
 
 use App\Controllers\BaseController;
-use App\Models\ModelKodeBelanjaSub2;
+use App\Models\ModelKodeBelanjaSub3;
 
-class KodeBelanjaSub2 extends BaseController{
+class KodeBelanjaSub3 extends BaseController{
     public function __construct()
     {
-        $this->mKodeBelanjaSub2 = new ModelKodeBelanjaSub2();
+        $this->mKodeBelanjaSub3 = new ModelKodeBelanjaSub3();
     }
 
     public function index()
     {
-        echo json_encode($this->mKodeBelanjaSub2->getKodeBelanjaSub2(null));
+        echo json_encode($this->mKodeBelanjaSub3->getKodeBelanjaSub3(null));
     }
 
     public function insertData(){
@@ -21,8 +21,8 @@ class KodeBelanjaSub2 extends BaseController{
         $errortext[] ='';
         $message = '';
 
-        if($this->validator->run($dataJSON, 'kodebelanjasub2')){
-            if ($this->mKodeBelanjaSub2->insertData($dataJSON)) {
+        if($this->validator->run($dataJSON, 'kodebelanjasub3')){
+            if ($this->mKodeBelanjaSub3->insertData($dataJSON)) {
                 $message = 'Berhasil Menyimpan Data';
             }
             else{
@@ -37,8 +37,8 @@ class KodeBelanjaSub2 extends BaseController{
     }
 
     public function getDetail($id){
-        $where = array('tb_kode_belanja_sub2.id' => $id);
-        echo json_encode($this->mKodeBelanjaSub2->getKodeBelanjaSub2($where));
+        $where = array('tb_kode_belanja_sub3.id' => $id);
+        echo json_encode($this->mKodeBelanjaSub3->getKodeBelanjaSub3($where));
     }
     
     public function updateData($id){
@@ -47,9 +47,9 @@ class KodeBelanjaSub2 extends BaseController{
         $errortext[] ='';
 
         $message = '';
-        if ($this->validator->run($dataJSON, 'kodebelanjasub2')) {
+        if ($this->validator->run($dataJSON, 'kodebelanjasub3')) {
             # code...
-            if ($this->mKodeBelanjaSub2->updateData($where, $dataJSON)) {
+            if ($this->mKodeBelanjaSub3->updateData($where, $dataJSON)) {
                 # code...
                 $message = "Berhasil Menyimpan Data";
             } else{
@@ -66,27 +66,23 @@ class KodeBelanjaSub2 extends BaseController{
 
     public function deleteData(){
         $where = $this->request->getJSON(true);
-        $this->mKodeBelanjaSub2->deleteData($where);
+        $this->mKodeBelanjaSub3->deleteData($where);
         return true;
     }
 
-    public function searchReBelanjaSub1($id){
-        if ($id == 0) {
-            # code...
-            die;
-        }
-        $where = array('id_rekening_dasar' => $id);
-        $rek_referensi = $this->mKodeBelanjaSub2->getSearchRekReferensi($where);
+    public function searchReBelanjaSub2(){
+        $rek_referensi = $this->mKodeBelanjaSub3->getSearchRekReferensi();
         $dataArray = $rek_referensi;
         $data = [];
         foreach ($dataArray as $row) {
             array_push($data,
                 [
                     'id' => $row['id'],
-                    'nama_rekening_belanja_sub1' => $row['nama_rekening_belanja_sub1'],
-                    'kode_belanja_sub1' => (
-                        $row['kode_belanja_sub1']. " - " .
-                        $row['nama_rekening_belanja_sub1']. " (" .
+                    'nama_rekening_belanja_sub2' => $row['nama_rekening_belanja_sub2'],
+                    'kode_belanja_sub2' => (
+                        $row['kode_belanja_sub1']. "." .
+                        $row['kode_belanja_sub2']. " - " .
+                        $row['nama_rekening_belanja_sub2']. " (" .
                         $row['tahun_anggaran']. ")" ),
                     'kode_rek_dasar' => (
                         $row['kode_rek_dinas']. "." .

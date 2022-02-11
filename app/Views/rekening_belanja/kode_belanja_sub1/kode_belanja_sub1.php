@@ -50,6 +50,7 @@
                             <th>Kode Rekening</th>
                             <th>Nama Rekening</th>
                             <th>Jumlah Anggaran</th>
+                            <th>Rekening Dasar</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -59,6 +60,7 @@
                             <th>Kode Rekening</th>
                             <th>Nama Rekening</th>
                             <th>Jumlah Anggaran</th>
+                            <th>Rekening Dasar</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
@@ -68,6 +70,16 @@
                             <td>{{ d.kode_belanja_sub1 }}</td>
                             <td>{{ d.nama_rekening_belanja_sub1 }}</td>
                             <td>Rp. {{ d.jumlah_anggaran_belanja_sub1 }}</td>
+                            <td>{{ 
+                                d.kode_rek_dinas + "." +
+                                d.kode_rek_urusan + "." +
+                                d.kode_rek_bidang + "." +
+                                d.kode_rek_program + "." +
+                                d.kode_rek_kegiatan + "." +
+                                d.kode_rek_unit + " - " +
+                                d.nama_rekening_dasar + " (" +
+                                d.tahun_anggaran + ")"
+                            }}</td>
                             <td style="text-align: center;">
                                 <button type="submit" class="btn btn-info" ng-click="getDetail(d.id)"><i
                                         class="fa fa-edit"> Detail</i></button>
@@ -132,30 +144,23 @@
                         <div class="col-sm-12 mb-6 mb-sm-0" ng-hide="false">
                             <div class="col"><label>Rekening Induk</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row" ng-init="datapangkat()">
-                                    <select style="width: 100%;" id="country_id" class="form-control" name="pangkat"
-                                        ng-options="pangkat.id as pangkat.nama_rekening_dasar for pangkat in gatPangkat"
-                                        ng-model="pangkat" ng-required="true"
-                                        ng-style="formPegawai.pangkat.$touched && formPegawai.pangkat.$invalid && {'border':'solid red'}"
-                                        ng-disabled="readOnly"></select>
+                                <div class="form-group row" ng-init="dataRekDasar()">
+                                    <select style="width: 100%;" id="rek_dasar" select2="" class="form-control"
+                                        name="rek_dasar" ng-model="formModel.id_rekening_dasar"
+                                        ng-options="rek_dasar.id as rek_dasar.kode_rekening_dasar for rek_dasar in getRekDasar"
+                                        ng-required="true" ng-disabled="readOnly"
+                                        ng-change="rekDasarChange(formModel.id_rekening_dasar)">
+                                        <option value="">--Select Here--</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="col-sm-12 mb-6 mb-sm-0" ng-hide="false">
-                            <div class="col"><label>Rekening Induk</label></div>
-                            <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row" ng-init="optionRekDasar()">
-                                    <select class="form-control" ng-options="agama for agama in getAgama"
-                                        ng-model="agama" ng-disabled="readOnly"></select>
-                                </div>
-                            </div>
-                        </div> -->
                         <div class="col-sm-12 mb-6 mb-sm-0" ng-hide="hideForAddSub">
                             <div class="col"><label>Tahun Anggaran</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
                                     <input class="form-control" name="tahun_anggaran"
-                                        ng-model="formModel.tahun_anggaran" ng-required="false">
+                                        ng-model="formModel.tahun_anggaran" ng-readonly="true">
                                 </div>
                             </div>
                         </div>
@@ -173,45 +178,10 @@
     </div>
     <!-- End Modal -->
 </div>
-<script type="text/javascript">
-// getData();
-
-// function getData() {
-//     $.ajax({
-//         type: 'GET',
-//         url: '',
-//         dataType: 'json',
-//         success: function(data) {
-//             console.log(data);
-//         }
-//     });
-// }
-
-$('#country_id').select2({
-    dropdownParent: $('#kodeBelanjaSub1'),
+<!-- <script type="text/javascript">
+$('#rek_dasar').select2({
+    // dropdownParent: $('#kodeBelanjaSub1'),
     placeholder: "Select Here",
     theme: "bootstrap-5"
 });
-$('#testselect').select2({
-    dropdownParent: $('#kodeBelanjaSub1'),
-    placeholder: "Select Here",
-    theme: "bootstrap-5",
-    // ajax: {
-    //     url: "",
-    //     dataType: "json",
-    //     delay: 250,
-    //     data: function(data) {
-    //         return {
-    //             country_id: $('#country_id').val(),
-    //             searchTerm: data.term
-    //         };
-    //         console.log(country_id);
-    //     },
-    //     processResults: function(data) {
-    //         return {
-    //             results: data.data,
-    //         };
-    //     },
-    // },
-});
-</script>
+</script> -->

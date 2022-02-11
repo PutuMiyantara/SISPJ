@@ -44,11 +44,10 @@
                 <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-bottom: 10px;"
                     ng-click="tambahData()"><i class="fas fa-plus fa-sm text-white-50"></i>Tambah
                     Data</button>
-                <div style="float: right;" ng-init="tahunAnggaran(tahun)">
-                    <select>
-                        <option ng-click="changeTahunAnggaran(Semua)">Semua</option>
-                        <option ng-repeat="t in tahun" ng-click="changeTahunAnggaran(t.tahun_anggaran)">
-                            {{ t.tahun_anggaran }}</option>
+                <div style="float: right;" ng-init="tahunAnggaran()">
+                    <select ng-options="rekDasar.tahun_anggaran as rekDasar.tahun_anggaran for rekDasar in tahun"
+                        ng-model="tahunSelect" ng-change="changeTahunAnggaran()" class="form-control-sm">
+                        <option label="" value="">All</option>
                     </select>
                 </div>
                 <table datatable="ng" dt-options="vm.dtOptions" class="table table-bordered" width="100%"

@@ -3,7 +3,7 @@
 
     <!-- Page Heading -->
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <section class=" content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
@@ -50,6 +50,8 @@
                             <th>Kode Rekening</th>
                             <th>Nama Rekening</th>
                             <th>Jumlah Anggaran</th>
+                            <th>Referensi Rekening Sub1</th>
+                            <th>Rekening Dasar</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -59,6 +61,8 @@
                             <th>Kode Rekening</th>
                             <th>Nama Rekening</th>
                             <th>Jumlah Anggaran</th>
+                            <th>Referensi Rekening Sub1</th>
+                            <th>Rekening Dasar</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
@@ -68,6 +72,17 @@
                             <td>{{ d.kode_belanja_sub2 }}</td>
                             <td>{{ d.nama_rekening_belanja_sub2 }}</td>
                             <td>Rp. {{ d.jumlah_anggaran_belanja_sub2 }}</td>
+                            <td>{{ d.kode_belanja_sub1 + " - " + d.nama_rekening_belanja_sub1 }}</td>
+                            <td>{{ 
+                                d.kode_rek_dinas + "." +
+                                d.kode_rek_urusan + "." +
+                                d.kode_rek_bidang + "." +
+                                d.kode_rek_program + "." +
+                                d.kode_rek_kegiatan + "." +
+                                d.kode_rek_unit + " - " +
+                                d.nama_rekening_dasar + " (" +
+                                d.tahun_anggaran + ")"
+                            }}</td>
                             <td style="text-align: center;">
                                 <button type="submit" class="btn btn-info" ng-click="getDetail(d.id)"><i
                                         class="fa fa-edit"> Detail</i></button>
@@ -82,7 +97,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" tabindex="1" role="dialog" id="kodeBelanjaSub2">
+    <div class="modal fade" role="dialog" role="dialog" aria-hidden="true" id="kodeBelanjaSub2">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form method="POST" enctype="multipart/form-data" name="formKodeDinas" ng-submit="submitData()">
@@ -120,7 +135,7 @@
                             </div>
                         </div>
                         <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Jumlah Anggaran Belanja Sub 1</label></div>
+                            <div class="col"><label>Jumlah Anggaran Belanja Sub 2</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
                                     <input class="form-control" name="jumlah_anggaran_belanja_sub2"
@@ -129,31 +144,31 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Referensi Anggaran</label></div>
+                        <div class="col-sm-12 mb-6 mb-sm-0" ng-hide="false">
+                            <div class="col"><label>Referensi Rekening Dasar</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row">
-                                    <input class="form-control" name="referensi_anggaran"
-                                        ng-model="formModel.referensi_anggaran" ng-required="false" ng-readonly="true">
+                                <div class="form-group row" ng-init="dataRekDasar()">
+                                    <input class="form-control" name="id_rekening_dasar"
+                                        ng-model="formModel.id_rekening_dasar" ng-required="false" ng-readonly="true">
+                                    <select style="width: 100%;" id="rek_dasar" select2="" class="form-control"
+                                        name="rek_dasar" ng-model="formModel.id_rekening_dasar"
+                                        ng-options="rek_dasar.id as rek_dasar.kode_rekening_dasar for rek_dasar in getRekDasar"
+                                        ng-required="true" ng-disabled="readOnly"
+                                        ng-change="rekDasarChange(formModel.id_rekening_dasar)">
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Rekening Induk</label></div>
+                        <div class="col-sm-12 mb-6 mb-sm-0" ng-hide="hideRekRef">
+                            <div class="col"><label>Referensi Rekening</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row">
-                                    <input class="form-control" name="kode_rek_dasar"
-                                        ng-model="formModel.kode_rek_dasar" ng-required="false" ng-readonly="true">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Nama Rekening Induk</label></div>
-                            <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row">
-                                    <textarea class="form-control" name="nama_rekening_dasar"
-                                        ng-model="formModel.nama_rekening_dasar" ng-required="false"
-                                        ng-readonly="true"></textarea>
+                                <div class="form-group row" ng-init="dataRekBelanjaSub1(formModel.id_rekening_dasar)">
+                                    <select style="width: 100%;" id="referensi_rekening" select2="" class="form-control"
+                                        name="referensi_rekening" ng-model="formModel.id_kode_belanja_sub1"
+                                        ng-options="referensi_rekening.id as referensi_rekening.kode_belanja_sub1 for referensi_rekening in getRekRefSub1"
+                                        ng-required="true" ng-disabled="readOnly"
+                                        ng-change="rekBelanjaSub1Change(formModel.id_kode_belanja_sub1)">
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -166,6 +181,16 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- <div class="col-sm-12 mb-6 mb-sm-0">
+                            <div class="col"><label>Kode Rekening</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <textarea class="form-control" name="kode_rek_dasar"
+                                        ng-model="formModel.kode_rek_dasar" ng-readonly="true">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div> -->
                     </div>
                     <div class="modal-footer">
                         <input type="text" name="id" ng-model="id" ng-hide="false" ng-readonly="true">
@@ -180,3 +205,10 @@
     </div>
     <!-- End Modal -->
 </div>
+<!-- <script type="text/javascript">
+$('#rek_dasar').select2({
+    // dropdownParent: $('#kodeBelanjaSub1'),
+    placeholder: "Select Here",
+    theme: "bootstrap-5"
+});
+</script> -->

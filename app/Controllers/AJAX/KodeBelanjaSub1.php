@@ -17,21 +17,28 @@ class KodeBelanjaSub1 extends BaseController{
     }
 
     public function searchRekDasar(){
-        echo json_encode($this->mKodeBelanjaSub1->getSearchRekDasar());
-    }
-
-    public function searchRekDasarTest(){
-        $country_id = $this->request->getVar('country_id');
-        $where = array(
-            'id' => 3
-        );
-        $data[] = [
-            'id' => 2,
-            'name' => 'test',
-        ];
-        $responseData = $data;
-        // return $this->response->setJSON($this->mKodeBelanjaSub1->getSearchRekDasarTest($where));
-        return $this->response->setJSON($responseData);
+        $rek_dasar = $this->mKodeBelanjaSub1->getSearchRekDasar();
+        $dataArray = $rek_dasar;
+        $data = [];
+        foreach ($dataArray as $row) {
+            array_push($data,
+                [
+                    'id' => $row['id'],
+                    'nama_rekening_dasar' => $row['nama_rekening_dasar'],
+                    'kode_rekening_dasar' => (
+                        $row['kode_rek_dinas']. "." .
+                        $row['kode_rek_urusan']. "." .
+                        $row['kode_rek_bidang']. "." .
+                        $row['kode_rek_program']. "." .
+                        $row['kode_rek_kegiatan']. "." .
+                        $row['kode_rek_unit']. " - " .
+                        $row['nama_rekening_dasar']. " (".
+                        $row['tahun_anggaran']. ")"),
+                    'tahun_anggaran' => $row['tahun_anggaran']
+                ]);
+        }
+        echo json_encode($data);
+        
     }
 
     public function insertData(){

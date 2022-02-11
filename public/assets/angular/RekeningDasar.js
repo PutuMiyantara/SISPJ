@@ -27,12 +27,12 @@ sispj.controller("RekeningDasar", function ($scope, $http, $window, $timeout) {
     });
   };
 
-  $scope.changeTahunAnggaran = function(tahun){
+  $scope.changeTahunAnggaran = function(){
     console.log('test');
-    if (tahun == 'Semua') {
+    if ($scope.tahunSelect == null) {
       $scope.getRekeningDasar(1);
     } else{
-      $scope.getRekeningDasar(tahun);
+      $scope.getRekeningDasar($scope.tahunSelect);
     }
   };
 
@@ -40,7 +40,10 @@ sispj.controller("RekeningDasar", function ($scope, $http, $window, $timeout) {
     // 1 == all
     if(tahun == null){
       tahun = 1;
-    } 
+    } else{
+      tahun = tahun
+    }
+    console.log('tahun select:'+ tahun);
     $http.get("/rekdasar/getRekeningDasar/" + tahun).then(function (data) {
       $scope.datas = data.data;
       console.log(data)
