@@ -61,7 +61,7 @@ class ModelKodeBelanjaSub1 extends Model
         $builder->join('tb_kode_program', 'tb_kode_program.id = tb_rekening_dasar.id_kode_program');
         $builder->join('tb_kode_kegiatan', 'tb_kode_kegiatan.id = tb_rekening_dasar.id_kode_kegiatan');
         $builder->join('tb_kode_unit', 'tb_kode_unit.id = tb_rekening_dasar.id_kode_unit');
-        $query = $builder->get();
+        $query = $builder->getWhere();
         return $query->getResultArray();
     }
 }

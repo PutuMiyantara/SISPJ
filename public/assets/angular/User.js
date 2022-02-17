@@ -206,7 +206,7 @@ sispj.controller("User", function ($scope, $http, $window, $timeout) {
       function successCallback(data) {
         $scope.nama = data.data[0].nama;
         $scope.foto = "/foto/" + data.data[0].foto;
-        console.log('getHaderUSer');
+        // console.log('getHaderUSer');
       },
       function errorCallback(response) {
         console.log(response);

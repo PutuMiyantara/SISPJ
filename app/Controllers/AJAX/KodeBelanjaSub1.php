@@ -17,6 +17,7 @@ class KodeBelanjaSub1 extends BaseController{
     }
 
     public function searchRekDasar(){
+        // $where = array('tahun_anggaran' => $where);
         $rek_dasar = $this->mKodeBelanjaSub1->getSearchRekDasar();
         $dataArray = $rek_dasar;
         $data = [];

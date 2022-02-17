@@ -415,4 +415,48 @@ class Validation
 			'required' => 'Referensi Rekening Belum Terisi'
 		]
 	];
+
+	public $kodebelanjasub3 = [
+		'kode_belanja_sub3' => 'required',
+		'nama_rekening_belanja_sub3' => 'required',
+		'jumlah_anggaran_belanja_sub3' => 'required',
+		'id_kode_belanja_sub2' => 'required'
+	];
+
+	public $kodebelanjasub3_errors = [
+		'kode_belanja_sub3' => [
+			'required' => 'Kode Belanja Belum Terisi'
+		],
+		'nama_rekening_belanja_sub3' => [
+			'required' => 'Nama Rekening Belanja Belum Terisi'
+		],
+		'jumlah_anggaran_belanja_sub3' => [
+			'required' => 'Jumlah Anggaran Belum Terisi'
+		],
+		'id_kode_belanja_sub2' => [
+			'required' => 'Referensi Rekening Belum Terisi'
+		]
+	];
+
+	public $kodebelanjasub4 = [
+		'kode_belanja_sub4' => 'required',
+		'nama_rekening_belanja_sub4' => 'required',
+		'jumlah_anggaran_belanja_sub4' => 'required',
+		'id_kode_belanja_sub3' => 'required'
+	];
+
+	public $kodebelanjasub4_errors = [
+		'kode_belanja_sub4' => [
+			'required' => 'Kode Belanja Belum Terisi'
+		],
+		'nama_rekening_belanja_sub4' => [
+			'required' => 'Nama Rekening Belanja Belum Terisi'
+		],
+		'jumlah_anggaran_belanja_sub4' => [
+			'required' => 'Jumlah Anggaran Belum Terisi'
+		],
+		'id_kode_belanja_sub3' => [
+			'required' => 'Referensi Rekening Belum Terisi'
+		]
+	];
 }

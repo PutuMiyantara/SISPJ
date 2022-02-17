@@ -1,4 +1,4 @@
-sispj.controller("KodeBelanjaSub2", function ($scope, $http, $window, $timeout) {
+sispj.controller("KodeBelanjaSub4", function ($scope, $http, $window, $timeout) {
   $scope.setDefault = function () {
     $scope.error = false;
     $scope.success = false;
@@ -7,10 +7,10 @@ sispj.controller("KodeBelanjaSub2", function ($scope, $http, $window, $timeout) 
     $scope.formModel.id_kode_belanja_sub1 = null;
   };
 
-  $scope.getKodeBelanjaSub2 = function () {
-    $http.get("/rekbelanja/getKodeBelanjaSub2").then(function (data) {
+  $scope.getKodeBelanjaSub4 = function () {
+    $http.get("/rekbelanja/getKodeBelanjaSub4").then(function (data) {
       $scope.datas = data.data;
-      // console.log(data)
+      console.log(data)
     },function errorCallback(response) {
       console.log(response);
       alert("error");
@@ -18,12 +18,13 @@ sispj.controller("KodeBelanjaSub2", function ($scope, $http, $window, $timeout) 
   };
 
   $scope.tambahData = function (){
-    $scope.hideRekRef = true;
-    $scope.openModal("#kodeBelanjaSub2");
+    $scope.openModal("#kodeBelanjaSub4");
     $scope.modalTitle = "Tambah Kode Rekening Dasar";
     $scope.modalButton = "Simpan";
     $scope.formSubmit = "ng-submit='insertData()'";
-    $scope.hideForAddSub = true;
+    $scope.hideRekRefSub1 = true;
+    $scope.hideRekRefSub2 = true;
+    $scope.hideRekRefSub3 = true;
     $scope.setDefault();
 
   }
@@ -41,26 +42,24 @@ sispj.controller("KodeBelanjaSub2", function ($scope, $http, $window, $timeout) 
 
   $scope.insertData = function () {
       $http
-        .post("/rekbelanja/insertKodeBelanjaSub2", {
-          kode_belanja_sub2: $scope.formModel.kode_belanja_sub2,
-          nama_rekening_belanja_sub2: $scope.formModel.nama_rekening_belanja_sub2,
-          jumlah_anggaran_belanja_sub2: $scope.formModel.jumlah_anggaran_belanja_sub2,
-          id_kode_belanja_sub1: $scope.formModel.id_kode_belanja_sub1,
+        .post("/rekbelanja/insertKodeBelanjaSub4", {
+          kode_belanja_sub4: $scope.formModel.kode_belanja_sub4,
+          nama_rekening_belanja_sub4: $scope.formModel.nama_rekening_belanja_sub4,
+          jumlah_anggaran_belanja_sub4: $scope.formModel.jumlah_anggaran_belanja_sub4,
+          id_kode_belanja_sub3: $scope.formModel.id_kode_belanja_sub3,
         })
         .then(
           function successCallback(data) {
-            
             console.log(data.data);
             if (data.data.errortext == "") {
               $scope.kode_rek_kegiatan = $scope.nama = null;
-              $scope.getKodeBelanjaSub2();
-              $scope.closeModal("#kodeBelanjaSub2");
+              $scope.getKodeBelanjaSub4();
+              $scope.closeModal("#kodeBelanjaSub4");
               $scope.success = true;
               $scope.message = data.data.message;
               $timeout(function () {
                 $scope.success = false;
               }, 5000);
-              $scope.setDefault();
             } else {
               $scope.message = data.data.errortext;
               $scope.error = true;
@@ -77,26 +76,27 @@ sispj.controller("KodeBelanjaSub2", function ($scope, $http, $window, $timeout) 
         );
   };
 
-  $scope.getDetail = function (id, id_rek_dasar) {
+  $scope.getDetail = function (id, id_rek_dasar, id_kode_belanja_sub1, id_kode_belanja_sub2) {
     $scope.setDefault();
     $scope.dataRekBelanjaSub1(id_rek_dasar);
+    $scope.dataRekBelanjaSub2(id_kode_belanja_sub1);
+    $scope.dataRekBelanjaSub3(id_kode_belanja_sub2);
     $scope.hideForAddSub = false;
     $scope.hideRekRef = false;
-    $http.get("/rekbelanja/getDetailKodeBelanjaSub2/" + id).then(
+    $http.get("/rekbelanja/getDetailKodeBelanjaSub4/" + id).then(
       function successCallback(data) {
         console.log("dibawah ini data get detail");
         console.log(data);
 
-
-        $scope.openModal("#kodeBelanjaSub2");
+        $scope.openModal("#kodeBelanjaSub4");
         $scope.modalTitle = "Detail Kode Belanja Sub 1";
         $scope.submitButton = "Update";
         $scope.actionButton = "Kembali";
 
         $scope.id = data.data[0].id;
-        $scope.formModel.kode_belanja_sub2 = data.data[0].kode_belanja_sub2;
-        $scope.formModel.nama_rekening_belanja_sub2 = data.data[0].nama_rekening_belanja_sub2;
-        $scope.formModel.jumlah_anggaran_belanja_sub2 = data.data[0].jumlah_anggaran_belanja_sub2;
+        $scope.formModel.kode_belanja_sub4 = data.data[0].kode_belanja_sub4;
+        $scope.formModel.nama_rekening_belanja_sub4 = data.data[0].nama_rekening_belanja_sub4;
+        $scope.formModel.jumlah_anggaran_belanja_sub4 = data.data[0].jumlah_anggaran_belanja_sub4;
         $scope.formModel.kode_rek_dasar = 
           data.data[0].kode_rek_dinas + '.' + 
           data.data[0].kode_rek_urusan + '.' + 
@@ -107,6 +107,8 @@ sispj.controller("KodeBelanjaSub2", function ($scope, $http, $window, $timeout) 
           data.data[0].nama_rekening_dasar;
         $scope.formModel.id_rekening_dasar = data.data[0].id_rekening_dasar;
         $scope.formModel.id_kode_belanja_sub1 = data.data[0].id_kode_belanja_sub1;
+        $scope.formModel.id_kode_belanja_sub2 = data.data[0].id_kode_belanja_sub2;
+        $scope.formModel.id_kode_belanja_sub3 = data.data[0].id_kode_belanja_sub3;
         $scope.formModel.tahun_anggaran = data.data[0].tahun_anggaran;
 
         console.log("id rek sub1 get detail "+ $scope.formModel.id_kode_belanja_sub1);
@@ -121,17 +123,17 @@ sispj.controller("KodeBelanjaSub2", function ($scope, $http, $window, $timeout) 
 
   $scope.editData = function () {
     $http
-      .post("/rekbelanja/updateKodeBelanjaSub2/" + $scope.id , {
-        kode_belanja_sub2: $scope.formModel.kode_belanja_sub2,
-        nama_rekening_belanja_sub2: $scope.formModel.nama_rekening_belanja_sub2,
-        jumlah_anggaran_belanja_sub2: $scope.formModel.jumlah_anggaran_belanja_sub2,
-        id_kode_belanja_sub1: $scope.formModel.id_kode_belanja_sub1,
+      .post("/rekbelanja/updateKodeBelanjaSub4/" + $scope.id , {
+        kode_belanja_sub4: $scope.formModel.kode_belanja_sub4,
+        nama_rekening_belanja_sub4: $scope.formModel.nama_rekening_belanja_sub4,
+        jumlah_anggaran_belanja_sub4: $scope.formModel.jumlah_anggaran_belanja_sub4,
+        id_kode_belanja_sub2: $scope.formModel.id_kode_belanja_sub2,
       })
       .then(
         function successCallback(data) {
           if (data.data.errortext == "") {
             $scope.getDetail($scope.id);
-            $scope.getKodeBelanjaSub2();
+            $scope.getKodeBelanjaSub4();
             $scope.success = true;
             $timeout(function () {
               $scope.success = false;
@@ -151,11 +153,11 @@ sispj.controller("KodeBelanjaSub2", function ($scope, $http, $window, $timeout) 
   $scope.deleteData = function(id){
     var isconfirm =  confirm("Ingin Menghapus Data?");
     if (isconfirm) {
-      $http.post("/rekbelanja/deleteKodeBelanjaSub2",{
+      $http.post("/rekbelanja/deleteKodeBelanjaSub4",{
         id: id,
       }).then(
         function successCallback(data){
-          $scope.getKodeBelanjaSub2();
+          $scope.getKodeBelanjaSub4();
           $scope.message = "Data Berhasil Dihapus";
           $scope.success = true;
           $timeout(function(){
@@ -206,17 +208,45 @@ sispj.controller("KodeBelanjaSub2", function ($scope, $http, $window, $timeout) 
         }
       );
     }
-
     $scope.dataRekBelanjaSub1(where);    
   };
 
   $scope.dataRekBelanjaSub1 = function (where) {
     if (where != null) {
-      $scope.hideRekRef = false;
+      $scope.hideRekRefSub1 = false;
       console.log("testete");
       $http.get("/rekbelanja/searchRekBelanjaSub1/" + where).then(function (data) {
         $scope.getRekRefSub1 = data.data;
         console.log($scope.getRekRefSub1);
+      });
+    }
+  };
+
+  $scope.rekSub1Change = function(where){
+    $scope.dataRekBelanjaSub2(where);
+  }
+  
+  $scope.dataRekBelanjaSub2 = function (where) {
+    if (where != null) {
+      $scope.hideRekRefSub2 = false;
+      $http.get("/rekbelanja/searchRekBelanjaSub2/" + where).then(function (data) {
+        $scope.getRekRefSub2 = data.data;
+        console.log(data.data);
+      });
+    }
+  };
+
+  $scope.rekSub2Change = function(where){
+    $scope.dataRekBelanjaSub3(where);
+  }
+
+  $scope.dataRekBelanjaSub3 = function (where) {
+    console.log('dataRekBelanjaSub3'+where);
+    if (where != null) {
+      $scope.hideRekRefSub3 = false;
+      $http.get("/rekbelanja/searchRekBelanjaSub3/" + where).then(function (data) {
+        $scope.getRekRefSub3 = data.data;
+        console.log(data.data);
       });
     }
   };

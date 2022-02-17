@@ -21,7 +21,7 @@ sispj.directive("select2", function($timeout, $parse) {
     restrict: 'AC',
     require: 'ngModel',
     link: function(scope, element, attrs) {
-      console.log(attrs);
+      // console.log(attrs);
       $timeout(function() {
         element.select2();
         element.select2Initialized = true;

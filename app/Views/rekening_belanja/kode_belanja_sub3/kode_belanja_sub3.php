@@ -84,7 +84,8 @@
                                 d.tahun_anggaran + ")"
                             }}</td>
                             <td style="text-align: center;">
-                                <button type="submit" class="btn btn-info" ng-click="getDetail(d.id)"><i
+                                <button type="submit" class="btn btn-info"
+                                    ng-click="getDetail(d.id, d.id_rekening_dasar, d.id_kode_belanja_sub1)"><i
                                         class="fa fa-edit"> Detail</i></button>
                                 <button type="submit" class="btn btn-danger" ng-click="deleteData(d.id)"><i
                                         class="fa fa-edit"> Delete</i></button>
@@ -145,26 +146,18 @@
                             </div>
                         </div>
                         <div class="col-sm-12 mb-6 mb-sm-0" ng-hide="false">
-                            <div class="col"><label>Referensi Rekening</label></div>
+                            <div class="col"><label>Referensi Rekening Dasar</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row" ng-init="dataRekReferensi()">
-                                    <select style="width: 100%;" id="referensi_rekening" select2="" class="form-control"
-                                        name="referensi_rekening" ng-model="formModel.id_kode_belanja_sub2"
-                                        ng-options="referensi_rekening.id as referensi_rekening.kode_belanja_sub2 for referensi_rekening in getRekRefSub2"
+                                <div class="form-group row" ng-init="dataRekDasar(null)">
+                                    <input class="form-control" name="id_rekening_dasar"
+                                        ng-model="formModel.id_rekening_dasar" ng-required="false" ng-readonly="true">
+                                    <select style="width: 100%;" id="rek_dasar" select2="" class="form-control"
+                                        name="rek_dasar" ng-model="formModel.id_rekening_dasar"
+                                        ng-options="rek_dasar.id as rek_dasar.kode_rekening_dasar for rek_dasar in getRekDasar"
                                         ng-required="true" ng-disabled="readOnly"
-                                        ng-change="rekBelanjaSub2Change(formModel.id_kode_belanja_sub2)">
-                                        <option value="">--Select Here--</option>
+                                        ng-change="rekDasarChange(formModel.id_rekening_dasar)">
+                                        <option value="">---select here---</option>
                                     </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Rekening Dasar</label></div>
-                            <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row">
-                                    <textarea class="form-control" name="kode_rek_dasar"
-                                        ng-model="formModel.kode_rek_dasar" ng-readonly="true">
-                                    </textarea>
                                 </div>
                             </div>
                         </div>
@@ -173,10 +166,54 @@
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
                                     <input class="form-control" name="tahun_anggaran"
-                                        ng-model="formModel.tahun_anggaran" ng-readonly="true">
+                                        ng-model="formModel.tahun_anggaran" ng-required="false" ng-readonly="true">
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0" ng-hide="hideRekRefSub1">
+                            <div class="col"><label>Referensi Rekening Sub 1</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row" ng-init="dataRekBelanjaSub1(null)">
+                                    <input class="form-control" name="id_kode_belanja_sub1"
+                                        ng-model="formModel.id_kode_belanja_sub1" ng-required="false"
+                                        ng-readonly="true">
+                                    <select style="width: 100%;" id="rek_referensi_sub1" select2="" class="form-control"
+                                        name="rek_referensi_sub1"
+                                        ng-options="rek_referensi_sub1.id as rek_referensi_sub1.kode_belanja_sub1 for rek_referensi_sub1 in getRekRefSub1"
+                                        ng-required="true" ng-disabled="readOnly"
+                                        ng-model="formModel.id_kode_belanja_sub1"
+                                        ng-change="rekSub1Change(formModel.id_kode_belanja_sub1)">
+                                        <option value="">---select here---</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0" ng-hide="hideRekRefSub2">
+                            <div class="col"><label>Referensi Rekening Sub 2</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row" ng-init="dataRekBelanjaSub2(null)">
+                                    <input class="form-control" name="id_kode_belanja_sub2"
+                                        ng-model="formModel.id_kode_belanja_sub2" ng-required="false"
+                                        ng-readonly="true">
+                                    <select style="width: 100%;" id="rek_referensi_sub2" select2="" class="form-control"
+                                        name="rek_referensi_sub2" ng-model="formModel.id_kode_belanja_sub2"
+                                        ng-options="rek_referensi_sub2.id as rek_referensi_sub2.kode_belanja_sub2 for rek_referensi_sub2 in getRekRefSub2"
+                                        ng-required="true" ng-disabled="readOnly">
+                                        <option value="">---select here---</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-sm-12 mb-6 mb-sm-0">
+                            <div class="col"><label>Kode Rekening</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <textarea class="form-control" name="kode_rek_dasar"
+                                        ng-model="formModel.kode_rek_dasar" ng-readonly="true">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div> -->
                     </div>
                     <div class="modal-footer">
                         <input type="text" name="id" ng-model="id" ng-hide="false" ng-readonly="true">
