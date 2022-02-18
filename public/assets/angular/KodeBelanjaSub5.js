@@ -1,4 +1,4 @@
-sispj.controller("KodeBelanjaSub4", function ($scope, $http, $window, $timeout) {
+sispj.controller("KodeBelanjaSub5", function ($scope, $http, $window, $timeout) {
   $scope.setDefault = function () {
     $scope.error = false;
     $scope.success = false;
@@ -7,8 +7,8 @@ sispj.controller("KodeBelanjaSub4", function ($scope, $http, $window, $timeout) 
     $scope.formModel.id_kode_belanja_sub1 = null;
   };
 
-  $scope.getKodeBelanjaSub4 = function () {
-    $http.get("/rekbelanja/getKodeBelanjaSub4").then(function (data) {
+  $scope.getKodeBelanjaSub5 = function () {
+    $http.get("/rekbelanja/getKodeBelanjaSub5").then(function (data) {
       $scope.datas = data.data;
       console.log(data)
     },function errorCallback(response) {
@@ -18,7 +18,7 @@ sispj.controller("KodeBelanjaSub4", function ($scope, $http, $window, $timeout) 
   };
 
   $scope.tambahData = function (){
-    $scope.openModal("#kodeBelanjaSub4");
+    $scope.openModal("#kodeBelanjaSub5");
     $scope.modalTitle = "Tambah Kode Rekening Dasar";
     $scope.modalButton = "Simpan";
     $scope.formSubmit = "ng-submit='insertData()'";
@@ -42,10 +42,10 @@ sispj.controller("KodeBelanjaSub4", function ($scope, $http, $window, $timeout) 
 
   $scope.insertData = function () {
       $http
-        .post("/rekbelanja/insertKodeBelanjaSub4", {
-          kode_belanja_sub4: $scope.formModel.kode_belanja_sub4,
-          nama_rekening_belanja_sub4: $scope.formModel.nama_rekening_belanja_sub4,
-          jumlah_anggaran_belanja_sub4: $scope.formModel.jumlah_anggaran_belanja_sub4,
+        .post("/rekbelanja/insertKodeBelanjaSub5", {
+          kode_belanja_sub5: $scope.formModel.kode_belanja_sub5,
+          nama_rekening_belanja_sub5: $scope.formModel.nama_rekening_belanja_sub5,
+          jumlah_anggaran_belanja_sub5: $scope.formModel.jumlah_anggaran_belanja_sub5,
           id_kode_belanja_sub3: $scope.formModel.id_kode_belanja_sub3,
         })
         .then(
@@ -53,8 +53,8 @@ sispj.controller("KodeBelanjaSub4", function ($scope, $http, $window, $timeout) 
             console.log(data.data);
             if (data.data.errortext == "") {
               $scope.kode_rek_kegiatan = $scope.nama = null;
-              $scope.getKodeBelanjaSub4();
-              $scope.closeModal("#kodeBelanjaSub4");
+              $scope.getKodeBelanjaSub5();
+              $scope.closeModal("#kodeBelanjaSub5");
               $scope.success = true;
               $scope.message = data.data.message;
               $timeout(function () {
@@ -76,27 +76,27 @@ sispj.controller("KodeBelanjaSub4", function ($scope, $http, $window, $timeout) 
         );
   };
 
-  $scope.getDetail = function (id, id_rek_dasar, id_kode_belanja_sub1, id_kode_belanja_sub2) {
+  $scope.getDetail = function (id, id_rek_dasar, id_kode_belanja_sub1, id_kode_belanja_sub2, id_kode_belanja_sub3) {
     $scope.setDefault();
     $scope.dataRekBelanjaSub1(id_rek_dasar);
     $scope.dataRekBelanjaSub2(id_kode_belanja_sub1);
     $scope.dataRekBelanjaSub3(id_kode_belanja_sub2);
     $scope.hideForAddSub = false;
     $scope.hideRekRef = false;
-    $http.get("/rekbelanja/getDetailKodeBelanjaSub4/" + id).then(
+    $http.get("/rekbelanja/getDetailKodeBelanjaSub5/" + id).then(
       function successCallback(data) {
         console.log("dibawah ini data get detail");
         console.log(data);
 
-        $scope.openModal("#kodeBelanjaSub4");
+        $scope.openModal("#kodeBelanjaSub5");
         $scope.modalTitle = "Detail Kode Belanja Sub 1";
         $scope.submitButton = "Update";
         $scope.actionButton = "Kembali";
 
         $scope.id = data.data[0].id;
-        $scope.formModel.kode_belanja_sub4 = data.data[0].kode_belanja_sub4;
-        $scope.formModel.nama_rekening_belanja_sub4 = data.data[0].nama_rekening_belanja_sub4;
-        $scope.formModel.jumlah_anggaran_belanja_sub4 = data.data[0].jumlah_anggaran_belanja_sub4;
+        $scope.formModel.kode_belanja_sub5 = data.data[0].kode_belanja_sub5;
+        $scope.formModel.nama_rekening_belanja_sub5 = data.data[0].nama_rekening_belanja_sub5;
+        $scope.formModel.jumlah_anggaran_belanja_sub5 = data.data[0].jumlah_anggaran_belanja_sub5;
         $scope.formModel.kode_rek_dasar = 
           data.data[0].kode_rek_dinas + '.' + 
           data.data[0].kode_rek_urusan + '.' + 
@@ -123,17 +123,17 @@ sispj.controller("KodeBelanjaSub4", function ($scope, $http, $window, $timeout) 
 
   $scope.editData = function () {
     $http
-      .post("/rekbelanja/updateKodeBelanjaSub4/" + $scope.id , {
-        kode_belanja_sub4: $scope.formModel.kode_belanja_sub4,
-        nama_rekening_belanja_sub4: $scope.formModel.nama_rekening_belanja_sub4,
-        jumlah_anggaran_belanja_sub4: $scope.formModel.jumlah_anggaran_belanja_sub4,
+      .post("/rekbelanja/updateKodeBelanjaSub5/" + $scope.id , {
+        kode_belanja_sub5: $scope.formModel.kode_belanja_sub5,
+        nama_rekening_belanja_sub5: $scope.formModel.nama_rekening_belanja_sub5,
+        jumlah_anggaran_belanja_sub5: $scope.formModel.jumlah_anggaran_belanja_sub5,
         id_kode_belanja_sub3: $scope.formModel.id_kode_belanja_sub3,
       })
       .then(
         function successCallback(data) {
           if (data.data.errortext == "") {
             $scope.getDetail($scope.id);
-            $scope.getKodeBelanjaSub4();
+            $scope.getKodeBelanjaSub5();
             $scope.success = true;
             $timeout(function () {
               $scope.success = false;
@@ -153,11 +153,11 @@ sispj.controller("KodeBelanjaSub4", function ($scope, $http, $window, $timeout) 
   $scope.deleteData = function(id){
     var isconfirm =  confirm("Ingin Menghapus Data?");
     if (isconfirm) {
-      $http.post("/rekbelanja/deleteKodeBelanjaSub4",{
+      $http.post("/rekbelanja/deleteKodeBelanjaSub5",{
         id: id,
       }).then(
         function successCallback(data){
-          $scope.getKodeBelanjaSub4();
+          $scope.getKodeBelanjaSub5();
           $scope.message = "Data Berhasil Dihapus";
           $scope.success = true;
           $timeout(function(){

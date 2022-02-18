@@ -1,103 +1,270 @@
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+<!-- Begin Page Content -->
+<div class="container-fluid" ng-controller="KodeBelanjaSub5">
+
+    <!-- Page Heading -->
     <!-- Content Header (Page header) -->
-    <div class="content-header">
+    <section class=" content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Kode Belanja SUb 5</h1>
-                </div><!-- /.col -->
+                    <h1>Data Kode Rekening Belanja Sub 5</h1>
+                </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Master Data</li>
-                        <li class="breadcrumb-item active">Rekening Dasar</li>
-                        <li class="breadcrumb-item active">Kode Belanja SUb 5</li>
+                        <li class="breadcrumb-item"><a href="#">Rekening Belanja</a></li>
+                        <li class="breadcrumb-item"><a href="#">Kode Rekening Belanja Sub 5</a></li>
                     </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Tabel Kode Belanja SUb 5</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <table id="example1" class="table table-hover text-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 10px;">No</th>
-                                        <th>Kode Rekening</th>
-                                        <th>Uraian</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Misc</td>
-                                        <td>Dillo 0.8</td>
-                                        <td>Embedded devices</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Misc</td>
-                                        <td>Links</td>
-                                        <td>Text only</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Misc</td>
-                                        <td>Lynx</td>
-                                        <td>Text only</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Misc</td>
-                                        <td>IE Mobile</td>
-                                        <td>Windows Mobile 6</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Misc</td>
-                                        <td>PSP browser</td>
-                                        <td>PSP</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Other browsers</td>
-                                        <td>All others</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Kode Rekening</th>
-                                        <th>Uraian</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
+        </div><!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <a href="<?= base_url('/rekbelanja') ?>" class="btn btn-outline-info">Rekening Belanja</a>
+            <a href="<?= base_url('/rekbelanja/kodesub1') ?>" class="btn btn-outline-info">Kode Sub 1</a>
+            <a href="<?= base_url('/rekbelanja/kodesub2') ?>" class="btn btn-outline-info">Kode Sub 2</a>
+            <a href="<?= base_url('/rekbelanja/kodesub3') ?>" class="btn btn-outline-info">Kode Sub 3</a>
+            <a href="<?= base_url('/rekbelanja/kodesub4') ?>" class="btn btn-outline-info">Kode Sub 4</a>
+            <a href="<?= base_url('/rekbelanja/kodesub5') ?>" class="btn btn-outline-info active">Kode Sub 5</a>
+        </div>
+        <div class="card-body">
+            <div>
+                <div class="alert alert-danger alert-dismissable" ng-show="error">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{message}}
+                </div>
+                <div class="alert alert-success alert-dismissable" ng-show="success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{message}}
+                </div>
+            </div>
+            <div class="table-responsive">
+                <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-bottom: 10px;"
+                    ng-click="tambahData()"><i class="fas fa-plus fa-sm text-white-50"></i>Tambah
+                    Data</button>
+                <table datatable="ng" dt-options="vm.dtOptions" class="table table-bordered" width="100%"
+                    cellspacing="0" ng-init="getKodeBelanjaSub4()">
+                    <thead>
+                        <tr>
+                            <th style="width: 10px;">No</th>
+                            <th>Kode Rekening</th>
+                            <th>Nama Rekening</th>
+                            <th>Jumlah Anggaran</th>
+                            <th>Referensi Rekening</th>
+                            <th>Rekening Dasar</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>No</th>
+                            <th>Kode Rekening</th>
+                            <th>Nama Rekening</th>
+                            <th>Jumlah Anggaran</th>
+                            <th>Referensi Rekening</th>
+                            <th>Rekening Dasar</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="d in datas">
+                            <td>{{ $index +1 }}</td>
+                            <td>{{ d.kode_belanja_sub5 }}</td>
+                            <td>{{ d.nama_rekening_belanja_sub5 }}</td>
+                            <td>Rp. {{ d.jumlah_anggaran_belanja_sub5 }}</td>
+                            <td>{{ d.kode_belanja_sub4 + " - " + d.nama_rekening_belanja_sub4 }}</td>
+                            <td>{{ 
+                                d.kode_rek_dinas + "." +
+                                d.kode_rek_urusan + "." +
+                                d.kode_rek_bidang + "." +
+                                d.kode_rek_program + "." +
+                                d.kode_rek_kegiatan + "." +
+                                d.kode_rek_unit + " - " +
+                                d.nama_rekening_dasar + " (" +
+                                d.tahun_anggaran + ")"
+                            }}</td>
+                            <td style="text-align: center;">
+                                <button type="submit" class="btn btn-info"
+                                    ng-click="getDetail(d.id, d.id_rekening_dasar, d.id_kode_belanja_sub1, d.id_kode_belanja_sub2, d.id_kode_belanja_sub3)"><i
+                                        class="fa fa-edit"> Detail</i></button>
+                                <button type="submit" class="btn btn-danger" ng-click="deleteData(d.id)"><i
+                                        class="fa fa-edit"> Delete</i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" role="dialog" role="dialog" aria-hidden="true" id="kodeBelanjaSub5">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <form method="POST" enctype="multipart/form-data" name="formKodeDinas" ng-submit="submitData()">
+                    <div class="modal-header">
+                        <h4 class="modal-title" ng-model="modalTitle">{{modalTitle}}</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class="alert alert-danger alert-dismissable" ng-show="error">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{message}}
+                            </div>
+                            <div class="alert alert-success alert-dismissable" ng-show="success">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{message}}
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0">
+                            <div class="col"><label>Kode Rekening</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <input type="text" class="form-control" name="kode_belanja_sub4"
+                                        ng-model="formModel.kode_belanja_sub4" ng-required="false" ng-readonly="false">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0">
+                            <div class="col"><label>Nama Kode Belanja</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <input class="form-control" name="nama_rekening_belanja_sub5"
+                                        ng-model="formModel.nama_rekening_belanja_sub5" ng-required="false"
+                                        ng-readonly="false">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0">
+                            <div class="col"><label>Jumlah Anggaran Belanja Sub 5</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <input class="form-control" name="jumlah_anggaran_belanja_sub5"
+                                        ng-model="formModel.jumlah_anggaran_belanja_sub5" ng-required="false"
+                                        ng-readonly="false">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0" ng-hide="false">
+                            <div class="col"><label>Referensi Rekening Dasar</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row" ng-init="dataRekDasar(null)">
+                                    <input class="form-control" name="id_rekening_dasar"
+                                        ng-model="formModel.id_rekening_dasar" ng-required="false" ng-readonly="true">
+                                    <select style="width: 100%;" id="rek_dasar" select2="" class="form-control"
+                                        name="rek_dasar" ng-model="formModel.id_rekening_dasar"
+                                        ng-options="rek_dasar.id as rek_dasar.kode_rekening_dasar for rek_dasar in getRekDasar"
+                                        ng-required="true" ng-disabled="readOnly"
+                                        ng-change="rekDasarChange(formModel.id_rekening_dasar)">
+                                        <option value="">---select here---</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0">
+                            <div class="col"><label>Tahun Anggaran</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <input class="form-control" name="tahun_anggaran"
+                                        ng-model="formModel.tahun_anggaran" ng-required="false" ng-readonly="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0" ng-hide="hideRekRefSub1">
+                            <div class="col"><label>Referensi Rekening Sub 1</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row" ng-init="dataRekBelanjaSub1(null)">
+                                    <input class="form-control" name="id_kode_belanja_sub1"
+                                        ng-model="formModel.id_kode_belanja_sub1" ng-required="false"
+                                        ng-readonly="true">
+                                    <select style="width: 100%;" id="rek_referensi_sub1" select2="" class="form-control"
+                                        name="rek_referensi_sub1"
+                                        ng-options="rek_referensi_sub1.id as rek_referensi_sub1.kode_belanja_sub1 for rek_referensi_sub1 in getRekRefSub1"
+                                        ng-required="true" ng-disabled="readOnly"
+                                        ng-model="formModel.id_kode_belanja_sub1"
+                                        ng-change="rekSub1Change(formModel.id_kode_belanja_sub1)">
+                                        <option value="">---select here---</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0" ng-hide="hideRekRefSub2">
+                            <div class="col"><label>Referensi Rekening Sub 2</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row" ng-init="dataRekBelanjaSub2(null)">
+                                    <input class="form-control" name="id_kode_belanja_sub2"
+                                        ng-model="formModel.id_kode_belanja_sub2" ng-required="false"
+                                        ng-readonly="true">
+                                    <select style="width: 100%;" id="rek_referensi_sub2" select2="" class="form-control"
+                                        name="rek_referensi_sub2" ng-model="formModel.id_kode_belanja_sub2"
+                                        ng-options="rek_referensi_sub2.id as rek_referensi_sub2.kode_belanja_sub2 for rek_referensi_sub2 in getRekRefSub2"
+                                        ng-required="true" ng-disabled="readOnly"
+                                        ng-change="rekSub2Change(formModel.id_kode_belanja_sub2)">
+                                        <option value="">---select here---</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0" ng-hide="hideRekRefSub3">
+                            <div class="col"><label>Referensi Rekening Sub 3</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row" ng-init="dataRekBelanjaSub3(null)">
+                                    <input class="form-control" name="id_kode_belanja_sub3"
+                                        ng-model="formModel.id_kode_belanja_sub3" ng-required="false"
+                                        ng-readonly="true">
+                                    <select style="width: 100%;" id="rek_referensi_sub3" select2="" class="form-control"
+                                        name="rek_referensi_sub3" ng-model="formModel.id_kode_belanja_sub3"
+                                        ng-options="rek_referensi_sub3.id as rek_referensi_sub3.kode_belanja_sub3 for rek_referensi_sub3 in getRekRefSub3"
+                                        ng-required="true" ng-disabled="readOnly">
+                                        <option value="">---select here---</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0" ng-hide="hideRekRefSub4">
+                            <div class="col"><label>Referensi Rekening Sub 4</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row" ng-init="dataRekBelanjaSub4(null)">
+                                    <input class="form-control" name="id_kode_belanja_sub4"
+                                        ng-model="formModel.id_kode_belanja_sub4" ng-required="false"
+                                        ng-readonly="true">
+                                    <select style="width: 100%;" id="rek_referensi_sub4" select2="" class="form-control"
+                                        name="rek_referensi_sub4" ng-model="formModel.id_kode_belanja_sub4"
+                                        ng-options="rek_referensi_sub4.id as rek_referensi_sub4.kode_belanja_sub4 for rek_referensi_sub4 in getRekRefSub4"
+                                        ng-required="true" ng-disabled="readOnly">
+                                        <option value="">---select here---</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-sm-12 mb-6 mb-sm-0">
+                            <div class="col"><label>Kode Rekening</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <textarea class="form-control" name="kode_rek_dasar"
+                                        ng-model="formModel.kode_rek_dasar" ng-readonly="true">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="modal-footer">
+                        <input type="text" name="id" ng-model="id" ng-hide="false" ng-readonly="true">
+                        <button type="submit" class="btn btn-success col-sm-3 mb-6"><i class="fas fa-save">
+                            </i> {{ modalButton }}</button>
+                        <button type="button" class="btn btn-danger col-sm-3 mb-6"
+                            ng-click="closeModal('#kodeDinas')">Kembali</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
 </div>
-<!-- /.content-wrapper -->
+<!-- <script type="text/javascript">
+$('#rek_dasar').select2({
+    // dropdownParent: $('#kodeBelanjaSub1'),
+    placeholder: "Select Here",
+    theme: "bootstrap-5"
+});
+</script> -->
