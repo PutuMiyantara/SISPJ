@@ -50,7 +50,7 @@ sispj.controller("User", function ($scope, $http, $window, $timeout) {
         // console.log(data);
         $scope.openModal("#detailEditUser");
         $scope.modalTitle = "Detail User";
-        $scope.submitButton = "Update";
+        $scope.modalButton = "Update";
         $scope.actionButton = "Kembali";
         $scope.errorMessage = null;
         $scope.error = false;
@@ -125,9 +125,9 @@ sispj.controller("User", function ($scope, $http, $window, $timeout) {
         function successCallback(data){
           $scope.getUser();
           $scope.message("Data Berhasil Dihapus");
-          $scope.error = true;
+          $scope.success = true;
           $timeout(function(){
-            $scope.error = false;
+            $scope.success = false;
           }, 5000);
         }
       );
@@ -222,7 +222,7 @@ sispj.controller("User", function ($scope, $http, $window, $timeout) {
         console.log(id);
         $scope.openModal("#detailuserHeader");
         $scope.modalTitle = "Detail User";
-        $scope.submitButton = "Update";
+        $scope.modalButton = "Update";
         $scope.actionButton = "Kembali";
         $scope.errorMessage = null;
         $scope.error = false;

@@ -66,11 +66,11 @@
                             <td>{{ $index +1 }}</td>
                             <td>{{ d.kode_rek_program }}</td>
                             <td>{{ d.nama_rek_program }}</td>
-                            <td style="text-align: center;">
+                            <td style="width:100px;">
                                 <button type="submit" class="btn btn-info" ng-click="getDetail(d.id)"><i
-                                        class="fa fa-edit"> Detail</i></button>
+                                        class="fa fa-edit"></i></button>
                                 <button type="submit" class="btn btn-danger" ng-click="deleteData(d.id)"><i
-                                        class="fa fa-edit"> Delete</i></button>
+                                        class="fa fa-trash"></i></button>
                             </td>
                         </tr>
                     </tbody>
@@ -81,7 +81,7 @@
 
     <!-- Modal -->
     <div class="modal fade" tabindex="1" role="dialog" id="kodeProgram">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form method="POST" enctype="multipart/form-data" name="formKodeProgram" ng-submit="submitData()">
                     <div class="modal-header">
@@ -118,10 +118,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <input type="text" name="id" ng-model="id" ng-hide="false" ng-readonly="true">
-                        <button type="submit" class="btn btn-success col-sm-3 mb-6"><i class="fas fa-save">
+                        <input type="text" name="id" ng-model="id" ng-hide="true" ng-readonly="true">
+                        <button type="submit" class="btn btn-success col-sm-2 mb-3"><i class="fas fa-save">
                             </i> {{ modalButton }}</button>
-                        <button type="button" class="btn btn-danger col-sm-3 mb-6"
+                        <button type="button" class="btn btn-danger col-sm-2 mb-3"
                             ng-click="closeModal('#kodeProgram')">Kembali</button>
                     </div>
                 </form>

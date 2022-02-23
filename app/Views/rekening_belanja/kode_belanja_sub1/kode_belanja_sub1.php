@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Data Kode Rekening Dinas</h1>
+                    <h1>Data Kode Belanja Sub 1</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -80,11 +80,11 @@
                                 d.nama_rekening_dasar + " (" +
                                 d.tahun_anggaran + ")"
                             }}</td>
-                            <td style="text-align: center;">
+                            <td style="text-align: center; width: 100px;">
                                 <button type="submit" class="btn btn-info" ng-click="getDetail(d.id)"><i
-                                        class="fa fa-edit"> Detail</i></button>
+                                        class="fa fa-edit"></i></button>
                                 <button type="submit" class="btn btn-danger" ng-click="deleteData(d.id)"><i
-                                        class="fa fa-edit"> Delete</i></button>
+                                        class="fa fa-trash"></i></button>
                             </td>
                         </tr>
                     </tbody>
@@ -166,11 +166,12 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <input type="text" name="id" ng-model="id" ng-hide="false" ng-readonly="true">
-                        <button type="submit" class="btn btn-success col-sm-3 mb-6"><i class="fas fa-save">
+                        <input type="text" name="id" ng-model="id" ng-hide="true" ng-readonly="true">
+                        <button type="submit" class="btn btn-success col-sm-2 mb-3"><i class="fa fa-save">
                             </i> {{ modalButton }}</button>
-                        <button type="button" class="btn btn-danger col-sm-3 mb-6"
-                            ng-click="closeModal('#kodeDinas')">Kembali</button>
+                        <button type="button" class="btn btn-danger col-sm-2 mb-3"
+                            ng-click="closeModal('#kodeBelanjaSub1')"><i class="fa fa-right-from-bracket"></i>
+                            Kembali</button>
                     </div>
                 </form>
             </div>

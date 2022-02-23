@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Data Kode Rekening Dinas</h1>
+                    <h1>Data Kode Rekening Belanja Sub 2</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -22,7 +22,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <!-- <a href="<?= base_url('/rekbelanja') ?>" class="btn btn-outline-info">Rekening Belanja</a> -->
+            <a href="<?= base_url('/rekbelanja') ?>" class="btn btn-outline-info">Rekening Belanja</a>
             <a href="<?= base_url('/rekbelanja/kodesub1') ?>" class="btn btn-outline-info">Kode Sub 1</a>
             <a href="<?= base_url('/rekbelanja/kodesub2') ?>" class="btn btn-outline-info active">Kode Sub 2</a>
             <a href="<?= base_url('/rekbelanja/kodesub3') ?>" class="btn btn-outline-info">Kode Sub 3</a>
@@ -83,12 +83,12 @@
                                 d.nama_rekening_dasar + " (" +
                                 d.tahun_anggaran + ")"
                             }}</td>
-                            <td style="text-align: center;">
+                            <td style="width: 100px;">
                                 <button type="submit" class="btn btn-info"
                                     ng-click="getDetail(d.id, d.id_rekening_dasar)"><i class="fa fa-edit">
-                                        Detail</i></button>
+                                    </i></button>
                                 <button type="submit" class="btn btn-danger" ng-click="deleteData(d.id)"><i
-                                        class="fa fa-edit"> Delete</i></button>
+                                        class="fa fa-trash"> </i></button>
                             </td>
                         </tr>
                     </tbody>
@@ -149,8 +149,8 @@
                             <div class="col"><label>Referensi Rekening Dasar</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row" ng-init="dataRekDasar(null)">
-                                    <input class="form-control" name="id_rekening_dasar"
-                                        ng-model="formModel.id_rekening_dasar" ng-required="false" ng-readonly="true">
+                                    <!-- <input class="form-control" name="id_rekening_dasar"
+                                        ng-model="formModel.id_rekening_dasar" ng-required="false" ng-readonly="true"> -->
                                     <select style="width: 100%;" id="rek_dasar" select2="" class="form-control"
                                         name="rek_dasar" ng-model="formModel.id_rekening_dasar"
                                         ng-options="rek_dasar.id as rek_dasar.kode_rekening_dasar for rek_dasar in getRekDasar"
@@ -174,9 +174,9 @@
                             <div class="col"><label>Referensi Rekening Sub1</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row" ng-init="dataRekBelanjaSub1(null)">
-                                    <input class="form-control" name="id_kode_belanja_sub1"
+                                    <!-- <input class="form-control" name="id_kode_belanja_sub1"
                                         ng-model="formModel.id_kode_belanja_sub1" ng-required="false"
-                                        ng-readonly="true">
+                                        ng-readonly="true"> -->
                                     <select style="width: 100%;" id="rek_referensi" select2="" class="form-control"
                                         name="rek_referensi" ng-model="formModel.id_kode_belanja_sub1"
                                         ng-options="rek_referensi.id as rek_referensi.kode_belanja_sub1 for rek_referensi in getRekRefSub1"
@@ -186,25 +186,14 @@
                                 </div>
                             </div>
                         </div>
-
-                        <select ng-model="color" ng-options="c.name for c in colors"></select>
-                        <!-- <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Kode Rekening</label></div>
-                            <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row">
-                                    <textarea class="form-control" name="kode_rek_dasar"
-                                        ng-model="formModel.kode_rek_dasar" ng-readonly="true">
-                                    </textarea>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                     <div class="modal-footer">
-                        <input type="text" name="id" ng-model="id" ng-hide="false" ng-readonly="true">
-                        <button type="submit" class="btn btn-success col-sm-3 mb-6"><i class="fas fa-save">
+                        <input type="text" name="id" ng-model="id" ng-hide="true" ng-readonly="true">
+                        <button type="submit" class="btn btn-success col-sm-2 mb-3"><i class="fa fa-save">
                             </i> {{ modalButton }}</button>
-                        <button type="button" class="btn btn-danger col-sm-3 mb-6"
-                            ng-click="closeModal('#kodeDinas')">Kembali</button>
+                        <button type="button" class="btn btn-danger col-sm-2 mb-3"
+                            ng-click="closeModal('#kodeBelanjaSub2')"><i class="fa fa-right-from-bracket"></i>
+                            Kembali</button>
                     </div>
                 </form>
             </div>

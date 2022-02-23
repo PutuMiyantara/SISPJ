@@ -459,4 +459,26 @@ class Validation
 			'required' => 'Referensi Rekening Belum Terisi'
 		]
 	];
+
+	public $kodebelanjasub5 = [
+		'kode_belanja_sub5' => 'required',
+		'nama_rekening_belanja_sub5' => 'required',
+		'jumlah_anggaran_belanja_sub5' => 'required',
+		'id_kode_belanja_sub4' => 'required'
+	];
+
+	public $kodebelanjasub5_errors = [
+		'kode_belanja_sub5' => [
+			'required' => 'Kode Belanja Belum Terisi'
+		],
+		'nama_rekening_belanja_sub5' => [
+			'required' => 'Nama Rekening Belanja Belum Terisi'
+		],
+		'jumlah_anggaran_belanja_sub5' => [
+			'required' => 'Jumlah Anggaran Belum Terisi'
+		],
+		'id_kode_belanja_sub4' => [
+			'required' => 'Referensi Rekening Belum Terisi'
+		]
+	];
 }

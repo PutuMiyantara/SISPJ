@@ -79,7 +79,7 @@
 
     <!-- Modal -->
     <div class="modal fade" tabindex="1" role="dialog" id="detailEditUser">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form method="POST" enctype="multipart/form-data" name="formUser" id="formDetailUser"
                     ng-submit="editData()">
@@ -185,10 +185,11 @@
                     <div class="modal-footer">
                         <input type="text" name="idUser" ng-model="iduser" ng-hide="true">
                         <!-- <input type="text" name="file_lama" ng-model="file_lama" ng-hide="false"> -->
-                        <button type="submit" class="btn btn-success col-sm-3 mb-6"><i class="fas fa-save">
-                                Update</i></button>
-                        <button type="button" class="btn btn-danger col-sm-3 mb-6"
-                            ng-click="closeModal('#detailEditUser')">Kembali</button>
+                        <button type="submit" class="btn btn-success col-sm-2 mb-3"><i class="fa fa-save">
+                            </i> {{ modalButton }}</button>
+                        <button type="button" class="btn btn-danger col-sm-2 mb-3"
+                            ng-click="closeModal('#detailEditUser')"><i class="fa fa-right-from-bracket"></i>
+                            Kembali</button>
                     </div>
                 </form>
             </div>

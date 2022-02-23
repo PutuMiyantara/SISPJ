@@ -72,7 +72,7 @@ sispj.controller("KodeUnit", function ($scope, $http, $window, $timeout) {
       function successCallback(data) {
         $scope.openModal("#kodeUnit");
         $scope.modalTitle = "Detail Kode Urusan";
-        $scope.submitButton = "Update";
+        $scope.modalButton = "Update";
         $scope.actionButton = "Kembali";
 
         $scope.id = data.data[0].id;

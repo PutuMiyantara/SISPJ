@@ -43,7 +43,7 @@
                     ng-click="tambahData()"><i class="fas fa-plus fa-sm text-white-50"></i>Tambah
                     Data</button>
                 <table datatable="ng" dt-options="vm.dtOptions" class="table table-bordered" width="100%"
-                    cellspacing="0" ng-init="getKodeBelanjaSub4()">
+                    cellspacing="0" ng-init="getKodeBelanjaSub5()">
                     <thead>
                         <tr>
                             <th style="width: 10px;">No</th>
@@ -86,9 +86,9 @@
                             <td style="text-align: center;">
                                 <button type="submit" class="btn btn-info"
                                     ng-click="getDetail(d.id, d.id_rekening_dasar, d.id_kode_belanja_sub1, d.id_kode_belanja_sub2, d.id_kode_belanja_sub3)"><i
-                                        class="fa fa-edit"> Detail</i></button>
+                                        class="fa fa-edit"></i></button>
                                 <button type="submit" class="btn btn-danger" ng-click="deleteData(d.id)"><i
-                                        class="fa fa-edit"> Delete</i></button>
+                                        class="fa fa-trash"></i></button>
                             </td>
                         </tr>
                     </tbody>
@@ -120,8 +120,8 @@
                             <div class="col"><label>Kode Rekening</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
-                                    <input type="text" class="form-control" name="kode_belanja_sub4"
-                                        ng-model="formModel.kode_belanja_sub4" ng-required="false" ng-readonly="false">
+                                    <input type="text" class="form-control" name="kode_belanja_sub5"
+                                        ng-model="formModel.kode_belanja_sub5" ng-required="false" ng-readonly="false">
                                 </div>
                             </div>
                         </div>
@@ -149,8 +149,8 @@
                             <div class="col"><label>Referensi Rekening Dasar</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row" ng-init="dataRekDasar(null)">
-                                    <input class="form-control" name="id_rekening_dasar"
-                                        ng-model="formModel.id_rekening_dasar" ng-required="false" ng-readonly="true">
+                                    <!-- <input class="form-control" name="id_rekening_dasar"
+                                        ng-model="formModel.id_rekening_dasar" ng-required="false" ng-readonly="true"> -->
                                     <select style="width: 100%;" id="rek_dasar" select2="" class="form-control"
                                         name="rek_dasar" ng-model="formModel.id_rekening_dasar"
                                         ng-options="rek_dasar.id as rek_dasar.kode_rekening_dasar for rek_dasar in getRekDasar"
@@ -174,9 +174,9 @@
                             <div class="col"><label>Referensi Rekening Sub 1</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row" ng-init="dataRekBelanjaSub1(null)">
-                                    <input class="form-control" name="id_kode_belanja_sub1"
+                                    <!-- <input class="form-control" name="id_kode_belanja_sub1"
                                         ng-model="formModel.id_kode_belanja_sub1" ng-required="false"
-                                        ng-readonly="true">
+                                        ng-readonly="true"> -->
                                     <select style="width: 100%;" id="rek_referensi_sub1" select2="" class="form-control"
                                         name="rek_referensi_sub1"
                                         ng-options="rek_referensi_sub1.id as rek_referensi_sub1.kode_belanja_sub1 for rek_referensi_sub1 in getRekRefSub1"
@@ -192,9 +192,9 @@
                             <div class="col"><label>Referensi Rekening Sub 2</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row" ng-init="dataRekBelanjaSub2(null)">
-                                    <input class="form-control" name="id_kode_belanja_sub2"
+                                    <!-- <input class="form-control" name="id_kode_belanja_sub2"
                                         ng-model="formModel.id_kode_belanja_sub2" ng-required="false"
-                                        ng-readonly="true">
+                                        ng-readonly="true"> -->
                                     <select style="width: 100%;" id="rek_referensi_sub2" select2="" class="form-control"
                                         name="rek_referensi_sub2" ng-model="formModel.id_kode_belanja_sub2"
                                         ng-options="rek_referensi_sub2.id as rek_referensi_sub2.kode_belanja_sub2 for rek_referensi_sub2 in getRekRefSub2"
@@ -209,13 +209,14 @@
                             <div class="col"><label>Referensi Rekening Sub 3</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row" ng-init="dataRekBelanjaSub3(null)">
-                                    <input class="form-control" name="id_kode_belanja_sub3"
+                                    <!-- <input class="form-control" name="id_kode_belanja_sub3"
                                         ng-model="formModel.id_kode_belanja_sub3" ng-required="false"
-                                        ng-readonly="true">
+                                        ng-readonly="true"> -->
                                     <select style="width: 100%;" id="rek_referensi_sub3" select2="" class="form-control"
                                         name="rek_referensi_sub3" ng-model="formModel.id_kode_belanja_sub3"
                                         ng-options="rek_referensi_sub3.id as rek_referensi_sub3.kode_belanja_sub3 for rek_referensi_sub3 in getRekRefSub3"
-                                        ng-required="true" ng-disabled="readOnly">
+                                        ng-required="true" ng-disabled="readOnly"
+                                        ng-change="rekSub3Change(formModel.id_kode_belanja_sub3)">
                                         <option value="">---select here---</option>
                                     </select>
                                 </div>
@@ -225,9 +226,9 @@
                             <div class="col"><label>Referensi Rekening Sub 4</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row" ng-init="dataRekBelanjaSub4(null)">
-                                    <input class="form-control" name="id_kode_belanja_sub4"
+                                    <!-- <input class="form-control" name="id_kode_belanja_sub4"
                                         ng-model="formModel.id_kode_belanja_sub4" ng-required="false"
-                                        ng-readonly="true">
+                                        ng-readonly="true"> -->
                                     <select style="width: 100%;" id="rek_referensi_sub4" select2="" class="form-control"
                                         name="rek_referensi_sub4" ng-model="formModel.id_kode_belanja_sub4"
                                         ng-options="rek_referensi_sub4.id as rek_referensi_sub4.kode_belanja_sub4 for rek_referensi_sub4 in getRekRefSub4"
@@ -249,11 +250,12 @@
                         </div> -->
                     </div>
                     <div class="modal-footer">
-                        <input type="text" name="id" ng-model="id" ng-hide="false" ng-readonly="true">
-                        <button type="submit" class="btn btn-success col-sm-3 mb-6"><i class="fas fa-save">
+                        <input type="text" name="id" ng-model="id" ng-hide="true" ng-readonly="true">
+                        <button type="submit" class="btn btn-success col-sm-2 mb-3"><i class="fa fa-save">
                             </i> {{ modalButton }}</button>
-                        <button type="button" class="btn btn-danger col-sm-3 mb-6"
-                            ng-click="closeModal('#kodeDinas')">Kembali</button>
+                        <button type="button" class="btn btn-danger col-sm-2 mb-3"
+                            ng-click="closeModal('#kodeBelanjaSub5')"><i class="fa fa-right-from-bracket"></i>
+                            Kembali</button>
                     </div>
                 </form>
             </div>

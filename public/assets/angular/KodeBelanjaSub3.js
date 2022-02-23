@@ -5,6 +5,7 @@ sispj.controller("KodeBelanjaSub3", function ($scope, $http, $window, $timeout) 
     $scope.formModel = {};
     $scope.formModel.id_rekening_dasar = null;
     $scope.formModel.id_kode_belanja_sub1 = null;
+    $scope.id = null;
   };
 
   $scope.getKodeBelanjaSub3 = function () {
@@ -19,7 +20,7 @@ sispj.controller("KodeBelanjaSub3", function ($scope, $http, $window, $timeout) 
 
   $scope.tambahData = function (){
     $scope.openModal("#kodeBelanjaSub3");
-    $scope.modalTitle = "Tambah Kode Rekening Dasar";
+    $scope.modalTitle = "Tambah Kode Rekening Belanja Sub 3";
     $scope.modalButton = "Simpan";
     $scope.formSubmit = "ng-submit='insertData()'";
     $scope.hideRekRefSub1 = true;
@@ -87,7 +88,7 @@ sispj.controller("KodeBelanjaSub3", function ($scope, $http, $window, $timeout) 
         console.log(data);
 
         $scope.openModal("#kodeBelanjaSub3");
-        $scope.modalTitle = "Detail Kode Belanja Sub 1";
+        $scope.modalTitle = "Detail Kode Belanja Sub 3";
         $scope.submitButton = "Update";
         $scope.actionButton = "Kembali";
 

@@ -56,6 +56,7 @@
                         <tr>
                             <th style="width: 10px;">No</th>
                             <th>Nama Rekening</th>
+                            <th>Tahun Anggaran</th>
                             <th>Kode Dinas</th>
                             <th>Kode Urusan</th>
                             <th>Kode Bidang</th>
@@ -70,6 +71,7 @@
                         <tr>
                             <th style="width: 10px;">No</th>
                             <th>Nama Rekening</th>
+                            <th>Tahun Anggaran</th>
                             <th>Kode Dinas</th>
                             <th>Kode Urusan</th>
                             <th>Kode Bidang</th>
@@ -84,6 +86,7 @@
                         <tr ng-repeat="d in datas">
                             <td>{{ $index +1 }}</td>
                             <td>{{ d.nama_rekening_dasar }}</td>
+                            <td>{{ d.tahun_anggaran }}</td>
                             <td>{{ d.kode_rek_dinas }}</td>
                             <td>{{ d.kode_rek_urusan }}</td>
                             <td>{{ d.kode_rek_bidang }}</td>
@@ -91,7 +94,7 @@
                             <td>{{ d.kode_rek_kegiatan }}</td>
                             <td>{{ d.kode_rek_unit }}</td>
                             <td>Rp. {{ d.jumlah_anggaran_rekening_dasar }}</td>
-                            <td style="text-align: center;">
+                            <td style="width: 100px;">
                                 <button type="submit" class="btn btn-info" ng-click="getDetail(d.id)"><i
                                         class="fa fa-edit"></i></button>
                                 <button type="submit" class="btn btn-danger" ng-click="deleteData(d.id)"><i
@@ -308,11 +311,12 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <input type="text" name="id" ng-model="id" ng-hide="false" ng-readonly="true">
-                        <button type="submit" class="btn btn-success col-sm-3 mb-6"><i class="fas fa-save">
+                        <input type="text" name="id" ng-model="id" ng-hide="true" ng-readonly="true">
+                        <button type="submit" class="btn btn-success col-sm-2 mb-3"><i class="fa fa-save">
                             </i> {{ modalButton }}</button>
-                        <button type="button" class="btn btn-danger col-sm-3 mb-6"
-                            ng-click="closeModal('#kodeDinas')">Kembali</button>
+                        <button type="button" class="btn btn-danger col-sm-2 mb-3"
+                            ng-click="closeModal('#rekeningDasar')"><i class="fa fa-right-from-bracket"></i>
+                            Kembali</button>
                     </div>
                 </form>
             </div>

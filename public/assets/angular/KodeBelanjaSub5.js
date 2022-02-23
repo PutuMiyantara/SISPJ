@@ -5,6 +5,7 @@ sispj.controller("KodeBelanjaSub5", function ($scope, $http, $window, $timeout) 
     $scope.formModel = {};
     $scope.formModel.id_rekening_dasar = null;
     $scope.formModel.id_kode_belanja_sub1 = null;
+    $scope.id = null;
   };
 
   $scope.getKodeBelanjaSub5 = function () {
@@ -19,12 +20,13 @@ sispj.controller("KodeBelanjaSub5", function ($scope, $http, $window, $timeout) 
 
   $scope.tambahData = function (){
     $scope.openModal("#kodeBelanjaSub5");
-    $scope.modalTitle = "Tambah Kode Rekening Dasar";
+    $scope.modalTitle = "Tambah Kode Rekening Belanja Sub 5";
     $scope.modalButton = "Simpan";
     $scope.formSubmit = "ng-submit='insertData()'";
     $scope.hideRekRefSub1 = true;
     $scope.hideRekRefSub2 = true;
     $scope.hideRekRefSub3 = true;
+    $scope.hideRekRefSub4 = true;
     $scope.setDefault();
 
   }
@@ -46,7 +48,7 @@ sispj.controller("KodeBelanjaSub5", function ($scope, $http, $window, $timeout) 
           kode_belanja_sub5: $scope.formModel.kode_belanja_sub5,
           nama_rekening_belanja_sub5: $scope.formModel.nama_rekening_belanja_sub5,
           jumlah_anggaran_belanja_sub5: $scope.formModel.jumlah_anggaran_belanja_sub5,
-          id_kode_belanja_sub3: $scope.formModel.id_kode_belanja_sub3,
+          id_kode_belanja_sub4: $scope.formModel.id_kode_belanja_sub4,
         })
         .then(
           function successCallback(data) {
@@ -81,6 +83,7 @@ sispj.controller("KodeBelanjaSub5", function ($scope, $http, $window, $timeout) 
     $scope.dataRekBelanjaSub1(id_rek_dasar);
     $scope.dataRekBelanjaSub2(id_kode_belanja_sub1);
     $scope.dataRekBelanjaSub3(id_kode_belanja_sub2);
+    $scope.dataRekBelanjaSub4(id_kode_belanja_sub3);
     $scope.hideForAddSub = false;
     $scope.hideRekRef = false;
     $http.get("/rekbelanja/getDetailKodeBelanjaSub5/" + id).then(
@@ -89,7 +92,7 @@ sispj.controller("KodeBelanjaSub5", function ($scope, $http, $window, $timeout) 
         console.log(data);
 
         $scope.openModal("#kodeBelanjaSub5");
-        $scope.modalTitle = "Detail Kode Belanja Sub 1";
+        $scope.modalTitle = "Detail Kode Belanja Sub 5";
         $scope.submitButton = "Update";
         $scope.actionButton = "Kembali";
 
@@ -109,6 +112,7 @@ sispj.controller("KodeBelanjaSub5", function ($scope, $http, $window, $timeout) 
         $scope.formModel.id_kode_belanja_sub1 = data.data[0].id_kode_belanja_sub1;
         $scope.formModel.id_kode_belanja_sub2 = data.data[0].id_kode_belanja_sub2;
         $scope.formModel.id_kode_belanja_sub3 = data.data[0].id_kode_belanja_sub3;
+        $scope.formModel.id_kode_belanja_sub4 = data.data[0].id_kode_belanja_sub4;
         $scope.formModel.tahun_anggaran = data.data[0].tahun_anggaran;
 
         console.log("id rek sub1 get detail "+ $scope.formModel.id_kode_belanja_sub1);
@@ -127,7 +131,7 @@ sispj.controller("KodeBelanjaSub5", function ($scope, $http, $window, $timeout) 
         kode_belanja_sub5: $scope.formModel.kode_belanja_sub5,
         nama_rekening_belanja_sub5: $scope.formModel.nama_rekening_belanja_sub5,
         jumlah_anggaran_belanja_sub5: $scope.formModel.jumlah_anggaran_belanja_sub5,
-        id_kode_belanja_sub3: $scope.formModel.id_kode_belanja_sub3,
+        id_kode_belanja_sub4: $scope.formModel.id_kode_belanja_sub4,
       })
       .then(
         function successCallback(data) {
@@ -246,6 +250,21 @@ sispj.controller("KodeBelanjaSub5", function ($scope, $http, $window, $timeout) 
       $scope.hideRekRefSub3 = false;
       $http.get("/rekbelanja/searchRekBelanjaSub3/" + where).then(function (data) {
         $scope.getRekRefSub3 = data.data;
+        console.log(data.data);
+      });
+    }
+  };
+
+  $scope.rekSub3Change = function(where){
+    $scope.dataRekBelanjaSub4(where);
+  }
+
+  $scope.dataRekBelanjaSub4 = function (where) {
+    console.log('dataRekBelanjaSub4'+where);
+    if (where != null) {
+      $scope.hideRekRefSub4 = false;
+      $http.get("/rekbelanja/searchRekBelanjaSub4/" + where).then(function (data) {
+        $scope.getRekRefSub4 = data.data;
         console.log(data.data);
       });
     }

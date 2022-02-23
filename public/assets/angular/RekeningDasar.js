@@ -56,7 +56,7 @@ sispj.controller("RekeningDasar", function ($scope, $http, $window, $timeout) {
   $scope.tambahData = function (){
     $scope.setDefault();
     $scope.openModal("#rekeningDasar");
-    $scope.modalTitle = "Tambah Kode Rekening Urusan";
+    $scope.modalTitle = "Tambah Kode Rekening Dasar";
     $scope.modalButton = "Simpan";
     $scope.formSubmit = "ng-submit='insertData()'";
   }
@@ -120,8 +120,8 @@ sispj.controller("RekeningDasar", function ($scope, $http, $window, $timeout) {
     $http.get("/rekdasar/getDetailRekeningDasar/" + id).then(
       function successCallback(data) {
         $scope.openModal("#rekeningDasar");
-        $scope.modalTitle = "Detail Kode Urusan";
-        $scope.submitButton = "Update";
+        $scope.modalTitle = "Detail Kode Rekening Dasar";
+        $scope.modalButton = "Update";
         $scope.actionButton = "Kembali";
         console.log(data);
 
