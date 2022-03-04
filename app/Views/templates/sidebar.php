@@ -123,15 +123,15 @@ $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>
             <div class="sidebar-heading">
                 Transaksi
             </div>
-            <li class="nav-item <?php if ($uri->getSegment(1) == 'user') : echo 'active';
+            <li class="nav-item <?php if ($uri->getSegment(1) == 'orders') : echo 'active';
                                     else : echo '';
                                     endif;
                                     ?>">
-                <a class="nav-link" href="/user/">
+                <a class="nav-link" href="/orders/">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Orders</span></a>
             </li>
-            <li class="nav-item <?php if ($uri->getSegment(1) == 'user') : echo 'active';
+            <li class="nav-item <?php if ($uri->getSegment(1) == 'kuwitansi') : echo 'active';
                                     else : echo '';
                                     endif;
                                     ?>">

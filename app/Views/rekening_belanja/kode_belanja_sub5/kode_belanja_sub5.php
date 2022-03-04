@@ -83,7 +83,7 @@
                                 d.nama_rekening_dasar + " (" +
                                 d.tahun_anggaran + ")"
                             }}</td>
-                            <td style="text-align: center;">
+                            <td style="width: 100px;">
                                 <button type="submit" class="btn btn-info"
                                     ng-click="getDetail(d.id, d.id_rekening_dasar, d.id_kode_belanja_sub1, d.id_kode_belanja_sub2, d.id_kode_belanja_sub3)"><i
                                         class="fa fa-edit"></i></button>

@@ -481,4 +481,84 @@ class Validation
 			'required' => 'Referensi Rekening Belum Terisi'
 		]
 	];
+
+	public $orders = [
+		'no_pesanan	' => 'required',
+		'tgl_pesanan' => 'required',
+		'id_rekening_dasar' => 'required',
+		'id_kode_belanja_sub5' => 'required',
+		'id_rekanan' => 'required',
+		'jenis_barang' => 'required',
+		'jumlah_barang' => 'required',
+		'jenis_satuan_barang' => 'required',
+		'uraian_pesanan' => 'required'
+	];
+
+	public $orders_errors = [
+		'no_pesanan' => [
+			'required' => 'Nomor Pesanan Belum Terisi'
+		],
+		'tgl_pesanan' => [
+			'required' => 'Tanggal Pesanan Belum Terisi'
+		],
+		'id_rekening_dasar' => [
+			'required' => 'Rekening Dasar Belum Terisi'
+		],
+		'id_kode_belanja_sub5' => [
+			'required' => 'Rekening Belanja Belum Terisi'
+		],
+		'id_rekanan' => [
+			'required' => 'Data Rekanan Belum Terisi'
+		],
+		'jenis_barang' => [
+			'required' => 'Jenis Barang Belum Terisi'
+		],
+		'jumlah_barang' => [
+			'required' => 'Jumlah Barang Belum Terisi'
+		],
+		'jenis_satuan_barang' => [
+			'required' => 'Jenis Satuan Barang Belum Terisi'
+		],
+		'uraian_pesanan' => [
+			'required' => 'Uraian Pesanan Belum Terisi'
+		]
+	];
+
+	public $rekanan = [
+		'instansi_rekanan' => 'required',
+		'nama_rekanan' => 'required',
+		'alamat_rekanan' => 'required',
+		'no_telp_rekanan' => 'required',
+		'npwp' => 'required',
+		'bank_rekanan' => 'required',
+		'no_rekening_rekanan' => 'required',
+		'jabatan' => 'required'
+	];
+
+	public $rekanan_errors = [
+		'instansi_rekanan' => [
+			'required' => 'Instansi Rekanan Belum Terisi'
+		],
+		'nama_rekanan' => [
+			'required' => 'Nama Rekanan Belum Terisi'
+		],
+		'alamat_rekanan' => [
+			'required' => 'Alamat Rekanan Belum Terisi'
+		],
+		'no_telp_rekanan' => [
+			'required' => 'No Telepon Rekanan Belum Terisi'
+		],
+		'npwp' => [
+			'required' => 'NPWP Rekanan Belum Terisi'
+		],
+		'bank_rekanan' => [
+			'required' => 'Bank Rekanan Belum Terisi'
+		],
+		'no_rekening_rekanan' => [
+			'required' => 'No Rekening Rekanan Belum Terisi'
+		],
+		'jabatan' => [
+			'required' => 'Jabatan Barang Belum Terisi'
+		]
+	];
 }
