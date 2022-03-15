@@ -135,7 +135,7 @@ $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>
                                     else : echo '';
                                     endif;
                                     ?>">
-                <a class="nav-link" href="/user/">
+                <a class="nav-link" href="/kuwitansi/">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Kuwitansi</span></a>
             </li>

@@ -47,6 +47,7 @@
                         <tr>
                             <th style="width: 10px;">No</th>
                             <th>No Pesanana</th>
+                            <th>Tanggal Pesanan</th>
                             <th>Rekening Dasar</th>
                             <th>Rekening Belanja</th>
                             <th>Rekanan</th>
@@ -62,6 +63,7 @@
                         <tr>
                             <th>No</th>
                             <th>No Pesanana</th>
+                            <th>Tanggal Pesanan</th>
                             <th>Rekening Dasar</th>
                             <th>Rekening Belanja</th>
                             <th>Rekanan</th>
@@ -77,6 +79,7 @@
                         <tr ng-repeat="d in datas">
                             <td>{{ $index +1 }}</td>
                             <td>{{ d.no_pesanan }}</td>
+                            <td>{{ d.tgl_pesanan }}</td>
                             <td>{{ 
                                 d.kode_rek_dinas + "." +
                                 d.kode_rek_urusan + "." +

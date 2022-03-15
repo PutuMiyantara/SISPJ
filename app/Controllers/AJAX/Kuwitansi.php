@@ -4,18 +4,19 @@ namespace App\Controllers\AJAX;
 
 use App\Controllers\BaseController;
 use App\Models\ModelKodeBelanjaSub5;
+use App\Models\ModelKuwitansi;
 use App\Models\ModelOrders;
 use App\Models\ModelRekanan;
 
-class Orders extends BaseController{
+class Kuwitansi extends BaseController{
     public function __construct()
     {
-        $this->mOrders = new ModelOrders();
+        $this->mKuwitansi = new ModelKuwitansi();
     }
 
     public function index()
     {
-        echo json_encode($this->mOrders->getOrders(null));
+        echo json_encode($this->mKuwitansi->getKuwitansi(null));
     }
 
     public function insertData(){
@@ -23,21 +24,23 @@ class Orders extends BaseController{
         $modelRekanan = new ModelRekanan();
         $errortext[] ='';
         $message = '';
-        $dataOrders = array(
-            'no_pesanan	' => $dataJSON['no_pesanan'],
-            'tgl_pesanan' => $dataJSON['tgl_pesanan'],
+        
+        $dataKuwitansi = array(
+            'no_kuwitansi' => $dataJSON['no_kuwitansi'],
+            'tgl_kuwitansi' => $dataJSON['tgl_kuwitansi'],
             'id_rekening_dasar' => $dataJSON['id_rekening_dasar'],
             'id_kode_belanja_sub5' => $dataJSON['id_kode_belanja_sub5'],
+            'nominal' => $dataJSON['nominal'],
+            'uraian_belanja' => $dataJSON['uraian_belanja'],
+            'dasar_spj_bukti' => $dataJSON['dasar_spj_bukti'],
             'id_rekanan' => $dataJSON['id_rekanan'],
-            'jenis_barang' => $dataJSON['jenis_barang'],
-            'jumlah_barang' => $dataJSON['jumlah_barang'],
-            'jenis_satuan_barang' => $dataJSON['jenis_satuan_barang'],
-            'uraian_pesanan' => $dataJSON['uraian_pesanan']
+            'keterangan_spj' => $dataJSON['keterangan_spj'],
+            'status_spj' => $dataJSON['status_spj'],
+            'keterangan' => $dataJSON['keterangan']
         );
 
-        var_dump($dataOrders);
+        var_dump($dataJSON);
         die;
-
         // cek apahah rekanan sudah terdapat di dalam database atau belum
         if ($dataJSON['id_rekanan'] == 'undefined') {
             $dataRekanan = array(
@@ -56,7 +59,7 @@ class Orders extends BaseController{
                     $where = array('instansi_rekanan' => $dataJSON['instansi_rekanan']);
                     $dataRekanan = $modelRekanan->getRekanan($where);
                     foreach ($dataRekanan as $key) {
-                        $dataOrders['id_rekanan'] = $key->id;
+                        $dataKuwitansi['id_rekanan'] = $key->id;
                     }
                 } else{
                     $errortext[] = 'Gagal Memasukan Data Rekanan';
@@ -67,16 +70,17 @@ class Orders extends BaseController{
             
         }
         
-        if ($this->validator->run($dataOrders, 'orders')) {
-            if ($this->mOrders->insertData($dataOrders)) {
+        if ($this->validator->run($dataKuwitansi, 'kuwitansi')) {
+            if ($this->mKuwitansi->insertData($dataKuwitansi)) {
                 # code...
-                $message = 'Berhasil Menyimpan Data Orders';
+                $message = 'Berhasil Menyimpan Data Kuwitansi';
             } else{
-                $errortext[] = 'Gagal Memasukan Data Orders';
+                $errortext[] = 'Gagal Memasukan Data Kuwitansi';
             }
         } else{
-            var_dump('galgal validasi data');
-            die;
+            // var_dump('galgal validasi data');
+            $errortext[] = implode(', ', $this->validator->getErrors());
+            // die;
         }
         $validationtext = implode('', $errortext);
         $output = array('errortext' => $validationtext, 'message' => $message);
@@ -85,7 +89,7 @@ class Orders extends BaseController{
 
     public function getDetail($id){
         $where = array('tb_orders.id' => $id);
-        echo json_encode($this->mOrders->getOrders($where));
+        echo json_encode($this->mKuwitansi->getOrders($where));
     }
     
     public function updateData($id){
@@ -136,7 +140,7 @@ class Orders extends BaseController{
         
         if ($this->validator->run($dataOrders, 'orders')) {
             $id = array('id' => $id);
-            if ($this->mOrders->updateData($id, $dataOrders)) {
+            if ($this->mKuwitansi->updateData($id, $dataOrders)) {
                 # code...
                 $message = 'Berhasil Mengubah Data Orders';
             } else{
@@ -153,7 +157,7 @@ class Orders extends BaseController{
 
     public function deleteData(){
         $where = $this->request->getJSON(true);
-        $this->mOrders->deleteData($where);
+        $this->mKuwitansi->deleteData($where);
         return true;
     }
 
@@ -185,6 +189,32 @@ class Orders extends BaseController{
     }
 
     public function getInstansiRekanan(){
-        echo json_encode($this->mOrders->getInstansiRekanan());
+        echo json_encode($this->mKuwitansi->getInstansiRekanan());
+    }
+
+    public function searchOrders($id){
+        $modelOrders = new ModelOrders();
+        if ($id == 0) {
+            # code...
+            die;
+        }
+        $where = array('id_kode_belanja_sub5' => $id);
+        $orders = $modelOrders->getOrders($where);
+        $dataArray = $orders;
+        $data = [];
+        foreach ($dataArray as $row) {
+            array_push($data,
+                [
+                    'id' => $row['id'],
+                    'orders' => (
+                        $row['no_pesanan']. " - " .
+                        $row['uraian_pesanan']. ", " .
+                        $row['jumlah_barang']. " " .
+                        $row['jenis_satuan_barang']. "( " .
+                        $row['tgl_pesanan']. ")"
+                    )
+                ]);
+        }
+        echo json_encode($data);
     }
 }

@@ -561,4 +561,54 @@ class Validation
 			'required' => 'Jabatan Barang Belum Terisi'
 		]
 	];
+
+	public $kuwitansi = [
+		'no_kuwitansi' => 'required',
+		'tgl_kuwitansi' => 'required',
+		'id_rekening_dasar' => 'required',
+		'id_kode_belanja_sub5' => 'required',
+		'nominal' => 'required',
+		'uraian_belanja' => 'required',
+		'dasar_spj_bukti' => 'required',
+		'id_rekanan' => 'required',
+		'keterangan_spj' => 'required',
+		'status_spj' => 'required',
+		'keterangan' => 'required'
+	];
+	
+	public $kuwitansi_errors = [
+		'no_kuwitansi' => [
+			'required' => 'No Kuwitansi Belum Terisi'
+		],
+		'tgl_kuwitansi' => [
+			'required' => 'Tanggal Kuwitansi Belum Terisi'
+		],
+		'id_rekening_dasar' => [
+			'required' => 'Rekening Dasar Belum Terisi'
+		],
+		'id_kode_belanja_sub5' => [
+			'required' => 'Rekening Belanja Belum Terisi'
+		],
+		'nominal' => [
+			'required' => 'Nominal Belum Terisi'
+		],
+		'uraian_belanja' => [
+			'required' => 'Uraian Belanja Belum Terisi'
+		],
+		'dasar_spj_bukti' => [
+			'required' => 'Dasar SPJ Belum Terisi'
+		],
+		'id_rekanan' => [
+			'required' => 'Instansi Rekanan Belum Terisi'
+		],
+		'keterangan_spj' => [
+			'required' => 'Keterangan Belum Terisi'
+		],
+		'status_spj' => [
+			'required' => 'Status SPJ Belum Terisi'
+		],
+		'keterangan' => [
+			'required' => 'Keterangan Belum Terisi'
+		]
+	];
 }
