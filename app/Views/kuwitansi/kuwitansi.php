@@ -99,7 +99,8 @@
                             <td ng-if="d.status_spj == 1">Sudah Cair</td>
                             <td style="text-align: center; width: 100px;">
                                 <button type="submit" class="btn btn-info"
-                                    ng-click="getDetail(d.id, d.id_rekening_dasar)"><i class="fa fa-edit"></i></button>
+                                    ng-click="getDetail(d.id, d.id_rekening_dasar, d.id_kode_belanja_sub5)"><i
+                                        class="fa fa-edit"></i></button>
                                 <button type="submit" class="btn btn-danger" ng-click="deleteData(d.id)"><i
                                         class="fa fa-trash"></i></button>
                             </td>
@@ -111,7 +112,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" role="dialog" role="dialog" aria-hidden="true" id="Orders">
+    <div class="modal fade" role="dialog" role="dialog" aria-hidden="true" id="Kuwitansi">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form method="POST" enctype="multipart/form-data" name="formOrders" ng-submit="submitData()">
@@ -185,7 +186,7 @@
                             <div class="col"><label>Nominal Harga</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
-                                    <input type="date" class="form-control" name="nominal" ng-model="formModel.nominal"
+                                    <input class="form-control" number-input name="nominal" ng-model="formModel.nominal"
                                         ng-required="false">
                                 </div>
                             </div>
@@ -339,9 +340,9 @@
                                     <!-- <input class="form-control" name="id_rekening_dasar"
                                         ng-model="formModel.id_rekening_dasar" ng-required="false" ng-readonly="true"> -->
                                     <select style="width: 100%;" id="kuwitansi_orders" select2="" class="form-control"
-                                        name="orders" ng-model="formModel.id_orders"
+                                        name="orders" ng-model="formModel.id_order"
                                         ng-options="orders.id as orders.orders for orders in getOrders"
-                                        ng-disabled="readOnly" ng-change="ordersChange(formModel.id)">
+                                        ng-disabled="readOnly" ng-change="ordersChange(formModel.id_order)">
                                         <option value="">---select here---</option>
                                     </select>
                                 </div>
@@ -353,7 +354,7 @@
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
                                     <input type="text" class="form-control" name="jenis_barang"
-                                        ng-model="formModel.jenis_barang" ng-required="false" ng-readonly="false">
+                                        ng-model="formModel.jenis_barang" ng-required="false" ng-readonly="true">
                                 </div>
                             </div>
                         </div>
@@ -362,7 +363,7 @@
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
                                     <input type="number" class="form-control" name="jumlah_barang"
-                                        ng-model="formModel.jumlah_barang" ng-required="false" ng-readonly="false">
+                                        ng-model="formModel.jumlah_barang" ng-required="false" ng-readonly="true">
                                 </div>
                             </div>
                         </div>
@@ -371,8 +372,7 @@
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
                                     <input type="text" class="form-control" name="jenis_satuan_barang"
-                                        ng-model="formModel.jenis_satuan_barang" ng-required="false"
-                                        ng-readonly="false">
+                                        ng-model="formModel.jenis_satuan_barang" ng-required="true" ng-readonly="true">
                                 </div>
                             </div>
                         </div>
@@ -381,7 +381,7 @@
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
                                     <textarea class="form-control" name="uraian_pesanan"
-                                        ng-model="formModel.uraian_pesanan" ng-required="false" ng-readonly="false">
+                                        ng-model="formModel.uraian_pesanan" ng-required="false" ng-readonly="true">
                                     </textarea>
                                 </div>
                             </div>
@@ -394,7 +394,7 @@
                         <button type="submit" class="btn btn-success col-sm-2 mb-3"><i class="fa fa-save">
                             </i> {{ modalButton }}</button>
                         <button type="button" class="btn btn-danger col-sm-2 mb-3"
-                            ng-click="closeModal('#kodeBelanjaSub5')"><i class="fa fa-right-from-bracket"></i>
+                            ng-click="closeModal('#Kuwitansi')"><i class="fa fa-right-from-bracket"></i>
                             Kembali</button>
                     </div>
                 </form>

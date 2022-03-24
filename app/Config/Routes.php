@@ -243,11 +243,9 @@ $routes->get('/kuwitansi/', 'Kuwitansi::index', ['namespace'=> 'App\Controllers\
 $routes->get('/kuwitansi/getKuwitansi', 'Kuwitansi::index', ['namespace' => 'App\Controllers\AJAX']);
 $routes->get('/rekbelanja/searchOrders/(:num)', 'Kuwitansi::searchOrders/$1', ['namespace' => 'App\Controllers\AJAX']);
 $routes->post('/kuwitansi/insertKuwitansi', 'Kuwitansi::insertData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
-// $routes->get('/kuwitansi/getDetailKuwitansi/(:num)', 'Kuwitansi::getDetail/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
-// $routes->post('/kuwitansi/updateKuwitansi/(:num)', 'Kuwitansi::updateData/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
-// $routes->post('/kuwitansi/deleteKuwitansi', 'Kuwitansi::deleteData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
-// $routes->get('/kuwitansi/getInstansiRekanan', 'Kuwitansi::getInstansiRekanan', ['namespace' => 'App\Controllers\AJAX']);
-// $routes->get('/kuwitansi/getRekBelanja/(:num)', 'Kuwitansi::searchReBelanja/$1', ['namespace' => 'App\Controllers\AJAX']);
+$routes->get('/kuwitansi/getDetailKuwitansi/(:num)', 'Kuwitansi::getDetail/$1', ['namespace' => 'App\Controllers\AJAX']);
+$routes->post('/kuwitansi/updateKuwitansi/(:num)', 'Kuwitansi::updateData/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->post('/kuwitansi/deleteKuwitansi', 'Kuwitansi::deleteData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 
 /**
  * --------------------------------------------------------------------

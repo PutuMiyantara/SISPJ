@@ -572,8 +572,7 @@ class Validation
 		'dasar_spj_bukti' => 'required',
 		'id_rekanan' => 'required',
 		'keterangan_spj' => 'required',
-		'status_spj' => 'required',
-		'keterangan' => 'required'
+		'status_spj' => 'required'
 	];
 	
 	public $kuwitansi_errors = [
@@ -606,9 +605,6 @@ class Validation
 		],
 		'status_spj' => [
 			'required' => 'Status SPJ Belum Terisi'
-		],
-		'keterangan' => [
-			'required' => 'Keterangan Belum Terisi'
 		]
 	];
 }

@@ -21,7 +21,7 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
   };
 
   $scope.tambahData = function (){
-    $scope.openModal("#Orders");
+    $scope.openModal("#Kuwitansi");
     $scope.modalTitle = "Tambah Kode Rekening Belanja Sub 5";
     $scope.modalButton = "Simpan";
     $scope.formSubmit = "ng-submit='insertData()'";
@@ -31,6 +31,7 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
     $scope.hideRekRefSub4 = true;
     $scope.formOrders = false;
     $scope.setDefault();
+    $scope.formModel.status_spj = "0";
   }
 
   $scope.submitData = function(){
@@ -78,8 +79,8 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
             console.log(data.data);
             if (data.data.errortext == "") {
               $scope.kode_rek_kegiatan = $scope.nama = null;
-              $scope.getOrders();
-              $scope.closeModal("#Orders");
+              $scope.getKuwitansi();
+              $scope.closeModal("#Kuwitansi");
               $scope.success = true;
               $scope.message = data.data.message;
               $timeout(function () {
@@ -101,31 +102,35 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
         );
   };
 
-  $scope.getDetail = function (id, id_rek_dasar) {
+  $scope.getDetail = function (id, id_rek_dasar, id_kode_belanja_sub5) {
+    $scope.formOrders = false;    
     console.log('id detail = '+ id);
     $scope.setDefault();
     $scope.dataRekDasar(id_rek_dasar);
     $scope.dataRekBelanja(id_rek_dasar);
+    $scope.dataOrders(id_kode_belanja_sub5);
     $scope.hideForAddSub = false;
     $scope.hideRekRef = false;
-    $http.get("/orders/getDetailOrders/" + id).then(
+    $http.get("/kuwitansi/getDetailKuwitansi/" + id).then(
       function successCallback(data) {
         console.log(data.data);
-        $scope.openModal("#Orders");
+        $scope.openModal("#Kuwitansi");
         $scope.modalTitle = "Detail Kode Belanja Sub 5";
         $scope.submitButton = "Update";
         $scope.actionButton = "Kembali";
 
         $scope.id = data.data[0].id;
-        $scope.formModel.no_pesanan = data.data[0].no_pesanan;
-        $scope.formModel.tgl_pesanan = new Date(data.data[0].tgl_pesanan);
+        $scope.formModel.no_kuwitansi = parseInt(data.data[0].no_kuwitansi);
+        $scope.formModel.tgl_kuwitansi = new Date(data.data[0].tgl_kuwitansi);
         $scope.formModel.id_rekening_dasar = data.data[0].id_rekening_dasar;
         $scope.formModel.id_kode_belanja_sub5 = data.data[0].id_kode_belanja_sub5;
-        $scope.formModel.jenis_barang = data.data[0].jenis_barang;
-        $scope.formModel.jumlah_barang = parseInt(data.data[0].jumlah_barang);
-        $scope.formModel.jenis_satuan_barang = data.data[0].jenis_satuan_barang;
-        $scope.formModel.uraian_pesanan = data.data[0].uraian_pesanan;
+        $scope.formModel.nominal = data.data[0].nominal;
+        $scope.formModel.uraian_belanja = data.data[0].uraian_belanja;
+        $scope.formModel.dasar_spj_bukti = data.data[0].dasar_spj_bukti;
         $scope.formModel.id_rekanan = data.data[0].id_rekanan;
+        $scope.formModel.keterangan_spj = data.data[0].keterangan_spj;
+        $scope.formModel.status_spj = data.data[0].status_spj;
+        $scope.formModel.keterangan = data.data[0].keterangan;
         $scope.formModel.instansi_rekanan = data.data[0].instansi_rekanan;
         $scope.formModel.nama_rekanan = data.data[0].nama_rekanan;
         $scope.formModel.alamat_rekanan = data.data[0].alamat_rekanan;
@@ -134,6 +139,14 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
         $scope.formModel.bank_rekanan = data.data[0].bank_rekanan;
         $scope.formModel.no_rekening_rekanan = data.data[0].no_rekening_rekanan;
         $scope.formModel.jabatan = data.data[0].jabatan;
+        $scope.formModel.id_order = data.data[0].id_order;
+        if (data.data[0].id_order != null) {
+          $scope.formOrders = true;    
+          $scope.formModel.jenis_barang = data.data[0].jenis_barang;      
+          $scope.formModel.jumlah_barang = parseInt(data.data[0].jumlah_barang);      
+          $scope.formModel.jenis_satuan_barang = data.data[0].jenis_satuan_barang;      
+          $scope.formModel.uraian_pesanan = data.data[0].uraian_pesanan;      
+        }
       },
       function errorCallback(response) {
         console.log(response);
@@ -149,16 +162,18 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
     console.log('idRekanan: '+ $scope.formModel.id_rekanan);
     console.log('id edit: '+ $scope.id);
     $http
-      .post("/orders/updateOrders/" + $scope.id , {
-        no_pesanan: $scope.formModel.no_pesanan,
-        tgl_pesanan: $scope.formModel.tgl_pesanan,
+      .post("/kuwitansi/updateKuwitansi/" + $scope.id , {
+        no_kuwitansi: $scope.formModel.no_kuwitansi,
+        tgl_kuwitansi: $scope.formModel.tgl_kuwitansi,
         id_rekening_dasar: $scope.formModel.id_rekening_dasar,
         id_kode_belanja_sub5: $scope.formModel.id_kode_belanja_sub5,
+        nominal: $scope.formModel.nominal,
+        uraian_belanja: $scope.formModel.uraian_belanja,
+        dasar_spj_bukti: $scope.formModel.dasar_spj_bukti,
+        keterangan_spj: $scope.formModel.keterangan_spj,
+        status_spj: $scope.formModel.status_spj,
+        keterangan: $scope.formModel.keterangan,
         id_rekanan: $scope.formModel.id_rekanan,
-        jenis_barang: $scope.formModel.jenis_barang,
-        jumlah_barang: $scope.formModel.jumlah_barang,
-        jenis_satuan_barang: $scope.formModel.jenis_satuan_barang,
-        uraian_pesanan: $scope.formModel.uraian_pesanan,
         instansi_rekanan: $scope.formModel.instansi_rekanan,
         nama_rekanan: $scope.formModel.nama_rekanan,
         alamat_rekanan: $scope.formModel.alamat_rekanan,
@@ -167,13 +182,14 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
         bank_rekanan: $scope.formModel.bank_rekanan,
         no_rekening_rekanan: $scope.formModel.no_rekening_rekanan,
         jabatan: $scope.formModel.jabatan,
+        id_order: $scope.formModel.id_order,
       })
       .then(
         function successCallback(data) {
           console.log(data);
           if (data.data.errortext == "") {
             $scope.getDetail($scope.id);
-            $scope.getOrders();
+            $scope.getKuwitansi();
             $scope.success = true;
             $timeout(function () {
               $scope.success = false;
@@ -193,11 +209,11 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
   $scope.deleteData = function(id){
     var isconfirm =  confirm("Ingin Menghapus Data?");
     if (isconfirm) {
-      $http.post("/orders/deleteOrders",{
+      $http.post("/kuwitansi/deleteKuwitansi",{
         id: id,
       }).then(
         function successCallback(data){
-          $scope.getOrders();
+          $scope.getKuwitansi();
           $scope.message = "Data Berhasil Dihapus";
           $scope.success = true;
           $timeout(function(){
@@ -294,19 +310,19 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
   
   
   $scope.ordersChange = function(where) {
-    // if (where != null) {
-    //   $http.get("/rekdasar/getDetailRekeningDasar/" + where).then(
-    //     function successCallback(data) {
-    //       console.log(data);
-    //       $scope.formModel.tahun_anggaran = data.data[0].tahun_anggaran;
-    //     },
-    //     function errorCallback(response) {
-    //       console.log(response);
-    //       alert("error");
-    //     }
-    //   );
-    // }
-    // $scope.dataRekBelanja(where);    
+    console.log(where);
+    console.log('this orderschange')
+    if (where != null) {
+      $scope.hideRekRefSub1 = false;
+      console.log("data rek belanja "+ where);
+      $http.get("/orders/getDetailOrders/" + where).then(function (data) {
+        console.log(data);
+        $scope.formModel.jenis_barang = data.data[0].jenis_barang;      
+        $scope.formModel.jumlah_barang = parseInt(data.data[0].jumlah_barang);      
+        $scope.formModel.jenis_satuan_barang = data.data[0].jenis_satuan_barang;      
+        $scope.formModel.uraian_pesanan = data.data[0].uraian_pesanan;     
+      });
+    }   
   };
 
   // searchbox REKANAN
