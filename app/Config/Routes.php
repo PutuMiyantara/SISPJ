@@ -246,6 +246,7 @@ $routes->post('/kuwitansi/insertKuwitansi', 'Kuwitansi::insertData', ['namespace
 $routes->get('/kuwitansi/getDetailKuwitansi/(:num)', 'Kuwitansi::getDetail/$1', ['namespace' => 'App\Controllers\AJAX']);
 $routes->post('/kuwitansi/updateKuwitansi/(:num)', 'Kuwitansi::updateData/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 $routes->post('/kuwitansi/deleteKuwitansi', 'Kuwitansi::deleteData', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
+$routes->get('/kuwitansi/cetakKuwitansi/(:num)', 'Kuwitansi::cetakKuwitansi/$1', ['namespace' => 'App\Controllers\AJAX', 'role' => 3, 'ajax' => true]);
 
 /**
  * --------------------------------------------------------------------

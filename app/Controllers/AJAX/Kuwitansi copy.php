@@ -166,22 +166,60 @@ class Kuwitansi extends BaseController{
     }
 
     public function cetakKuwitansi($where){
-        // $where = array('tb_kuwitansi.id' => $where);
-        // $data = $this->mKuwitansi->getKuwitansi($where);
-        echo view('/kuwitansi/printKuwitansi');
+        $where = array('tb_kuwitansi.id' => $where);
+        $data = $this->mKuwitansi->getKuwitansi($where);
 
-        // $mpdf = new Mpdf([
-        //     'default_font_size' => 8,
-        //     // 'default_font' => 'Times New Roman'
-        // ]);
-        // $mpdf->useOddEven = 1;
+        $mpdf = new Mpdf([
+            'default_font_size' => 8,
+            // 'default_font' => 'Times New Roman'
+        ]);
+        $mpdf->WriteHTML('
+        <!DOCTYPE html>
+        <html lang="en">
 
-        // $html = ;
-        // $mpdf->WriteHTML($html);
-        // $mpdf->shrink_tables_to_fit = 1;
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+        </head>
 
-        // $this->response->setHeader('Content-Type', 'application/pdf');
-        // $mpdf->Output('arjun.pdf','I');
+        <body>
+            <div>
+                <table style="margin:auto">
+                    <tr>
+                        <td style="width: 4cm">Tahun Anggaran</td>
+                        <td>: 2022</td>
+                        <td style="width: 2cm"></td>
+                        <td>Rekening Bank</td>
+                        <td>: 1234567890</td>
+                    </tr>
+                    <tr>
+                        <td>Kode Rekening</td>
+                        <td>: 2 . 17 . 3 .30 . 03 . 2 . 02 . 5 . 1 . 02 . 01 . 01 . 0027</td>
+                        <td></td>
+                        <td>NPWP</td>
+                        <td>: 1234567890</td>
+                    </tr>
+                    <tr>
+                        <td>Nomor</td>
+                        <td>: 111</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <hr style="border-style: solid">
+            <hr style="margin-top:-7px;">
+            <h2></h2>
+        </body>
+        </html>'
+        );
+        $mpdf->shrink_tables_to_fit = 1;
+
+        $this->response->setHeader('Content-Type', 'application/pdf');
+        $mpdf->Output('arjun.pdf','I');
     }
 
     public function searchReBelanja($id){

@@ -72,7 +72,7 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
           bank_rekanan: $scope.formModel.bank_rekanan,
           no_rekening_rekanan: $scope.formModel.no_rekening_rekanan,
           jabatan: $scope.formModel.jabatan,
-          id_orders: $scope.formModel.id_orders,
+          id_order: $scope.formModel.id_order,
         })
         .then(
           function successCallback(data) {
@@ -230,8 +230,7 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
         }
       );
     }
-
-  }
+  };
 
   $scope.openModal = function (id) {
     var modal_popup = angular.element(id);

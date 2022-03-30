@@ -99,10 +99,15 @@
                             <td ng-if="d.status_spj == 1">Sudah Cair</td>
                             <td style="text-align: center; width: 100px;">
                                 <button type="submit" class="btn btn-info"
-                                    ng-click="getDetail(d.id, d.id_rekening_dasar, d.id_kode_belanja_sub5)"><i
-                                        class="fa fa-edit"></i></button>
-                                <button type="submit" class="btn btn-danger" ng-click="deleteData(d.id)"><i
-                                        class="fa fa-trash"></i></button>
+                                    ng-click="getDetail(d.id, d.id_rekening_dasar, d.id_kode_belanja_sub5)"
+                                    style="margin-top: 5px;"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-success" style="margin-top: 5px;"><a
+                                        href="<?= base_url('/kuwitansi/cetakKuwitansi/') ?>{{ d.id }}"
+                                        target="_blank"><i class="fa fa-print"></i></a></button>
+                                <button type="submit" class="btn btn-secondary" ng-click="downloadKuwitansi(d.id)"
+                                    style="margin-top: 5px;"><i class="fa fa-download"></i></button>
+                                <button type="submit" class="btn btn-danger" ng-click="deleteData(d.id)"
+                                    style="margin-top: 5px;"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
                     </tbody>
