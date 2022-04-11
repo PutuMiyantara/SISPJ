@@ -75,7 +75,7 @@
             </table>
         </div>
         <div>
-            <div style="margin-top: 10px">
+            <div style="position: static; margin-top: 30px">
                 <div style="width: 60%; float: left; background-color: red; height: 200px;">
                     <p style="margin-top: 48px;">Pejabat Pelaksana Teknis Kegiatan,</p>
                     <p style="margin-top: 80px; font-weight: bold; text-decoration: underline;">I Komang Sugianta, SE.,
@@ -90,8 +90,8 @@
                     <p style="margin-top:-15px">.</p>
                 </div>
             </div>
-            <div>
-                <div style="height: 260px; width: 60%; float: left; background-color: green;">
+            <div style="position: static;">
+                <div style="height: 200px; width: 60%; float: left; background-color: green;">
                     <p>Mengetahui,</p>
                     <p style="margin-top: -15px;">Kuasa pengguna Anggaran</p>
                     <p style="margin-top: -15px;">Bidang Perdagangan</p>
@@ -101,19 +101,8 @@
                         Julia Pramana, ST., MM.</p>
                     <p style="margin-top:-15px">NIP. : 19840724 201001 1 021</p>
                 </div>
-                <div style="height: 260px; width: 40%; float: right; background-color: red;">
+                <div style="height: 200px; width: 40%; float: right; background-color: red; margin-top:30px">
                     <p style="margin-top: -15px;">Diajukan ke Kepala SKPD.</p>
-                    <p style="margin-top: -15px;">Dinas Koperasi, UKM dan Perdagangan</p>
-                    <p style="margin-top: -15px;">Kab. Klungkung</p>
-                    <p style="margin-top: -15px;">pada tanggal :</p>
-                    <p style="margin-top: -15px;">Bendahara Pengeluaran</p>
-                    <p style="margin-top: 80px; font-weight: bold; text-decoration: underline;">Ni Wayan Artini, SE.</p>
-                    <p style="margin-top:-15px">NIP. : 19840724 201001 1 021</p>
-                </div>
-            </div>
-            <div style="height: 260px; width: 100%; background-color:purple; float: left;">
-                <div style="margin: auto;">
-                    <p>Diajukan ke Kepala SKPD.</p>
                     <p style="margin-top: -15px;">Dinas Koperasi, UKM dan Perdagangan</p>
                     <p style="margin-top: -15px;">Kab. Klungkung</p>
                     <p style="margin-top: -15px;">pada tanggal :</p>
