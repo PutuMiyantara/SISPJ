@@ -1,8 +1,9 @@
 <!-- Begin Page Content -->
 <div class="container-fluid" ng-controller="RekeningDasar">
-
     <!-- Page Heading -->
     <!-- Content Header (Page header) -->
+
+
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -106,10 +107,9 @@
             </div>
         </div>
     </div>
-
     <!-- Modal -->
-    <div class="modal fade" tabindex="1" role="dialog" id="rekeningDasar">
-        <div class="modal-dialog modal-lg" role="document">
+    <div class="modal fade" role="dialog" role="dialog" aria-hidden="true" id="rekeningDasar">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <form method="POST" enctype="multipart/form-data" name="formModel" ng-submit="submitData()">
                     <div class="modal-header">
@@ -131,95 +131,53 @@
                                 <label>Kode Rekening</label>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="kode_rek_dinas"
-                                        ng-model="formModel.kode_rek_dinas" ne-required="true" ng-readonly="false"
-                                        ng-keyup="searchRekDinas(formModel.kode_rek_dinas)"
-                                        ng-style="formModel.kode_rek_dinas_style">
-                                    <ul class="list-group" ng-hide="hide_rek_dinas"
-                                        style="height: 100px;overflow: auto;">
-                                        <li class="list-group-item list-group-item-action"
-                                            ng-repeat="kode_dinas in filterRekDinas"
-                                            ng-click="fillRekDinas(kode_dinas.id ,kode_dinas.kode_rek_dinas)">
-                                            <a href=""
-                                                style="color: black; text-align: right; text-decoration: none;">{{kode_dinas.kode_rek_dinas}}</a>
-                                        </li>
-                                    </ul>
+                                <div class="col-sm-2" ng-init="searchKodeDinas()">
+                                    <select style="width: 100%;" id="kode_rek_dinas" select2="" class="form-control"
+                                        name="kode_rek_dinas" ng-model="formModel.id_kode_dinas"
+                                        ng-options="kode_rek_dinas.id_kode_dinas as kode_rek_dinas.kode_dinas for kode_rek_dinas in getKodeDinas"
+                                        ng-required="true" ng-disabled="readOnly">
+                                        <option value="">---select here---</option>
+                                    </select>
                                 </div>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="kode_rek_urusan"
-                                        ng-model="formModel.kode_rek_urusan" ne-required="true" ng-readonly="false"
-                                        ng-keyup="searchRekUrusan(formModel.kode_rek_urusan)"
-                                        ng-style="kode_rek_urusan_style">
-                                    <ul class="list-group" ng-hide="hide_rek_urusan"
-                                        style="height: 100px;overflow: auto;">
-                                        <li class="list-group-item list-group-item-action"
-                                            ng-repeat="kode_urusan in filterRekUrusan"
-                                            ng-click="fillRekUrusan(kode_urusan.id ,kode_urusan.kode_rek_urusan)">
-                                            <a href=""
-                                                style="color: black; text-align: right; text-decoration: none;">{{kode_urusan.kode_rek_urusan}}</a>
-                                        </li>
-                                    </ul>
+                                <div class="col-sm-2" ng-init="searchKodeUrusan()">
+                                    <select style="width: 100%;" id="kode_rek_urusan" select2="" class="form-control"
+                                        name="kode_rek_urusan" ng-model="formModel.id_kode_urusan"
+                                        ng-options="kode_rek_urusan.id_kode_urusan as kode_rek_urusan.kode_urusan for kode_rek_urusan in getKodeUrusan"
+                                        ng-required="true" ng-disabled="readOnly">
+                                        <option value="">---select here---</option>
+                                    </select>
                                 </div>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="kode_rek_bidang"
-                                        ng-model="formModel.kode_rek_bidang" ne-required="true" ng-readonly="false"
-                                        ng-keyup="searchRekBidang(formModel.kode_rek_bidang)"
-                                        ng-style="kode_rek_bidang_style">
-                                    <ul class="list-group" ng-hide="hide_rek_bidang"
-                                        style="height: 100px;overflow: auto;">
-                                        <li class="list-group-item list-group-item-action"
-                                            ng-repeat="kode_bidang in filterRekbidang"
-                                            ng-click="fillRekBidang(kode_bidang.id ,kode_bidang.kode_rek_bidang)">
-                                            <a href=""
-                                                style="color: black; text-align: right; text-decoration: none;">{{kode_bidang.kode_rek_bidang}}</a>
-                                        </li>
-                                    </ul>
+                                <div class="col-sm-2" ng-init="searchKodeBidang()">
+                                    <select style="width: 100%;" id="kode_rek_bidang" select2="" class="form-control"
+                                        name="kode_rek_bidang" ng-model="formModel.id_kode_bidang"
+                                        ng-options="kode_rek_bidang.id_kode_bidang as kode_rek_bidang.kode_bidang for kode_rek_bidang in getKodeBidang"
+                                        ng-required="true" ng-disabled="readOnly">
+                                        <option value="">---select here---</option>
+                                    </select>
                                 </div>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="kode_rek_kegiatan"
-                                        ng-model="formModel.kode_rek_kegiatan" ne-required="true" ng-readonly="false"
-                                        ng-keyup="searchRekKegiatan(formModel.kode_rek_kegiatan)"
-                                        ng-style="kode_rek_kegiatan_style">
-                                    <ul class="list-group" ng-hide="hide_rek_kegiatan"
-                                        style="height: 100px;overflow: auto;">
-                                        <li class="list-group-item list-group-item-action"
-                                            ng-repeat="kode_kegiatan in filterRekKegiatan"
-                                            ng-click="fillRekKegiatan(kode_kegiatan.id ,kode_kegiatan.kode_rek_kegiatan)">
-                                            <a href=""
-                                                style="color: black; text-align: right; text-decoration: none;">{{kode_kegiatan.kode_rek_kegiatan}}</a>
-                                        </li>
-                                    </ul>
+                                <div class="col-sm-2" ng-init="searchKodeProgram()">
+                                    <select style="width: 100%;" id="kode_rek_program" select2="" class="form-control"
+                                        name="kode_rek_program" ng-model="formModel.id_kode_program"
+                                        ng-options="kode_rek_program.id_kode_program as kode_rek_program.kode_program for kode_rek_program in getKodeProgram"
+                                        ng-required="true" ng-disabled="readOnly">
+                                        <option value="">---select here---</option>
+                                    </select>
                                 </div>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="kode_rek_program"
-                                        ng-model="formModel.kode_rek_program" ne-required="true" ng-readonly="false"
-                                        ng-keyup="searchRekProgram(formModel.kode_rek_program)"
-                                        ng-style="kode_rek_program_style">
-                                    <ul class="list-group" ng-hide="hide_rek_program"
-                                        style="height: 100px;overflow: auto;">
-                                        <li class="list-group-item list-group-item-action"
-                                            ng-repeat="kode_program in filterRekProgram"
-                                            ng-click="fillRekProgram(kode_program.id ,kode_program.kode_rek_program)">
-                                            <a href=""
-                                                style="color: black; text-align: right; text-decoration: none;">{{kode_program.kode_rek_program}}</a>
-                                        </li>
-                                    </ul>
+                                <div class="col-sm-2" ng-init="searchKodeKegiatan()">
+                                    <select style="width: 100%;" id="kode_rek_kegiatan" select2="" class="form-control"
+                                        name="kode_rek_kegiatan" ng-model="formModel.id_kode_kegiatan"
+                                        ng-options="kode_rek_kegiatan.id_kode_kegiatan as kode_rek_kegiatan.kode_kegiatan for kode_rek_kegiatan in getKodeKegiatan"
+                                        ng-required="true" ng-disabled="readOnly">
+                                        <option value="">---select here---</option>
+                                    </select>
                                 </div>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="kode_rek_unit"
-                                        ng-model="formModel.kode_rek_unit" ne-required="true" ng-readonly="false"
-                                        ng-keyup="searchRekUnit(formModel.kode_rek_unit)"
-                                        ng-style="kode_rek_unit_style">
-                                    <ul class="list-group" ng-hide="hide_rek_unit"
-                                        style="height: 100px;overflow: auto;">
-                                        <li class="list-group-item list-group-item-action"
-                                            ng-repeat="kode_kegiatan in filterRekUnit"
-                                            ng-click="fillRekUnit(kode_kegiatan.id ,kode_kegiatan.kode_rek_unit)">
-                                            <a href=""
-                                                style="color: black; text-align: right; text-decoration: none;">{{kode_kegiatan.kode_rek_unit}}</a>
-                                        </li>
-                                    </ul>
+                                <div class="col-sm-2" ng-init="searchKodeUnit()">
+                                    <select style="width: 100%;" id="kode_rek_unit" select2="" class="form-control"
+                                        name="kode_rek_unit" ng-model="formModel.id_kode_unit"
+                                        ng-options="kode_rek_unit.id_kode_unit as kode_rek_unit.kode_unit for kode_rek_unit in getKodeUnit"
+                                        ng-required="true" ng-disabled="readOnly">
+                                        <option value="">---select here---</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -255,57 +213,40 @@
                         <div class="col-sm-12 mb-6 mb-sm-0">
                             <div class="col"><label>Pejabat KPA PPK</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row">
-                                    <input type="text" class="form-control" name="nama_kpa_ppk"
-                                        ng-model="formModel.nama_kpa_ppk" ne-required="true" ng-readonly="false"
-                                        ng-keyup="searchKpaPpk(nama_kpa_ppk)" ng-style="kpa_ppk_style">
-                                    <ul class="list-group col-sm-12 mb-6 mb-sm-0" ng-hide="hide_kpa_ppk"
-                                        style="height: 100px;overflow: auto;">
-                                        <li class="list-group-item list-group-item-action"
-                                            ng-repeat="kpa_ppk in filterKpaPpk"
-                                            ng-click="fillKpaPpk(kpa_ppk.id ,kpa_ppk.nama_kpa_ppk, kpa_ppk.nip_kpa_ppk)">
-                                            <a href=""
-                                                style="color: black; text-align: right; text-decoration: none;">{{kpa_ppk.nama_kpa_ppk}}</a>
-                                        </li>
-                                    </ul>
+                                <div class="form-group row" ng-init="searchKpaPpk()">
+                                    <select style="width: 100%;" id="kpa_ppk_rek_dasar" select2="" class="form-control"
+                                        name="kpa_ppk_rek_dasar" ng-model="formModel.id_kpa_ppk"
+                                        ng-options="kpa_ppk_rek_dasar.id as kpa_ppk_rek_dasar.kpa_ppk for kpa_ppk_rek_dasar in getKpaPpk"
+                                        ng-required="true" ng-disabled="readOnly">
+                                        <option value="">---select here---</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-12 mb-6 mb-sm-0">
                             <div class="col"><label>Pejabat PPTK</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row">
-                                    <input type="text" class="form-control" name="nama_pptk"
-                                        ng-model="formModel.nama_pptk" ne-required="true" ng-readonly="false"
-                                        ng-keyup="searchPptk(nama_pptk)" ng-style="pptk_style">
-                                    <ul class="list-group col-sm-12 mb-6 mb-sm-0" ng-hide="hide_pptk"
-                                        style="height: 100px;overflow: auto;">
-                                        <li class="list-group-item list-group-item-action"
-                                            ng-repeat="pptk in filterPptk"
-                                            ng-click="fillPptk(pptk.id ,pptk.nama_pptk, pptk.nip_pptk)">
-                                            <a href=""
-                                                style="color: black; text-align: right; text-decoration: none;">{{pptk.nama_pptk}}</a>
-                                        </li>
-                                    </ul>
+                                <div class="form-group row" ng-init="searchPptk()">
+                                    <select style="width: 100%;" id="pptk_rek_dasar" select2="" class="form-control"
+                                        name="pptk_rek_dasar" ng-model="formModel.id_pptk"
+                                        ng-options="pptk_rek_dasar.id as pptk_rek_dasar.pptk for pptk_rek_dasar in getPptk"
+                                        ng-required="true" ng-disabled="readOnly">
+                                        <option value="">---select here---</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-12 mb-6 mb-sm-0">
                             <div class="col"><label>Pejabat Bendahara Pengeluaran</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row">
-                                    <input type="text" class="form-control" name="nama_bendahara"
-                                        ng-model="formModel.nama_bendahara" ne-required="true" ng-readonly="false"
-                                        ng-keyup="searchBendahara(nama_bendahara)" ng-style="bendahara_style">
-                                    <ul class="list-group col-sm-12 mb-6 mb-sm-0" ng-hide="hide_bendahara"
-                                        style="height: 100px;overflow: auto;">
-                                        <li class="list-group-item list-group-item-action"
-                                            ng-repeat="bendahara in filterBendahara"
-                                            ng-click="fillBendahara(bendahara.id ,bendahara.nama_bendahara, bendahara.nip_bendahara)">
-                                            <a href=""
-                                                style="color: black; text-align: right; text-decoration: none;">{{bendahara.nama_bendahara}}</a>
-                                        </li>
-                                    </ul>
+                                <div class="form-group row" ng-init="searchBendahara()">
+                                    <select style="width: 100%;" id="bendahara_rek_dasar" select2=""
+                                        class="form-control" name="bendahara_rek_dasar"
+                                        ng-model="formModel.id_bendahara"
+                                        ng-options="bendahara_rek_dasar.id as bendahara_rek_dasar.bendahara for bendahara_rek_dasar in getBendahara"
+                                        ng-required="true" ng-disabled="readOnly">
+                                        <option value="">---select here---</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

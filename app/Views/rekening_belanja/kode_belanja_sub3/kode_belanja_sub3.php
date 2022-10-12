@@ -52,6 +52,7 @@
                             <th>Jumlah Anggaran</th>
                             <th>Referensi Rekening</th>
                             <th>Rekening Dasar</th>
+                            <th>Jenis Belanja</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -63,6 +64,7 @@
                             <th>Jumlah Anggaran</th>
                             <th>Referensi Rekening</th>
                             <th>Rekening Dasar</th>
+                            <th>Jenis Belanja</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
@@ -83,6 +85,7 @@
                                 d.nama_rekening_dasar + " (" +
                                 d.tahun_anggaran + ")"
                             }}</td>
+                            <td>{{ d.keterangan_kode_belanja_sub3 }}</td>
                             <td style="width: 100px;">
                                 <button type="submit" class="btn btn-info"
                                     ng-click="getDetail(d.id, d.id_rekening_dasar, d.id_kode_belanja_sub1)"><i
@@ -204,16 +207,35 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Kode Rekening</label></div>
+                        <div class="col-sm-12 mb-6 mb-sm-0">
+                            <div class="col"><label>Jenis Belanja</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
-                                    <textarea class="form-control" name="kode_rek_dasar"
-                                        ng-model="formModel.kode_rek_dasar" ng-readonly="true">
-                                    </textarea>
+                                    <select style="width: 100%;" id="keterangan_kode_belanja_sub3" select2=""
+                                        class="form-control" name="keterangan_kode_belanja_sub3"
+                                        ng-model="formModel.keterangan_kode_belanja_sub3" ng-required="true"
+                                        ng-change="changeJenisBelanja(formModel.keterangan_kode_belanja_sub3)">
+                                        <option value="">---select here---</option>
+                                        <option value="Barang">Barang</option>
+                                        <option value="Jasa">Jasa</option>
+                                    </select>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
+                        <div class="col-sm-12 mb-6 mb-sm-0" ng-hide="hideRefPengurusBarang">
+                            <div class="col"><label>Pengurus Barang</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row" ng-init="dataPengurusBarang()">
+                                    <select style="width: 100%;" id="pengurus_barang_kode_belanja_sub3" select2=""
+                                        class="form-control" name="pengurus_barang_kode_belanja_sub3"
+                                        ng-model="formModel.id_pengurus_barang"
+                                        ng-options="pengurus_barang.id as pengurus_barang.pengurus_barang for pengurus_barang in getPengurusBarang"
+                                        ng-disabled="readOnly">
+                                        <option value="">---select here---</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <input type="text" name="id" ng-model="id" ng-hide="true" ng-readonly="true">

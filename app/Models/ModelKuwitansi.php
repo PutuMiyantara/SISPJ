@@ -23,20 +23,24 @@ class ModelKuwitansi extends Model
         //     tb_orders.id_rekening_dasar, nama_rekening_dasar, tahun_anggaran, 
         //     kode_rek_dinas, kode_rek_urusan, kode_rek_bidang, kode_rek_program, kode_rek_kegiatan, kode_rek_unit');
         
-            // tidak isi order
-        $builder->select('tb_kuwitansi.id, no_kuwitansi, nominal, uraian_belanja, dasar_spj_bukti, status_spj, tgl_kuwitansi, keterangan, keterangan_spj,
+        // tidak isi order
+        $builder->select('tb_kuwitansi.id, no_kuwitansi, id_order, uraian_pesanan, nominal, uraian_belanja, dasar_spj_bukti, status_spj, tgl_kuwitansi, keterangan, 
             tb_kuwitansi.id_rekanan, instansi_rekanan, alamat_rekanan, no_telp_rekanan, nama_rekanan, bank_rekanan, no_rekening_rekanan, npwp, jabatan, 
             kode_belanja_sub5, nama_rekening_belanja_sub5, tb_kuwitansi.id_kode_belanja_sub5, 
             kode_belanja_sub4, nama_rekening_belanja_sub4, 
-            kode_belanja_sub3, nama_rekening_belanja_sub3, 
+            kode_belanja_sub3, nama_rekening_belanja_sub3, keterangan_kode_belanja_sub3, tb_kode_belanja_sub3.id_pengurus_barang,
             kode_belanja_sub2, nama_rekening_belanja_sub2, 
             kode_belanja_sub1, nama_rekening_belanja_sub1,
-            id_order, jenis_barang, jumlah_barang, jenis_satuan_barang, uraian_pesanan, 
             tb_kuwitansi.id_rekening_dasar, nama_rekening_dasar, tahun_anggaran, 
-            kode_rek_dinas, kode_rek_urusan, kode_rek_bidang, kode_rek_program, kode_rek_kegiatan, kode_rek_unit');
+            kode_rek_dinas, kode_rek_urusan, kode_rek_bidang, kode_rek_program, kode_rek_kegiatan, kode_rek_unit,
+            nama_kpa_ppk, nip_kpa_ppk, nama_pptk, nip_pptk, nama_bendahara, nip_bendahara, nama_pengurus_barang, nip_pengurus_barang');
         $builder->join('tb_orders', 'tb_orders.id = tb_kuwitansi.id_order', 'left');
         $builder->join('tb_rekening_dasar', 'tb_rekening_dasar.id = tb_kuwitansi.id_rekening_dasar', 'left');
         $builder->join('tb_rekanan', 'tb_rekanan.id = tb_kuwitansi.id_rekanan', 'left');
+        $builder->join('tb_kpa_ppk', 'tb_kpa_ppk.id = tb_rekening_dasar.id_kpa_ppk', 'left');
+        $builder->join('tb_pptk', 'tb_pptk.id = tb_rekening_dasar.id_pptk', 'left');
+        $builder->join('tb_bendahara', 'tb_bendahara.id = tb_rekening_dasar.id_bendahara', 'left');
+        $builder->join('tb_pengurus_barang', 'tb_pengurus_barang.id = tb_rekening_dasar.id_pengurus_barang', 'left');
         $builder->join('tb_kode_belanja_sub5', 'tb_kode_belanja_sub5.id = tb_kuwitansi.id_kode_belanja_sub5', 'left');
         $builder->join('tb_kode_belanja_sub4', 'tb_kode_belanja_sub4.id = tb_kode_belanja_sub5.id_kode_belanja_sub4', 'left');
         $builder->join('tb_kode_belanja_sub3', 'tb_kode_belanja_sub3.id = tb_kode_belanja_sub4.id_kode_belanja_sub3', 'left');
@@ -53,7 +57,6 @@ class ModelKuwitansi extends Model
             # code...
             $query = $builder->get();
         } else{
-            
             $query = $builder->getWhere($id);
         }
         return $query->getResult();

@@ -5,7 +5,8 @@
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- jquery -->
 
     <!-- angularjs -->
@@ -49,6 +50,7 @@
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/RekeningDasar.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/KpaPpk.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/Pptk.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('/assets/angular/PengurusBarang.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/Bendahara.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/KodeBelanjaSub1.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/KodeBelanjaSub2.js'); ?>"></script>
@@ -57,6 +59,9 @@
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/KodeBelanjaSub5.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/Orders.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/Kuwitansi.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('/assets/angular/HakAkses.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('/assets/angular/HakAksesSub.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('/assets/angular/HakAksesSubSub.js'); ?>"></script>
     <!-- js -->
 
     <meta charset="utf-8">

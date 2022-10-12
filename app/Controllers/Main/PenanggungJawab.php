@@ -5,10 +5,6 @@ use App\Controllers\BaseController;
 
 class PenanggungJawab extends BaseController
 {
-    public function index()
-    {
-        parent::MasterView('/penanggung_jawab/penanggung_jawab', []);
-    }
     public function kpa_ppk()
     {
         parent::MasterView('/penanggung_jawab/kpa_ppk', []);
@@ -20,6 +16,10 @@ class PenanggungJawab extends BaseController
     public function bendahara()
     {
         parent::MasterView('/penanggung_jawab/bendahara', []);
+    }
+    public function pengurus_barang()
+    {
+        parent::MasterView('/penanggung_jawab/pengurus_barang', []);
     }
 
 }

@@ -62,9 +62,8 @@ class ModelKodeBelanjaSub5 extends Model
     
     public function getSearchRekReferensi($where){
         $db = db_connect();
-        $builder = $db->table('tb_kode_belanja_sub5');
+        $builder = $db->table('tb_kode_belanja_sub4');
         $builder->select('tb_kode_belanja_sub4.id, kode_belanja_sub4, nama_rekening_belanja_sub4, tahun_anggaran');
-        $builder->join('tb_kode_belanja_sub4', 'tb_kode_belanja_sub4.id = tb_kode_belanja_sub5.id_kode_belanja_sub4');
         $builder->join('tb_kode_belanja_sub3', 'tb_kode_belanja_sub3.id = tb_kode_belanja_sub4.id_kode_belanja_sub3');
         $builder->join('tb_kode_belanja_sub2', 'tb_kode_belanja_sub2.id = tb_kode_belanja_sub3.id_kode_belanja_sub2');
         $builder->join('tb_kode_belanja_sub1', 'tb_kode_belanja_sub1.id = tb_kode_belanja_sub2.id_kode_belanja_sub1');

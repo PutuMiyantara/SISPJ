@@ -1,5 +1,5 @@
 <!-- Begin Page Content -->
-<div class="container-fluid" ng-controller="">
+<div class="container-fluid" ng-controller="PenanggungJawab">
 
     <!-- Page Heading -->
     <!-- Content Header (Page header) -->
@@ -44,22 +44,47 @@
                     <thead>
                         <tr>
                             <th style="width: 10px;">No</th>
-                            <th>NIP KPA_PPK</th>
-                            <th>Nama KPA_PPK</th>
+                            <th>Nomor Rekening</th>
+                            <th>Tahun Anggaran</th>
+                            <th>NIP KPA PPK</th>
+                            <th>Nama KPA PPK</th>
+                            <th>NIP PPTK</th>
+                            <th>Nama PPTK</th>
+                            <th>NIP Bendahara</th>
+                            <th>Nama Bendahara</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th style="width: 10px;">No</th>
-                            <th>NIP KPA_PPK</th>
-                            <th>Nama KPA_PPK</th>
+                            <th>Nomor Rekening</th>
+                            <th>Tahun Anggaran</th>
+                            <th>NIP KPA PPK</th>
+                            <th>Nama KPA PPK</th>
+                            <th>NIP PPTK</th>
+                            <th>Nama PPTK</th>
+                            <th>NIP Bendahara</th>
+                            <th>Nama Bendahara</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
                     <tbody>
                         <tr ng-repeat="d in datas">
                             <td>{{ $index +1 }}</td>
+                            <td>
+                                {{ d.kode_rek_dinas }} .
+                                {{ d.kode_rek_urusan }} .
+                                {{ d.kode_rek_bidang }} .
+                                {{ d.kode_rek_program }} .
+                                {{ d.kode_rek_kegiatan }} .
+                                {{ d.kode_rek_unit }}
+                            </td>
+                            <td>{{ d.tahun_anggaran }}</td>
+                            <td>{{ d.nip_kpa_ppk }}</td>
+                            <td>{{ d.nama_kpa_ppk }}</td>
+                            <td>{{ d.nip_pptk }}</td>
+                            <td>{{ d.nama_pptk }}</td>
                             <td>{{ d.nip_bendahara }}</td>
                             <td>{{ d.nama_bendahara }}</td>
                             <td style="text-align: center;">

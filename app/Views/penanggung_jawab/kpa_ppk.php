@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Data Kode Rekening Bidang</h1>
+                    <h1>Data Pegawai KPA PPK</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -21,10 +21,11 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="<?= base_url('/penanggungjawab') ?>" class="btn btn-outline-info">Penanggung Jawab Anggaran</a>
             <a href="<?= base_url('/penanggungjawab/kpa_ppk') ?>" class="btn btn-outline-info active">KPA PPK</a>
             <a href="<?= base_url('/penanggungjawab/pptk') ?>" class="btn btn-outline-info">PPTK</a>
             <a href="<?= base_url('/penanggungjawab/bendahara') ?>" class="btn btn-outline-info">Bendahara</a>
+            <a href="<?= base_url('/penanggungjawab/pengurus_barang') ?>"
+                class="btn btn-outline-info">Pengurusbarang</a>
         </div>
         <div class="card-body">
             <div>
@@ -64,9 +65,9 @@
                             <td>{{ d.nama_kpa_ppk }}</td>
                             <td style="text-align: center;">
                                 <button type="submit" class="btn btn-info" ng-click="getDetail(d.id)"><i
-                                        class="fa fa-edit"> Detail</i></button>
+                                        class="fa fa-edit"></i></button>
                                 <button type="submit" class="btn btn-danger" ng-click="deleteData(d.id)"><i
-                                        class="fa fa-edit"> Delete</i></button>
+                                        class="fa fa-trash"></i></button>
                             </td>
                         </tr>
                     </tbody>

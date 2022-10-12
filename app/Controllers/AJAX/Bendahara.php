@@ -11,9 +11,26 @@ class Bendahara extends BaseController{
         $this->mBendahara = new ModelBendahara();
     }
 
-    public function index()
+    public function index($search)
     {
-        echo json_encode($this->mBendahara->getBendahara(null));
+        $data = $this->mBendahara->getBendahara(null);
+        $result = [];
+        if ($search == 'search') {
+            # code...
+            foreach ($data as $key) {
+                # code...
+                array_push($result,
+                [
+                    'id' => $key['id'],
+                    'bendahara' => (
+                        $key['nip_bendahara']. " - " .
+                        $key['nama_bendahara'])
+                ]);
+            }
+        } else{
+            $result = $data;
+        }
+        echo json_encode($result);
     }
 
     public function insertData(){

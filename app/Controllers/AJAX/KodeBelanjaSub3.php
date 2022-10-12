@@ -20,8 +20,16 @@ class KodeBelanjaSub3 extends BaseController{
         $dataJSON = $this->request->getJSON(true);
         $errortext[] ='';
         $message = '';
+        $validatorsub3 = '';
 
-        if($this->validator->run($dataJSON, 'kodebelanjasub3')){
+        if ($dataJSON['keterangan_kode_belanja_sub3'] == 'Barang') {
+            # code...
+            $validatorsub3 = 'kodebelanjasub3barang';
+        } else{
+            $validatorsub3 = 'kodebelanjasub3jasa';
+        }
+
+        if($this->validator->run($dataJSON, $validatorsub3)){
             if ($this->mKodeBelanjaSub3->insertData($dataJSON)) {
                 $message = 'Berhasil Menyimpan Data';
             }
@@ -45,9 +53,16 @@ class KodeBelanjaSub3 extends BaseController{
         $where = array('id' => $id);
         $dataJSON = $this->request->getJSON(true);
         $errortext[] ='';
-
         $message = '';
-        if ($this->validator->run($dataJSON, 'kodebelanjasub3')) {
+        $validatorsub3 = '';
+
+        if ($dataJSON['keterangan_kode_belanja_sub3'] == 'Barang') {
+            # code...
+            $validatorsub3 = 'kodebelanjasub3barang';
+        } else{
+            $validatorsub3 = 'kodebelanjasub3jasa';
+        }
+        if ($this->validator->run($dataJSON, $validatorsub3)) {
             # code...
             if ($this->mKodeBelanjaSub3->updateData($where, $dataJSON)) {
                 # code...

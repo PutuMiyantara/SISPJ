@@ -11,9 +11,26 @@ class KodeUnit extends BaseController{
         $this->mKodeUnit = new ModelKodeUnit();
     }
 
-    public function index()
+    public function index($search)
     {
-        echo json_encode($this->mKodeUnit->getKodeUnit(null));
+        $data = $this->mKodeUnit->getKodeUnit(null);
+        $result = [];
+        if ($search == 'search') {
+            # code...
+            foreach ($data as $key) {
+                # code...
+                array_push($result,
+                [
+                    'id_kode_unit' => $key->id,
+                    'kode_unit' => (
+                        $key->kode_rek_unit . " - " .
+                        $key->nama_rek_unit)
+                ]);
+            }
+        } else{
+            $result = $data;
+        }
+        echo json_encode($result);
     }
 
     public function insertData(){

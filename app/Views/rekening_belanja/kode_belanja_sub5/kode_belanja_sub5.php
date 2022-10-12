@@ -209,9 +209,6 @@
                             <div class="col"><label>Referensi Rekening Sub 3</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row" ng-init="dataRekBelanjaSub3(null)">
-                                    <!-- <input class="form-control" name="id_kode_belanja_sub3"
-                                        ng-model="formModel.id_kode_belanja_sub3" ng-required="false"
-                                        ng-readonly="true"> -->
                                     <select style="width: 100%;" id="rek_referensi_sub3" select2="" class="form-control"
                                         name="rek_referensi_sub3" ng-model="formModel.id_kode_belanja_sub3"
                                         ng-options="rek_referensi_sub3.id as rek_referensi_sub3.kode_belanja_sub3 for rek_referensi_sub3 in getRekRefSub3"
@@ -226,9 +223,6 @@
                             <div class="col"><label>Referensi Rekening Sub 4</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row" ng-init="dataRekBelanjaSub4(null)">
-                                    <!-- <input class="form-control" name="id_kode_belanja_sub4"
-                                        ng-model="formModel.id_kode_belanja_sub4" ng-required="false"
-                                        ng-readonly="true"> -->
                                     <select style="width: 100%;" id="rek_referensi_sub4" select2="" class="form-control"
                                         name="rek_referensi_sub4" ng-model="formModel.id_kode_belanja_sub4"
                                         ng-options="rek_referensi_sub4.id as rek_referensi_sub4.kode_belanja_sub4 for rek_referensi_sub4 in getRekRefSub4"

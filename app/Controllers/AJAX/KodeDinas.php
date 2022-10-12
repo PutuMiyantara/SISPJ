@@ -11,9 +11,26 @@ class KodeDinas extends BaseController{
         $this->mKodeDinas = new ModelKodeDinas();
     }
 
-    public function index()
+    public function index($search)
     {
-        echo json_encode($this->mKodeDinas->getKodeDinas(null));
+        $data = $this->mKodeDinas->getKodeDinas(null);
+        $result = [];
+        if ($search == 'search') {
+            # code...
+            foreach ($data as $key) {
+                # code...
+                array_push($result,
+                [
+                    'id_kode_dinas' => $key->id,
+                    'kode_dinas' => (
+                        $key->kode_rek_dinas . " - " .
+                        $key->nama_rek_dinas)
+                ]);
+            }
+        } else{
+            $result = $data;
+        }
+        echo json_encode($result);
     }
 
     public function insertData(){

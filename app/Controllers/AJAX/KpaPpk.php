@@ -11,9 +11,29 @@ class KpaPpk extends BaseController{
         $this->mKpaPpk = new ModelKpaPpk();
     }
 
-    public function index()
+    public function index($search)
     {
-        echo json_encode($this->mKpaPpk->getKpaPpk(null));
+        $data = $this->mKpaPpk->getKpaPpk(null);
+        $result = [];
+        if ($search == 'search') {
+            # code...
+            foreach ($data as $key) {
+                # code...
+                array_push($result,
+                [
+                    'id' => $key['id'],
+                    'kpa_ppk' => (
+                        $key['nip_kpa_ppk']. " - " .
+                        $key['nama_kpa_ppk']. "( " .
+                        $key['bidang_kpa_ppk']. " )")
+                ]);
+            }
+        } elseif ($search == 'getAll') {
+            # code...
+            $result = $data;
+
+        }
+        echo json_encode($result);
     }
 
     public function insertData(){

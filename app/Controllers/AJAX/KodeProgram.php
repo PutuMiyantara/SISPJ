@@ -11,9 +11,26 @@ class KodeProgram extends BaseController{
         $this->mKodeUrusan = new ModelKodeProgram();
     }
 
-    public function index()
+    public function index($search)
     {
-        echo json_encode($this->mKodeUrusan->getKodeProgram(null));
+        $data = $this->mKodeUrusan->getKodeProgram(null);
+        $result = [];
+        if ($search == 'search') {
+            # code...
+            foreach ($data as $key) {
+                # code...
+                array_push($result,
+                [
+                    'id_kode_program' => $key->id,
+                    'kode_program' => (
+                        $key->kode_rek_program . " - " .
+                        $key->nama_rek_program)
+                ]);
+            }
+        } else{
+            $result = $data;
+        }
+        echo json_encode($result);
     }
 
     public function insertData(){

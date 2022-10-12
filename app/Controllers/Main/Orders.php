@@ -9,4 +9,9 @@ class Orders extends BaseController
     {
         parent::MasterView('orders/orders', []);
     }
+
+    public function testView()
+    {
+        parent::MasterView('orders/test', []);
+    }
 }

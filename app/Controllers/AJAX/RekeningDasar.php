@@ -53,17 +53,41 @@ class RekeningDasar extends BaseController{
 
     public function updateData($id){
         $where = array('id' => $id);
-        $dataJSON = $this->request->getJSON(true);
+        $wGetData = array('tb_rekening_dasar.id' => $id);
+        $c_unique = true;
         $errortext[] ='';
-
         $message = '';
-        if ($this->validator->run($dataJSON, 'koderekeningdasar')) {
+        $dataJSON = $this->request->getJSON(true);
+        $dataRekDasarDetail = $this->mRekeningDasar->getRekeningDasar($wGetData);
+        $dataRekDasar = $this->mRekeningDasar->getRekeningDasar(null);
+
+        if ($this->validator->run($dataJSON, 'koderekeningdasaredit')) {
             # code...
-            if ($this->mRekeningDasar->updateData($where, $dataJSON)) {
+            foreach ($dataRekDasarDetail as $key) {
                 # code...
-                $message = "Berhasil Menyimpan Data";
+                if ($key->id == $id && $key->tahun_anggaran ==  $dataJSON['tahun_anggaran']) {
+                    # code...
+                    $c_unique = true;
+                } else{
+                    foreach ($dataRekDasar as $key) {
+                        # code...
+                        if ($key->tahun_anggaran == $dataJSON['tahun_anggaran']) {
+                            # code...
+                            $c_unique = false;
+                        }
+                    }
+                }
+            }
+            if ($c_unique == true) {
+                # code...
+                if ($this->mRekeningDasar->updateData($where, $dataJSON)) {
+                    # code...
+                    $message = "Berhasil Menyimpan Data";
+                } else{
+                    $errortext[] ='Gagal Menyimpan Data';
+                }
             } else{
-                $errortext[] ='Gagal Menyimpan Data';
+                $errortext[] = implode(', ', ["Tahun Anggaran Sudah Terdapat Didalam Database"]);
             }
         } else{
             $errortext[] = implode(', ', $this->validator->getErrors());
@@ -73,6 +97,31 @@ class RekeningDasar extends BaseController{
         $output = array('errortext' => $validationtext, 'message' => $message);
         echo json_encode($output);
     }
+
+    // public function updateData($id){
+    //     $where = array('id' => $id);
+    //     $dataJSON = $this->request->getJSON(true);
+    //     $errortext[] ='';
+    //     $c_unique = true;
+    //     $message = '';
+    //     if ($this->validator->run($dataJSON, 'koderekeningdasaredit')) {
+    //         # code...
+
+            
+    //         if ($this->mRekeningDasar->updateData($where, $dataJSON)) {
+    //             # code...
+    //             $message = "Berhasil Menyimpan Data";
+    //         } else{
+    //             $errortext[] ='Gagal Menyimpan Data';
+    //         }
+    //     } else{
+    //         $errortext[] = implode(', ', $this->validator->getErrors());
+    //     }
+
+    //     $validationtext = implode('', $errortext);
+    //     $output = array('errortext' => $validationtext, 'message' => $message);
+    //     echo json_encode($output);
+    // }
 
     public function deleteData(){
         $where = $this->request->getJSON(true);

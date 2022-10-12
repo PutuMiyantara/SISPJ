@@ -11,9 +11,26 @@ class KodeBidang extends BaseController{
         $this->mKodeBidang = new ModelKodeBidang();
     }
 
-    public function index()
+    public function index($search)
     {
-        echo json_encode($this->mKodeBidang->getKodeBidang(null));
+        $data = $this->mKodeBidang->getKodeBidang(null);
+        $result = [];
+        if ($search == 'search') {
+            # code...
+            foreach ($data as $key) {
+                # code...
+                array_push($result,
+                [
+                    'id_kode_bidang' => $key->id,
+                    'kode_bidang' => (
+                        $key->kode_rek_bidang . " - " .
+                        $key->nama_rek_bidang)
+                ]);
+            }
+        } else{
+            $result = $data;
+        }
+        echo json_encode($result);
     }
 
     public function insertData(){

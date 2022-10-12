@@ -5,65 +5,65 @@ sispj.controller("KodeBidang", function ($scope, $http, $window, $timeout) {
   };
 
   $scope.getKodeBidang = function () {
-    $http.get("/rekdasar/getKodeBidang").then(function (data) {
+    $http.get("/rekdasar/getKodeBidang/all").then(function (data) {
       $scope.datas = data.data;
       console.log(data)
-    },function errorCallback(response) {
+    }, function errorCallback(response) {
       console.log(response);
       alert("error");
     });
   };
 
-  $scope.tambahData = function (){
+  $scope.tambahData = function () {
     $scope.openModal("#kodeBidang");
     $scope.modalTitle = "Tambah Kode Rekening Bidang";
     $scope.modalButton = "Simpan";
     $scope.formSubmit = "ng-submit='insertData()'";
-    $scope.id = $scope.kode_rek_bidang = $scope.nama_rek_bidang =  null;
+    $scope.id = $scope.kode_rek_bidang = $scope.nama_rek_bidang = null;
   }
 
-  $scope.submitData = function(){
+  $scope.submitData = function () {
     if ($scope.id == null) {
       $scope.insertData();
     }
-    else{
+    else {
       $scope.editData()
     }
   }
 
   $scope.insertData = function () {
     $scope.setDefault();
-      $http
-        .post("/rekdasar/insertKodeBidang", {
-          kode_rek_bidang: $scope.kode_rek_bidang,
-          nama_rek_bidang: $scope.nama_rek_bidang,
-        })
-        .then(
-          function successCallback(data) {
-            console.log(data.data);
-            if (data.data.errortext == "") {
-              $scope.kode_rek_bidang = $scope.uraian = null;
-              $scope.getKodeBidang();
-              $scope.closeModal("#kodeBidang");
-              $scope.success = true;
-              $scope.message = data.data.message;
-              $timeout(function () {
-                $scope.success = false;
-              }, 5000);
-            } else {
-              $scope.message = data.data.errortext;
-              $scope.error = true;
-              $timeout(function () {
-                $scope.error = false;
-              }, 5000);
-            }
-          },
-          function errorCallback(response) {
+    $http
+      .post("/rekdasar/insertKodeBidang", {
+        kode_rek_bidang: $scope.kode_rek_bidang,
+        nama_rek_bidang: $scope.nama_rek_bidang,
+      })
+      .then(
+        function successCallback(data) {
+          console.log(data.data);
+          if (data.data.errortext == "") {
+            $scope.kode_rek_bidang = $scope.uraian = null;
+            $scope.getKodeBidang();
+            $scope.closeModal("#kodeBidang");
+            $scope.success = true;
+            $scope.message = data.data.message;
+            $timeout(function () {
+              $scope.success = false;
+            }, 5000);
+          } else {
+            $scope.message = data.data.errortext;
             $scope.error = true;
-            $scope.message = "Gagal Menyimpan data";
-            console.log("Gagal Menyimpan Data", response);
+            $timeout(function () {
+              $scope.error = false;
+            }, 5000);
           }
-        );
+        },
+        function errorCallback(response) {
+          $scope.error = true;
+          $scope.message = "Gagal Menyimpan data";
+          console.log("Gagal Menyimpan Data", response);
+        }
+      );
   };
 
   $scope.getDetail = function (id) {
@@ -89,9 +89,9 @@ sispj.controller("KodeBidang", function ($scope, $http, $window, $timeout) {
   $scope.editData = function () {
     console.log('ini benar edit');
     $http
-      .post("/rekdasar/updateKodeBidang/" + $scope.id , {
-        kode_rek_bidang : $scope.kode_rek_bidang,
-        nama_rek_bidang : $scope.nama_rek_bidang
+      .post("/rekdasar/updateKodeBidang/" + $scope.id, {
+        kode_rek_bidang: $scope.kode_rek_bidang,
+        nama_rek_bidang: $scope.nama_rek_bidang
       })
       .then(
         function successCallback(data) {
@@ -114,17 +114,17 @@ sispj.controller("KodeBidang", function ($scope, $http, $window, $timeout) {
       );
   };
 
-  $scope.deleteData = function(id){
-    var isconfirm =  confirm("Ingin Menghapus Data?");
+  $scope.deleteData = function (id) {
+    var isconfirm = confirm("Ingin Menghapus Data?");
     if (isconfirm) {
-      $http.post("/rekdasar/deleteKodeBidang",{
+      $http.post("/rekdasar/deleteKodeBidang", {
         id: id,
       }).then(
-        function successCallback(data){
+        function successCallback(data) {
           $scope.getKodeBidang();
           $scope.message = "Data Berhasil Dihapus";
           $scope.success = true;
-          $timeout(function(){
+          $timeout(function () {
             $scope.success = false;
           }, 5000);
         }

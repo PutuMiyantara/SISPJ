@@ -41,15 +41,14 @@ class Rekanan extends BaseController{
         echo json_encode($this->mRekanan->getKpaPpk($where));
     }
     
-    public function updateData($id){
+    public function updateData($id, $data){
         $where = array('id' => $id);
-        $dataJSON = $this->request->getJSON(true);
         $errortext[] ='';
-
         $message = '';
-        if ($this->validator->run($dataJSON, 'kpappk_edit')) {
+        
+        if ($this->validator->run($data, 'rekanan')) {
             # code...
-            if ($this->mRekanan->updateData($where, $dataJSON)) {
+            if ($this->mRekanan->updateData($where, $data)) {
                 # code...
                 $message = "Berhasil Menyimpan Data";
             } else{

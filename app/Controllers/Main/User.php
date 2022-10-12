@@ -7,7 +7,6 @@ use App\Models\ModelUser;
 
 class User extends BaseController
 {
-
     public function index()
     {
         parent::masterView('user/user', []);

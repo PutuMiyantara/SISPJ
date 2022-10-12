@@ -26,11 +26,19 @@ $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>
             </a>
             <hr class="sidebar-divider">
 
-            <!-- Nav Item - Dashboard -->
-            <?php if ($session->has('email') && $session->get('role') == 3) :  ?>
+            <!-- foreach mein menu -->
+            <?php foreach ($data as $main) : 
+                # code...
+                ?>
             <div class="sidebar-heading">
-                Dashboard
+                <?= $main['name_main_menu'] ?>
             </div>
+            <?php
+                foreach ($main['sub_menu'] as $sub) :
+                # code...
+                    if (count($sub['subsub_menu']) == 0) :
+                        # code...
+                        ?>
             <li class="nav-item <?php if ($uri->getPath() == '/home/admin') : echo 'active';
                                     else : echo '';
                                     endif;
@@ -39,110 +47,41 @@ $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
-            <?php endif; ?>
-            <!-- Nav Item - Dashboard -->
-            <hr class="sidebar-divider">
-            <!-- Nav Item - Master Data -->
-            <div class="sidebar-heading">
-                Master Data
-            </div>
-            <?php if ($session->has('email') && $session->get('role') == 3) :  ?>
-            <li class="nav-item <?php if ($uri->getSegment(1) == 'master') : echo 'active';
-                                        else : echo '';
-                                        endif;
-                                        ?>">
-                <a class=" nav-link collapsed" href="#" data-toggle="collapse" data-target="#mutasi"
-                    aria-expanded="true" aria-controls="mutasi">
+            <?php
+                    else:
+                        ?>
+            <li
+                class="nav-item <?php if ($uri->getSegment(1) == preg_replace("/[^a-zA-Z]/", "", $sub['sub_url'])): echo 'active'; else: ''; endif?>">
+                <a class=" nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#rekdasarmenu<?= $sub['id_sub_menu']?>" aria-expanded="true"
+                    aria-controls="rekdasarmenu">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Master Data</span>
+                    <span><?= $sub['name_sub_menu'] ?></span>
                 </a>
-                <div id="mutasi" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div id="rekdasarmenu<?= $sub['id_sub_menu']?>" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">--Pilihan--</h6>
-                        <a class="collapse-item <?php if ($uri->getPath() == '/rekdasar') : echo 'active';
-                                                        else : echo '';
-                                                        endif;
-                                                        ?>" href="/rekdasar/">Data Rekening Dasar</a>
-                        <a class="collapse-item <?php if ($uri->getPath() == '/rekbelanja') : echo 'active';
-                                                        else : echo '';
-                                                        endif;
-                                                        ?>" href="/rekbelanja">Data Rekening Belanja</a>
-                        <a class="collapse-item <?php if ($uri->getSegment(1) == '/user') : echo 'active';
-                                                    else : echo '';
-                                                    endif;
-                                                    ?>" href="/user">User</a>
-                        <a class="collapse-item <?php if ($uri->getPath() == '/penanggungjawab') : echo 'active';
-                                                    else : echo '';
-                                                    endif;
-                                                    ?>" href="/penanggungjawab">Penanggung Jawab Anggaran</a>
+                        <?php
+                            foreach ($sub['subsub_menu'] as $subsub) :
+                                # code...
+                                ?>
+                        <a class="collapse-item <?php if ($uri->getSegment(2) == preg_replace("/[^a-zA-Z]/", "", $subsub['sub_sub_url'])): echo 'active'; else: ''; endif?>"
+                            href="<?= $sub['sub_url'].$subsub['sub_sub_url'] ?>"><?= $subsub['name_sub_sub_menu'] ?></a>
+                        <?php
+                            endforeach;
+                        ?>
                     </div>
                 </div>
             </li>
-            <!-- Nav Item - Dashboard -->
-            <hr class="sidebar-divider">
-            <!-- Nav Item - Master Data -->
-            <div class="sidebar-heading">
-                Management Data
-            </div>
-            <li class="nav-item <?php if ($uri->getSegment(1) == 'jabatan' || $uri->getSegment(1) == 'pangkat' || $uri->getSegment(1) == 'pesan') : echo 'active';
-                                    else : echo '';
-                                    endif;
-                                    ?>">
-                <a class=" nav-link collapsed" href="#" data-toggle="collapse" data-target="#lainnya"
-                    aria-expanded="true" aria-controls="lainnya">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Management Data</span>
-                </a>
-                <div id="lainnya" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">--Pilihan--</h6>
-                        <a class="collapse-item <?php if ($uri->getPath() == '/mutasi') : echo 'active';
-                                                        else : echo '';
-                                                        endif;
-                                                        ?>" href="/mutasi/">Rekening Dasar</a>
-                        <!-- <a class="collapse-item <?php if ($uri->getPath() == '/mutasi/tambahSKMutasi') : echo 'active';
-                                                                else : echo '';
-                                                                endif;
-                                                                ?>" href="/mutasi/tambahSkMutasi">Tambah Data SK Mutasi</a> -->
-                        <a class="collapse-item <?php if ($uri->getPath() == '/mutasi/tambahMutasi') : echo 'active';
-                                                        else : echo '';
-                                                        endif;
-                                                        ?>" href="/mutasi/tambahMutasi">Rekening Belanja</a>
-                        <a class="collapse-item <?php if ($uri->getSegment(1) == 'jabatan') : echo 'active';
-                                                    else : echo '';
-                                                    endif;
-                                                    ?>" href="/jabatan/">User</a>
-                    </div>
-                </div>
-            </li>
-            <?php endif; ?>
-            <!-- Nav Item - Master Data -->
-            <?php if ($session->has('email') && $session->get('role') == 3) :  ?>
-            <hr class="sidebar-divider">
-            <!-- Nav Item - Transaksi -->
-            <div class="sidebar-heading">
-                Transaksi
-            </div>
-            <li class="nav-item <?php if ($uri->getSegment(1) == 'orders') : echo 'active';
-                                    else : echo '';
-                                    endif;
-                                    ?>">
-                <a class="nav-link" href="/orders/">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Orders</span></a>
-            </li>
-            <li class="nav-item <?php if ($uri->getSegment(1) == 'kuwitansi') : echo 'active';
-                                    else : echo '';
-                                    endif;
-                                    ?>">
-                <a class="nav-link" href="/kuwitansi/">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Kuwitansi</span></a>
-            </li>
-            <!-- Nav Item - Transaksi -->
-            <?php endif; ?>
+            <?php
+                    endif;
+                endforeach;
+            endforeach;
+            ?>
             <!-- ============================================================================ -->
             <hr class="sidebar-divider d-none d-md-block">
+            <!-- endforeach main menu -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
@@ -194,7 +133,6 @@ $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>
                                 <!-- buatin js untuk get ini berdasarkan id dari session agar saat update data langsung nama dan foto keganti -->
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ nama }}</span>
                                 <img class="img-profile rounded-circle" src="{{ foto }}">
-
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

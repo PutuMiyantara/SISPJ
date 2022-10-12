@@ -11,9 +11,26 @@ class KodeUrusan extends BaseController{
         $this->mKodeUrusan = new ModelKodeUrusan();
     }
 
-    public function index()
+    public function index($search)
     {
-        echo json_encode($this->mKodeUrusan->getKodeUrusan(null));
+        $data = $this->mKodeUrusan->getKodeUrusan(null);
+        $result = [];
+        if ($search == 'search') {
+            # code...
+            foreach ($data as $key) {
+                # code...
+                array_push($result,
+                [
+                    'id_kode_urusan' => $key->id,
+                    'kode_urusan' => (
+                        $key->kode_rek_urusan . " - " .
+                        $key->nama_rek_urusan)
+                ]);
+            }
+        } else{
+            $result = $data;
+        }
+        echo json_encode($result);
     }
 
     public function insertData(){

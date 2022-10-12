@@ -17,7 +17,7 @@ class ModelPptk extends Model
         } else{
             $query = $builder->getWhere($id);
         }
-        return $query->getResult();
+        return $query->getResultArray();
         
     }
 

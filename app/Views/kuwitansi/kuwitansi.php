@@ -94,7 +94,7 @@
                             <td>{{ d.dasar_spj_bukti }}</td>
                             <td>{{ d.nama_rekanan + '-' + d.jabatan }}</td>
                             <td>{{ d.instansi_rekanan }}</td>
-                            <td>{{ d.keterangan_spj }}</td>
+                            <td>{{ d.keterangan }}</td>
                             <td ng-if="d.status_spj == 0">Belum Cair</td>
                             <td ng-if="d.status_spj == 1">Sudah Cair</td>
                             <td style="text-align: center; width: 100px;">
@@ -308,11 +308,15 @@
                             </div>
                         </div>
                         <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Keterangan SPJ</label></div>
+                            <div class="col"><label>Keterangan (LS/GU)</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
-                                    <input class="form-control" name="keterangan_spj"
-                                        ng-model="formModel.keterangan_spj" ng-required="false" ng-readonly="false">
+                                    <select class="form-control" name="keterangan" ng-model="formModel.keterangan"
+                                        ng-required="false" ng-readonly="false">
+                                        <option value="">---select here---</option>
+                                        <option value="LS">LS</option>
+                                        <option value="GU">GU</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -329,16 +333,6 @@
                             </div>
                         </div>
                         <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Keterangan (Catatan)</label></div>
-                            <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row">
-                                    <textarea class="form-control" name="keterangan" ng-model="formModel.keterangan"
-                                        ng-required="false" ng-readonly="false">
-                                    </textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 mb-6 mb-sm-0">
                             <div class="col"><label>Nomor Orders</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row" ng-init="dataOrders(null)">
@@ -346,42 +340,14 @@
                                         ng-model="formModel.id_rekening_dasar" ng-required="false" ng-readonly="true"> -->
                                     <select style="width: 100%;" id="kuwitansi_orders" select2="" class="form-control"
                                         name="orders" ng-model="formModel.id_order"
-                                        ng-options="orders.id as orders.orders for orders in getOrders"
+                                        ng-options="orders.id_order as orders.orders for orders in getOrders"
                                         ng-disabled="readOnly" ng-change="ordersChange(formModel.id_order)">
                                         <option value="">---select here---</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <hr ng-show="formOrders">
-                        <div class="col-sm-12 mb-6 mb-sm-0" ng-show="formOrders">
-                            <div class="col"><label>Jenis Barang</label></div>
-                            <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row">
-                                    <input type="text" class="form-control" name="jenis_barang"
-                                        ng-model="formModel.jenis_barang" ng-required="false" ng-readonly="true">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 mb-6 mb-sm-0" ng-show="formOrders">
-                            <div class="col"><label>Jumlah Barang</label></div>
-                            <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row">
-                                    <input type="number" class="form-control" name="jumlah_barang"
-                                        ng-model="formModel.jumlah_barang" ng-required="false" ng-readonly="true">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 mb-6 mb-sm-0" ng-show="formOrders">
-                            <div class="col"><label>Jenis Satuan Barang</label></div>
-                            <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row">
-                                    <input type="text" class="form-control" name="jenis_satuan_barang"
-                                        ng-model="formModel.jenis_satuan_barang" ng-required="true" ng-readonly="true">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 mb-6 mb-sm-0" ng-show="formOrders">
+                        <div class="col-sm-12 mb-6 mb-sm-0">
                             <div class="col"><label>Uraian Pesanan</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">

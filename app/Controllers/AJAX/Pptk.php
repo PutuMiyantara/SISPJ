@@ -11,9 +11,26 @@ class Pptk extends BaseController{
         $this->mPptk = new Modelpptk();
     }
 
-    public function index()
+    public function index($search)
     {
-        echo json_encode($this->mPptk->getPptk(null));
+        $data = $this->mPptk->getPptk(null);
+        $result = [];
+        if ($search == 'search') {
+            # code...
+            foreach ($data as $key) {
+                # code...
+                array_push($result,
+                [
+                    'id' => $key['id'],
+                    'pptk' => (
+                        $key['nip_pptk']. " - " .
+                        $key['nama_pptk'])
+                ]);
+            }
+        } else{
+            $result = $data;
+        }
+        echo json_encode($result);
     }
 
     public function insertData(){

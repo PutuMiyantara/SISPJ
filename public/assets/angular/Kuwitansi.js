@@ -14,13 +14,13 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
     $http.get("/kuwitansi/getKuwitansi").then(function (data) {
       $scope.datas = data.data;
       console.log(data.data);
-    },function errorCallback(response) {
+    }, function errorCallback(response) {
       console.log(response);
       alert("error");
     });
   };
 
-  $scope.tambahData = function (){
+  $scope.tambahData = function () {
     $scope.openModal("#Kuwitansi");
     $scope.modalTitle = "Tambah Kode Rekening Belanja Sub 5";
     $scope.modalButton = "Simpan";
@@ -34,77 +34,75 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
     $scope.formModel.status_spj = "0";
   }
 
-  $scope.submitData = function(){
+  $scope.submitData = function () {
     if ($scope.id == null) {
       $scope.insertData();
       console.log('insertdata');
     }
-    else{
+    else {
       $scope.editData()
       console.log('edit data');
     }
   }
 
   $scope.insertData = function () {
-    if($scope.formModel.id_rekanan == null){
+    if ($scope.formModel.id_rekanan == null) {
       $scope.formModel.id_rekanan = 'undefined';
     }
-    $scope.formModel.keterangan = 'test keterangan';
-    console.log('id rekanan'+$scope.formModel.id_rekanan);
-      $http
-        .post("/kuwitansi/insertKuwitansi", {
-          no_kuwitansi: $scope.formModel.no_kuwitansi,
-          tgl_kuwitansi: $scope.formModel.tgl_kuwitansi,
-          id_rekening_dasar: $scope.formModel.id_rekening_dasar,
-          id_kode_belanja_sub5: $scope.formModel.id_kode_belanja_sub5,
-          nominal: $scope.formModel.nominal,
-          uraian_belanja: $scope.formModel.uraian_belanja,
-          dasar_spj_bukti: $scope.formModel.dasar_spj_bukti,
-          keterangan_spj: $scope.formModel.keterangan_spj,
-          status_spj: $scope.formModel.status_spj,
-          keterangan: $scope.formModel.keterangan,
-          id_rekanan: $scope.formModel.id_rekanan,
-          instansi_rekanan: $scope.formModel.instansi_rekanan,
-          nama_rekanan: $scope.formModel.nama_rekanan,
-          alamat_rekanan: $scope.formModel.alamat_rekanan,
-          no_telp_rekanan: $scope.formModel.no_telp_rekanan,
-          npwp: $scope.formModel.npwp,
-          bank_rekanan: $scope.formModel.bank_rekanan,
-          no_rekening_rekanan: $scope.formModel.no_rekening_rekanan,
-          jabatan: $scope.formModel.jabatan,
-          id_order: $scope.formModel.id_order,
-        })
-        .then(
-          function successCallback(data) {
-            console.log(data.data);
-            if (data.data.errortext == "") {
-              $scope.kode_rek_kegiatan = $scope.nama = null;
-              $scope.getKuwitansi();
-              $scope.closeModal("#Kuwitansi");
-              $scope.success = true;
-              $scope.message = data.data.message;
-              $timeout(function () {
-                $scope.success = false;
-              }, 5000);
-            } else {
-              $scope.message = data.data.errortext;
-              $scope.error = true;
-              $timeout(function () {
-                $scope.error = false;
-              }, 5000);
-            }
-          },
-          function errorCallback(response) {
+    console.log('id rekanan' + $scope.formModel.id_rekanan);
+    $http
+      .post("/kuwitansi/insertKuwitansi", {
+        no_kuwitansi: $scope.formModel.no_kuwitansi,
+        tgl_kuwitansi: $scope.formModel.tgl_kuwitansi,
+        id_rekening_dasar: $scope.formModel.id_rekening_dasar,
+        id_kode_belanja_sub5: $scope.formModel.id_kode_belanja_sub5,
+        nominal: $scope.formModel.nominal,
+        uraian_belanja: $scope.formModel.uraian_belanja,
+        dasar_spj_bukti: $scope.formModel.dasar_spj_bukti,
+        status_spj: $scope.formModel.status_spj,
+        keterangan: $scope.formModel.keterangan,
+        id_rekanan: $scope.formModel.id_rekanan,
+        instansi_rekanan: $scope.formModel.instansi_rekanan,
+        nama_rekanan: $scope.formModel.nama_rekanan,
+        alamat_rekanan: $scope.formModel.alamat_rekanan,
+        no_telp_rekanan: $scope.formModel.no_telp_rekanan,
+        npwp: $scope.formModel.npwp,
+        bank_rekanan: $scope.formModel.bank_rekanan,
+        no_rekening_rekanan: $scope.formModel.no_rekening_rekanan,
+        jabatan: $scope.formModel.jabatan,
+        id_order: $scope.formModel.id_order,
+      })
+      .then(
+        function successCallback(data) {
+          console.log(data.data);
+          if (data.data.errortext == "") {
+            $scope.kode_rek_kegiatan = $scope.nama = null;
+            $scope.getKuwitansi();
+            $scope.closeModal("#Kuwitansi");
+            $scope.success = true;
+            $scope.message = data.data.message;
+            $timeout(function () {
+              $scope.success = false;
+            }, 5000);
+          } else {
+            $scope.message = data.data.errortext;
             $scope.error = true;
-            $scope.message = "Gagal Menyimpan data";
-            console.log("Gagal Menyimpan Data", response);
+            $timeout(function () {
+              $scope.error = false;
+            }, 5000);
           }
-        );
+        },
+        function errorCallback(response) {
+          $scope.error = true;
+          $scope.message = "Gagal Menyimpan data";
+          console.log("Gagal Menyimpan Data", response);
+        }
+      );
   };
 
   $scope.getDetail = function (id, id_rek_dasar, id_kode_belanja_sub5) {
-    $scope.formOrders = false;    
-    console.log('id detail = '+ id);
+    $scope.formOrders = false;
+    console.log('id detail = ' + id);
     $scope.setDefault();
     $scope.dataRekDasar(id_rek_dasar);
     $scope.dataRekBelanja(id_rek_dasar);
@@ -114,6 +112,7 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
     $http.get("/kuwitansi/getDetailKuwitansi/" + id).then(
       function successCallback(data) {
         console.log(data.data);
+
         $scope.openModal("#Kuwitansi");
         $scope.modalTitle = "Detail Kode Belanja Sub 5";
         $scope.submitButton = "Update";
@@ -141,11 +140,11 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
         $scope.formModel.jabatan = data.data[0].jabatan;
         $scope.formModel.id_order = data.data[0].id_order;
         if (data.data[0].id_order != null) {
-          $scope.formOrders = true;    
-          $scope.formModel.jenis_barang = data.data[0].jenis_barang;      
-          $scope.formModel.jumlah_barang = parseInt(data.data[0].jumlah_barang);      
-          $scope.formModel.jenis_satuan_barang = data.data[0].jenis_satuan_barang;      
-          $scope.formModel.uraian_pesanan = data.data[0].uraian_pesanan;      
+          $scope.formOrders = true;
+          $scope.formModel.jenis_barang = data.data[0].jenis_barang;
+          $scope.formModel.jumlah_barang = parseInt(data.data[0].jumlah_barang);
+          $scope.formModel.jenis_satuan_barang = data.data[0].jenis_satuan_barang;
+          $scope.formModel.uraian_pesanan = data.data[0].uraian_pesanan;
         }
       },
       function errorCallback(response) {
@@ -156,13 +155,13 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
   };
 
   $scope.editData = function () {
-    if($scope.formModel.id_rekanan == null){
+    if ($scope.formModel.id_rekanan == null) {
       $scope.formModel.id_rekanan = 'undefined';
     }
-    console.log('idRekanan: '+ $scope.formModel.id_rekanan);
-    console.log('id edit: '+ $scope.id);
+    console.log('idRekanan: ' + $scope.formModel.id_rekanan);
+    console.log('id edit: ' + $scope.id);
     $http
-      .post("/kuwitansi/updateKuwitansi/" + $scope.id , {
+      .post("/kuwitansi/updateKuwitansi/" + $scope.id, {
         no_kuwitansi: $scope.formModel.no_kuwitansi,
         tgl_kuwitansi: $scope.formModel.tgl_kuwitansi,
         id_rekening_dasar: $scope.formModel.id_rekening_dasar,
@@ -206,17 +205,17 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
       );
   };
 
-  $scope.deleteData = function(id){
-    var isconfirm =  confirm("Ingin Menghapus Data?");
+  $scope.deleteData = function (id) {
+    var isconfirm = confirm("Ingin Menghapus Data?");
     if (isconfirm) {
-      $http.post("/kuwitansi/deleteKuwitansi",{
+      $http.post("/kuwitansi/deleteKuwitansi", {
         id: id,
       }).then(
-        function successCallback(data){
+        function successCallback(data) {
           $scope.getKuwitansi();
           $scope.message = "Data Berhasil Dihapus";
           $scope.success = true;
-          $timeout(function(){
+          $timeout(function () {
             $scope.success = false;
           }, 5000);
         },
@@ -245,12 +244,12 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
   $scope.hideRekRef = true;
   $scope.dataRekDasar = function () {
     $http.get("/rekbelanja/searchRekDasar").then(function (data) {
-      console.log("dataRekDasar: "+data.data.id);
+      console.log("dataRekDasar: " + data.data.id);
       $scope.getRekDasar = data.data;
     });
   };
-  
-  $scope.rekDasarChange = function(where) {
+
+  $scope.rekDasarChange = function (where) {
     if (where != null) {
       $http.get("/rekdasar/getDetailRekeningDasar/" + where).then(
         function successCallback(data) {
@@ -263,14 +262,14 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
         }
       );
     }
-    $scope.dataRekBelanja(where);    
+    $scope.dataRekBelanja(where);
   };
 
   $scope.dataRekBelanja = function (where) {
     console.log(where);
     if (where != null) {
       $scope.hideRekRefSub1 = false;
-      console.log("data rek belanja "+ where);
+      console.log("data rek belanja " + where);
       $http.get("/orders/getRekBelanja/" + where).then(function (data) {
         $scope.getRekBelanja = data.data;
         console.log($scope.getRekBelanja);
@@ -278,8 +277,8 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
     }
   };
 
-  $scope.rekBelanjaChange = function(where) {
-    console.log('belanja change '+ where);
+  $scope.rekBelanjaChange = function (where) {
+    console.log('belanja change ' + where);
     if (where != null) {
       $http.get("/rekdasar/getDetailRekeningDasar/" + where).then(
         function successCallback(data) {
@@ -291,14 +290,14 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
         }
       );
     }
-    $scope.dataOrders(where);    
+    $scope.dataOrders(where);
   };
 
   $scope.dataOrders = function (where) {
     console.log(where);
     if (where != null) {
       $scope.hideRekRefSub1 = false;
-      console.log("data rek belanja "+ where);
+      console.log("data rek belanja " + where);
       $http.get("/rekbelanja/searchOrders/" + where).then(function (data) {
         $scope.getOrders = data.data;
         console.log($scope.getOrders);
@@ -306,22 +305,22 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
     }
   };
 
-  
-  
-  $scope.ordersChange = function(where) {
+
+
+  $scope.ordersChange = function (where) {
     console.log(where);
     console.log('this orderschange')
     if (where != null) {
       $scope.hideRekRefSub1 = false;
-      console.log("data rek belanja "+ where);
+      console.log("data rek belanja " + where);
       $http.get("/orders/getDetailOrders/" + where).then(function (data) {
         console.log(data);
-        $scope.formModel.jenis_barang = data.data[0].jenis_barang;      
-        $scope.formModel.jumlah_barang = parseInt(data.data[0].jumlah_barang);      
-        $scope.formModel.jenis_satuan_barang = data.data[0].jenis_satuan_barang;      
-        $scope.formModel.uraian_pesanan = data.data[0].uraian_pesanan;     
+        $scope.formModel.jenis_barang = data.data[0].jenis_barang;
+        $scope.formModel.jumlah_barang = parseInt(data.data[0].jumlah_barang);
+        $scope.formModel.jenis_satuan_barang = data.data[0].jenis_satuan_barang;
+        $scope.formModel.uraian_pesanan = data.data[0].uraian_pesanan;
       });
-    }   
+    }
   };
 
   // searchbox REKANAN
@@ -399,6 +398,9 @@ sispj.controller("Kuwitansi", function ($scope, $http, $window, $timeout) {
     $scope.rekananRO = true;
   };
 
-  
-
+  $scope.printKuwitansi = function () {
+    console.log('test');
+    var url = window.location.href;
+    console.log(url);
+  };
 });

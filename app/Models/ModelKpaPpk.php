@@ -17,7 +17,7 @@ class ModelKpaPpk extends Model
         } else{
             $query = $builder->getWhere($id);
         }
-        return $query->getResult();
+        return $query->getResultArray();
         
     }
 

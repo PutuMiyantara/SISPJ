@@ -10,7 +10,13 @@ class ModelKodeBelanjaSub3 extends Model
         $db = db_connect();
         $builder = $db->table('tb_kode_belanja_sub3');
 
-        $builder->select('tb_kode_belanja_sub3.id, kode_belanja_sub2, id_kode_belanja_sub2, id_kode_belanja_sub1, id_rekening_dasar, kode_belanja_sub3, nama_rekening_belanja_sub3, nama_rekening_belanja_sub2, jumlah_anggaran_belanja_sub3,nama_rekening_dasar, tahun_anggaran, kode_rek_dinas, kode_rek_urusan, kode_rek_bidang, kode_rek_program, kode_rek_kegiatan, kode_rek_unit');
+        $builder->select('tb_kode_belanja_sub3.id, kode_belanja_sub3, nama_rekening_belanja_sub3, jumlah_anggaran_belanja_sub3,
+            tb_kode_belanja_sub3.id_pengurus_barang, nip_pengurus_barang, nama_pengurus_barang, keterangan_kode_belanja_sub3,
+            id_kode_belanja_sub2, kode_belanja_sub2, nama_rekening_belanja_sub2, 
+            id_kode_belanja_sub1, kode_belanja_sub1, nama_rekening_belanja_sub1,
+            id_rekening_dasar,nama_rekening_dasar, tahun_anggaran, 
+            kode_rek_dinas, kode_rek_urusan, kode_rek_bidang, kode_rek_program, kode_rek_kegiatan, kode_rek_unit');
+        $builder->join('tb_pengurus_barang', 'tb_pengurus_barang.id = tb_kode_belanja_sub3.id_pengurus_barang', 'left');
         $builder->join('tb_kode_belanja_sub2', 'tb_kode_belanja_sub2.id = tb_kode_belanja_sub3.id_kode_belanja_sub2', 'left');
         $builder->join('tb_kode_belanja_sub1', 'tb_kode_belanja_sub1.id = tb_kode_belanja_sub2.id_kode_belanja_sub1', 'left');
         $builder->join('tb_rekening_dasar', 'tb_rekening_dasar.id = tb_kode_belanja_sub1.id_rekening_dasar', 'left');

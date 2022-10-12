@@ -1,6 +1,5 @@
 <!-- Begin Page Content -->
 <div class="container-fluid" ng-controller="Orders">
-
     <!-- Page Heading -->
     <!-- Content Header (Page header) -->
     <section class=" content-header">
@@ -16,18 +15,13 @@
                     </ol>
                 </div>
             </div>
-        </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.container-fluid -->
     </section>
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-        <!-- <div class="card-header py-3">
-            <a href="<?= base_url('/rekbelanja') ?>" class="btn btn-outline-info active">Rekening Belanja</a>
-            <a href="<?= base_url('/rekbelanja/kodesub1') ?>" class="btn btn-outline-info">Kode Sub 1</a>
-            <a href="<?= base_url('/rekbelanja/kodesub2') ?>" class="btn btn-outline-info">Kode Sub 2</a>
-            <a href="<?= base_url('/rekbelanja/kodesub3') ?>" class="btn btn-outline-info">Kode Sub 3</a>
-            <a href="<?= base_url('/rekbelanja/kodesub4') ?>" class="btn btn-outline-info">Kode Sub 4</a>
-            <a href="<?= base_url('/rekbelanja/kodesub5') ?>" class="btn btn-outline-info">Kode Sub 5</a>
-        </div> -->
+        <div class="card-header py-3">
+        </div>
         <div class="card-body">
             <div>
                 <div class="alert alert-danger alert-dismissable" ng-show="error">
@@ -53,9 +47,6 @@
                             <th>Rekanan</th>
                             <th>Nama Rekanan</th>
                             <th>Tlp Rekanan</th>
-                            <th>Jenis Pesanan</th>
-                            <th>Jumlah</th>
-                            <th>Satuan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -69,9 +60,6 @@
                             <th>Rekanan</th>
                             <th>Nama Rekanan</th>
                             <th>Tlp Rekanan</th>
-                            <th>Jenis Pesanan</th>
-                            <th>Jumlah</th>
-                            <th>Satuan</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
@@ -101,14 +89,14 @@
                             <td>{{ d.instansi_rekanan }}</td>
                             <td>{{ d.nama_rekanan }}</td>
                             <td>{{ d.no_telp_rekanan }}</td>
-                            <td>{{ d.jenis_barang }}</td>
-                            <td>{{ d.jumlah_barang }}</td>
-                            <td>{{ d.jenis_satuan_barang }}</td>
                             <td style="text-align: center; width: 100px;">
                                 <button type="submit" class="btn btn-info"
                                     ng-click="getDetail(d.id, d.id_rekening_dasar)"><i class="fa fa-edit"></i></button>
-                                <button type="submit" class="btn btn-danger" ng-click="deleteData(d.id)"><i
-                                        class="fa fa-trash"></i></button>
+                                <button class="btn btn-success"><a
+                                        href="<?= base_url('/orders/cetakOrders/') ?>{{ d.id }}" target="_blank"><i
+                                            class="fa fa-print"></i></a></button>
+                                <button type="submit" class="btn btn-danger" ng-click="deleteData(d.id)"
+                                    style="margin-top: 5px;"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
                     </tbody>
@@ -116,12 +104,11 @@
             </div>
         </div>
     </div>
-
     <!-- Modal -->
     <div class="modal fade" role="dialog" role="dialog" aria-hidden="true" id="Orders">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
-                <form method="POST" enctype="multipart/form-data" name="formOrders" ng-submit="submitData()">
+                <form method="POST" enctype="multipart/form-data" name="formKodeDinas" ng-submit="submitData()">
                     <div class="modal-header">
                         <h4 class="modal-title" ng-model="modalTitle">Detail Pesanan</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -188,43 +175,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Jenis Barang</label></div>
+                        <div class="col-sm-12 mb-6 mb-sm-0" ng-hide="false">
+                            <div class="col"><label>Penanggung Jawab</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row">
-                                    <input type="text" class="form-control" name="jenis_barang"
-                                        ng-model="formModel.jenis_barang" ne-required="true" ng-readonly="false"
-                                        ng-style="jenis_barang_style">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Jumlah Barang</label></div>
-                            <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row">
-                                    <input type="number" class="form-control" name="jumlah_barang"
-                                        ng-model="formModel.jumlah_barang" ne-required="true" ng-readonly="false"
-                                        ng-style="jumlah_barang_style">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Jenis Satuan Barang</label></div>
-                            <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row">
-                                    <input type="text" class="form-control" name="jenis_satuan_barang"
-                                        ng-model="formModel.jenis_satuan_barang" ne-required="true" ng-readonly="false"
-                                        ng-style="jenis_satuan_barang_style">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Uraian Pesanan</label></div>
-                            <div class="col-sm-12 mb-6 mb-sm-0">
-                                <div class="form-group row">
-                                    <input type="text" class="form-control" name="uraian_pesanan"
-                                        ng-model="formModel.uraian_pesanan" ne-required="true" ng-readonly="false"
-                                        ng-style="uraian_pesanan_style">
+                                <div class="form-group row" ng-init="dataKpaPpk()">
+                                    <select style="width: 100%;" id="data_pegawai" select2="" class="form-control"
+                                        name="data_pegawai"
+                                        ng-options="data_pegawai.id as data_pegawai.kpa_ppk for data_pegawai in getPegawai"
+                                        ng-required="true" ng-disabled="readOnly" ng-model="formModel.id_kpa_ppk">
+                                        <option value="">---select here---</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -316,19 +276,63 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="col-sm-12 mb-6 mb-sm-0">
-                            <div class="col"><label>Kode Rekening</label></div>
+                        <div class="col-sm-12 mb-6 mb-sm-0">
+                            <div class="col"><label>Uraian Pesanan</label></div>
                             <div class="col-sm-12 mb-6 mb-sm-0">
                                 <div class="form-group row">
-                                    <textarea class="form-control" name="kode_rek_dasar"
-                                        ng-model="formModel.kode_rek_dasar" ng-readonly="true">
-                                    </textarea>
+                                    <textarea class="form-control" name="uraian_pesanan"
+                                        ng-model="formModel.uraian_pesanan" ng-required="false"
+                                        ng-readonly="false"></textarea>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
+                        <hr>
+                        <div class="col-sm-12 mb-6 mb-sm-0">
+                            <div class="col"><label>Tambah Barang</label></div>
+                            <div class="col-sm-12 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <button type="button" class="btn btn-info col-sm-2 mb-4" ng-click="addForm()"><i
+                                            class="fa fa-plus">
+                                        </i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive form" id="tableBarangHide" ng-hide="tableBarangHide">
+                            <table class="table table-bordered" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 100px;">No</th>
+                                        <th>Jenis Barang</th>
+                                        <th>Jumlah Barang</th>
+                                        <th>Jenis Satuan Barang</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th style="width: 100px;">No</th>
+                                        <th>Jenis Barang</th>
+                                        <th>Jumlah Barang</th>
+                                        <th>Jenis Satuan Barang</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody class="formTambah">
+                                    <!-- <tr>
+                                        <td>1</td>
+                                        <td><input type="text" name="jenis_barang" id="jenis_barang"></td>
+                                        <td><input type="number" name="jumlah_barang" id="jumlah_barang"></td>
+                                        <td><input type="text" name="jenis_satuan_barang" id="jenis_satuan_barang"></td>
+                                        <td><input type="text" name="uraian_pesanan" id="uraian_pesanan"></td>
+                                        <td><button type="button" class="btn btn-danger" ng-click="deleteForm()"
+                                                style="margin-top: 5px;"><i class="fa fa-trash"></i></button></td>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <input type="text" name="id" ng-model="id" ng-hide="true" ng-readonly="true">
+                        <input type="text" name="id" ng-model="id" ng-hide="false" ng-readonly="true">
                         <input type="text" name="id_rekanan" ng-model="formModel.id_rekanan" ng-hide="true"
                             ng-readonly="true">
                         <button type="submit" class="btn btn-success col-sm-2 mb-3"><i class="fa fa-save">
@@ -343,10 +347,52 @@
     </div>
     <!-- End Modal -->
 </div>
-<!-- <script type="text/javascript">
-$('#rek_dasar').select2({
-    // dropdownParent: $('#kodeBelanjaSub1'),
-    placeholder: "Select Here",
-    theme: "bootstrap-5"
+
+<script>
+$(document).on('click', '.deleteForm', function(e) {
+    e.preventDefault();
+    var barangBeforeDel = [];
+    var barangAfterDel = [];
+    var number = $(".number");
+    number.each(function(j) {
+        console.log('ini atasan: ' + j);
+        const id_barang = document.getElementsByName("id_barang")[j].value;
+        barangBeforeDel.push(id_barang);
+    });
+
+    $(this).parents('tr').remove();
+    var number = $(".number");
+    number.each(function(i) {
+        console.log('ini bawahan: ' + i);
+        document.getElementsByClassName("number")[i].innerHTML = i + 1;
+        const id_barang = document.getElementsByName("id_barang")[i].value;
+        barangAfterDel.push(id_barang);
+    });
+    // membandingkan array awal sebelum delete dan sesudah delete yang mana hilang maka itu akan muncul
+    let difference = barangBeforeDel.filter(x => !barangAfterDel.includes(x));
+    if (barangAfterDel.length == 0) {
+        $("#tableBarangHide").hide();
+    }
+
+    // console.log('ini bedanya: ' + difference + " | Length: " + barangAfterDel.length);
+    if (difference != '' && difference != null && difference != undefined) {
+        var idBarang = JSON.stringify({
+            id_barang: difference
+        });
+        $.ajax({
+            type: "POST",
+            url: '/orders/deleteBarang',
+            data: idBarang,
+            success: function(resultData) {
+                console.log(resultData);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log(XMLHttpRequest);
+                console.log(textStatus);
+                console.log(errorThrown);
+            },
+            dataType: 'text'
+        });
+    }
 });
-</script> -->
+</script>

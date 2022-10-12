@@ -11,9 +11,26 @@ class KodeKegiatan extends BaseController{
         $this->mKodeKegiatan = new ModelKodeKegiatan();
     }
 
-    public function index()
+    public function index($search)
     {
-        echo json_encode($this->mKodeKegiatan->getKodeKegiatan(null));
+        $data = $this->mKodeKegiatan->getKodeKegiatan(null);
+        $result = [];
+        if ($search == 'search') {
+            # code...
+            foreach ($data as $key) {
+                # code...
+                array_push($result,
+                [
+                    'id_kode_kegiatan' => $key->id,
+                    'kode_kegiatan' => (
+                        $key->kode_rek_kegiatan . " - " .
+                        $key->nama_rek_kegiatan)
+                ]);
+            }
+        } else{
+            $result = $data;
+        }
+        echo json_encode($result);
     }
 
     public function insertData(){

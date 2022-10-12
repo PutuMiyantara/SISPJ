@@ -13,6 +13,7 @@ class Kuwitansi extends BaseController{
     public function __construct()
     {
         $this->mKuwitansi = new ModelKuwitansi();
+        $this->cMataUang = new MataUang();
     }
 
     public function index()
@@ -26,20 +27,23 @@ class Kuwitansi extends BaseController{
         $errortext[] ='';
         $message = '';
         
-        $dataKuwitansi = array(
-            'no_kuwitansi' => $dataJSON['no_kuwitansi'],
-            'tgl_kuwitansi' => $dataJSON['tgl_kuwitansi'],
-            'id_rekening_dasar' => $dataJSON['id_rekening_dasar'],
-            'id_kode_belanja_sub5' => $dataJSON['id_kode_belanja_sub5'],
-            'nominal' => $dataJSON['nominal'],
-            'uraian_belanja' => $dataJSON['uraian_belanja'],
-            'dasar_spj_bukti' => $dataJSON['dasar_spj_bukti'],
-            'id_rekanan' => $dataJSON['id_rekanan'],
-            'keterangan_spj' => $dataJSON['keterangan_spj'],
-            'status_spj' => $dataJSON['status_spj'],
-            'keterangan' => $dataJSON['keterangan'],
-            'id_order' => $dataJSON['id_order']
-        );
+        // $dataJSON = array(
+        //     'no_kuwitansi' => $dataJSON['no_kuwitansi'],
+        //     'tgl_kuwitansi' => $dataJSON['tgl_kuwitansi'],
+        //     'id_rekening_dasar' => $dataJSON['id_rekening_dasar'],
+        //     'id_kode_belanja_sub5' => $dataJSON['id_kode_belanja_sub5'],
+        //     'nominal' => $dataJSON['nominal'],
+        //     'uraian_belanja' => $dataJSON['uraian_belanja'],
+        //     'dasar_spj_bukti' => $dataJSON['dasar_spj_bukti'],
+        //     'id_rekanan' => $dataJSON['id_rekanan'],
+        //     'keterangan_spj' => $dataJSON['keterangan_spj'],
+        //     'status_spj' => $dataJSON['status_spj'],
+        //     'keterangan' => $dataJSON['keterangan'],
+        //     'id_order' => $dataJSON['id_order']
+        // );
+
+
+    // echo json_encode($dataJSON); die;
 
         // cek apahah rekanan sudah terdapat di dalam database atau belum
         if ($dataJSON['id_rekanan'] == 'undefined') {
@@ -59,7 +63,7 @@ class Kuwitansi extends BaseController{
                     $where = array('instansi_rekanan' => $dataJSON['instansi_rekanan']);
                     $dataRekanan = $modelRekanan->getRekanan($where);
                     foreach ($dataRekanan as $key) {
-                        $dataKuwitansi['id_rekanan'] = $key->id;
+                        $dataJSON['id_rekanan'] = $key->id;
                     }
                 } else{
                     $errortext[] = 'Gagal Memasukan Data Rekanan';
@@ -70,7 +74,20 @@ class Kuwitansi extends BaseController{
             
         }
         
-        if ($this->validator->run($dataKuwitansi, 'kuwitansi')) {
+        if ($this->validator->run($dataJSON, 'kuwitansi')) {
+            $dataKuwitansi = array(
+                'no_kuwitansi' => $dataJSON['no_kuwitansi'],
+                'tgl_kuwitansi' => $dataJSON['tgl_kuwitansi'],
+                'id_rekening_dasar' => $dataJSON['id_rekening_dasar'],
+                'id_kode_belanja_sub5' => $dataJSON['id_kode_belanja_sub5'],
+                'nominal' => $dataJSON['nominal'],
+                'uraian_belanja' => $dataJSON['uraian_belanja'],
+                'dasar_spj_bukti' => $dataJSON['dasar_spj_bukti'],
+                'id_rekanan' => $dataJSON['id_rekanan'],
+                'status_spj' => $dataJSON['status_spj'],
+                'keterangan' => $dataJSON['keterangan'],
+                'id_order' => $dataJSON['id_order']
+            );
             if ($this->mKuwitansi->insertData($dataKuwitansi)) {
                 # code...
                 $message = 'Berhasil Menyimpan Data Kuwitansi';
@@ -97,19 +114,6 @@ class Kuwitansi extends BaseController{
         $modelRekanan = new ModelRekanan();
         $errortext[] ='';
         $message = '';
-        
-        $dataKuwitansi = array(
-            'no_kuwitansi' => $dataJSON['no_kuwitansi'],
-            'tgl_kuwitansi' => $dataJSON['tgl_kuwitansi'],
-            'id_rekening_dasar' => $dataJSON['id_rekening_dasar'],
-            'id_kode_belanja_sub5' => $dataJSON['id_kode_belanja_sub5'],
-            'nominal' => $dataJSON['nominal'],
-            'uraian_belanja' => $dataJSON['uraian_belanja'],
-            'dasar_spj_bukti' => $dataJSON['dasar_spj_bukti'],
-            'id_rekanan' => $dataJSON['id_rekanan'],
-            'keterangan_spj' => $dataJSON['keterangan_spj'],
-            'status_spj' => $dataJSON['status_spj'],
-        );
 
         // echo json_encode($dataKuwitansi);
         // die;
@@ -142,7 +146,19 @@ class Kuwitansi extends BaseController{
             
         }
         
-        if ($this->validator->run($dataKuwitansi, 'kuwitansi')) {
+        if ($this->validator->run($dataJSON, 'kuwitansi')) {
+            $dataKuwitansi = array(
+                'no_kuwitansi' => $dataJSON['no_kuwitansi'],
+                'tgl_kuwitansi' => $dataJSON['tgl_kuwitansi'],
+                'id_rekening_dasar' => $dataJSON['id_rekening_dasar'],
+                'id_kode_belanja_sub5' => $dataJSON['id_kode_belanja_sub5'],
+                'nominal' => $dataJSON['nominal'],
+                'uraian_belanja' => $dataJSON['uraian_belanja'],
+                'dasar_spj_bukti' => $dataJSON['dasar_spj_bukti'],
+                'id_rekanan' => $dataJSON['id_rekanan'],
+                'status_spj' => $dataJSON['status_spj'],
+                'keterangan' => $dataJSON['keterangan'],
+            );
             $id = array('id' => $id);
             if ($this->mKuwitansi->updateData($id, $dataKuwitansi)) {
                 # code...
@@ -166,23 +182,44 @@ class Kuwitansi extends BaseController{
     }
 
     public function cetakKuwitansi($where){
-        // $where = array('tb_kuwitansi.id' => $where);
-        // $data = $this->mKuwitansi->getKuwitansi($where);
-        echo view('/kuwitansi/printKuwitansi');
+        $where = array('tb_kuwitansi.id' => $where);
+        $data = $this->mKuwitansi->getKuwitansi($where);
+
+        // echo json_encode($data); die;
+        $nominal = null;
+        $uang = null;
+        $no_kuwitansi = null;
+        foreach ($data as $key) {
+            # code...
+            $nominal = $key->nominal;
+            $no_kuwitansi = $key->no_kuwitansi;
+        }
 
         // $mpdf = new Mpdf([
         //     'default_font_size' => 8,
         //     // 'default_font' => 'Times New Roman'
         // ]);
-        // $mpdf->useOddEven = 1;
+        $uang = ucfirst($this->cMataUang->terbilang($nominal));
+        $mpdf = new Mpdf();
+        $viewHtml  = view('kuwitansi/printKuwitansi', ['dKuwitansi'=>$data, 'nominal' => $uang]);
+        $mpdf->WriteHTML($viewHtml);
+        $mpdf->shrink_tables_to_fit = 1;
 
-        // $html = ;
-        // $mpdf->WriteHTML($html);
-        // $mpdf->shrink_tables_to_fit = 1;
-
-        // $this->response->setHeader('Content-Type', 'application/pdf');
-        // $mpdf->Output('arjun.pdf','I');
+        $this->response->setHeader('Content-Type', 'application/pdf');
+        $mpdf->Output('Kuwitansi('. $no_kuwitansi .').pdf','I');
     }
+
+    // public function testDataKuwitansi($where){
+    //     $where = array('tb_kuwitansi.id' => $where);
+    //     $data = $this->mKuwitansi->getKuwitansi($where);
+    //     $no_kuwitansi = null;
+
+    //     foreach ($data as $key) {
+    //         # code...
+    //         echo json_encode($key->no_kuwitansi);
+    //     }
+
+    // }
 
     public function searchReBelanja($id){
         $modelBelanja = new ModelKodeBelanjaSub5();
@@ -222,19 +259,16 @@ class Kuwitansi extends BaseController{
             die;
         }
         $where = array('id_kode_belanja_sub5' => $id);
-        $orders = $modelOrders->getOrders($where);
-        $dataArray = $orders;
+        $orders = $modelOrders->ordersPrint($where);
         $data = [];
-        foreach ($dataArray as $row) {
+        foreach ($orders as $row) {
             array_push($data,
                 [
-                    'id' => $row['id'],
+                    'id_order' => $row->id,
                     'orders' => (
-                        $row['no_pesanan']. " - " .
-                        $row['uraian_pesanan']. ", " .
-                        $row['jumlah_barang']. " " .
-                        $row['jenis_satuan_barang']. "( " .
-                        $row['tgl_pesanan']. ")"
+                        $row->no_pesanan. " - " .
+                        $row->uraian_pesanan. ", " .
+                        $row->tgl_pesanan. ")"
                     )
                 ]);
         }
