@@ -60,8 +60,6 @@
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/Orders.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/Kuwitansi.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('/assets/angular/HakAkses.js'); ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('/assets/angular/HakAksesSub.js'); ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('/assets/angular/HakAksesSubSub.js'); ?>"></script>
     <!-- js -->
 
     <meta charset="utf-8">

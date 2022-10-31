@@ -27,7 +27,7 @@ $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>
             <hr class="sidebar-divider">
 
             <!-- foreach mein menu -->
-            <?php foreach ($data as $main) : 
+            <?php foreach ($dataUrl as $main) : 
                 # code...
                 ?>
             <div class="sidebar-heading">
@@ -39,13 +39,27 @@ $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>
                     if (count($sub['subsub_menu']) == 0) :
                         # code...
                         ?>
-            <li class="nav-item <?php if ($uri->getPath() == '/home/admin') : echo 'active';
-                                    else : echo '';
-                                    endif;
-                                    ?>">
-                <a class="nav-link" href="/home/admin">
+            <li class="nav-item <?php if ($uri->getSegment(1) == preg_replace("/[^a-zA-Z]/", "", $sub['sub_url'])): echo 'active'; 
+                else: ''; endif?>">
+                <a class="nav-link" href="<?php
+                $role_user = '';
+                if (preg_replace("/[^a-zA-Z]/", "", $sub['sub_url']) == 'dashboard') {
+                    # code...
+                    if ($session->get('role') == '3') {
+                        # code...
+                        $role_user = 'admin';
+                    } elseif ($session->get('role') == '1') {
+                        # code...
+                        $role_user = 'pegawai';
+                    } elseif ($session->get('role') == '2') {
+                        # code...
+                        $role_user = 'monitoring';
+                    }
+                }
+                echo $sub['sub_url'] . '/' . $role_user;
+                ?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span><?= $sub['name_sub_menu'] ?></span></a>
             </li>
             <?php
                     else:

@@ -26,7 +26,19 @@ class ModelUrl extends Model
             // $builder->join('tb_sub_menu', 'tb_sub_menu.id = tb_sub_sub_menu.id_sub_menu', 'left');
             // $builder->join('tb_main_menu', 'tb_main_menu.id = tb_sub_menu.id_main_menu', 'left');
             $builder->orderBy('no_urut_sub_sub_menu', 'ASC');
+        } elseif($url == 'kategori'){
+            $builder = $db->table('tb_kategori_menu');
+            $builder->select('tb_kategori_menu.id, name_kategori_menu, kategori_url, status_kategori_menu, no_urut_kategori_menu');
+            // $builder->join('tb_sub_menu', 'tb_sub_menu.id = tb_sub_sub_menu.id_sub_menu', 'left');
+            // $builder->join('tb_main_menu', 'tb_main_menu.id = tb_sub_menu.id_main_menu', 'left');
+            $builder->orderBy('no_urut_kategori_menu', 'ASC');
         }
+
+        // $builder = $db->table('tb_kategori_menu');
+        //     $builder->select('tb_kategori_menu.id, name_kategori_menu, kategori_url, status_kategori_menu, no_urut_kategori_menu');
+        //     // $builder->join('tb_sub_menu', 'tb_sub_menu.id = tb_sub_sub_menu.id_sub_menu', 'left');
+        //     // $builder->join('tb_main_menu', 'tb_main_menu.id = tb_sub_menu.id_main_menu', 'left');
+        //     $builder->orderBy('no_urut_kategori_menu', 'ASC');
 
         if ($id == null) {
             # code...
@@ -36,6 +48,21 @@ class ModelUrl extends Model
         }
         return $query->getResultArray();
     }
+
+    // public function getUrl($id, $url)
+    // {
+    //     $db = db_connect();
+    //     $builder = $db->table('tb_main_menu');
+    //     $builder->select('*');
+    //     $builder->orderBy('no_urut_main_menu', 'ASC');
+    //     if ($id == null) {
+    //         # code...
+    //         $query = $builder->get();
+    //     } else{
+    //         $query = $builder->getWhere($id);
+    //     }
+    //     return $query->getResultArray();
+    // }
 
     public function insertData($data)
     {

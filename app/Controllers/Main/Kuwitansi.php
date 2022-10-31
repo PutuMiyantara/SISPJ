@@ -9,17 +9,7 @@ class Kuwitansi extends BaseController
 {
     public function index()
     {
-        parent::MasterView('kuwitansi/kuwitansi', []);
+        parent::MasterView('kuwitansi/kuwitansi', ['dataUrl' => parent::manageUrl()]);
     }
 
-    public function test()
-    {
-        
-        // $data = array(
-            //     'todo_list' => 'list1',
-            //     'title'     => 'My Real Title',
-        //     'heading'   => 'My Real Heading',
-        // );
-        return view('orders/test', []);
-    }
 }

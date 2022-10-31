@@ -1,3 +1,5 @@
+<?php $session = session();
+$uri = new \CodeIgniter\HTTP\URI(current_url()); ?>
 <!-- Begin Page Content -->
 <div class="container-fluid" ng-controller="KodeUnit">
 
@@ -22,13 +24,28 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="<?= base_url('/rekdasar') ?>" class="btn btn-outline-info">Rekening Dasar</a>
-            <a href="<?= base_url('/rekdasar/dinas') ?>" class="btn btn-outline-info">Kode Dinas</a>
-            <a href="<?= base_url('/rekdasar/urusan') ?>" class="btn btn-outline-info">Kode Urusan</a>
-            <a href="<?= base_url('/rekdasar/bidang') ?>" class="btn btn-outline-info">Kode Bidang</a>
-            <a href="<?= base_url('/rekdasar/kegiatan') ?>" class="btn btn-outline-info">Kode Kegiatan</a>
-            <a href="<?= base_url('/rekdasar/program') ?>" class="btn btn-outline-info">Kode Program</a>
-            <a href="<?= base_url('/rekdasar/unit') ?>" class="btn btn-outline-info active">Kode Unit</a>
+            <?php
+                foreach ($dataUrl as $main) {
+                    # code...
+                    foreach ($main['sub_menu'] as $sub) {
+                        # code...
+                        foreach ($sub['subsub_menu'] as $subsub) {
+                            # code...
+                            if (preg_replace("/[^a-zA-Z]/", "", $subsub['sub_sub_url']) == $uri->getSegment(2)) {
+                                foreach ($subsub['kategori'] as $kategori) {
+                                    # code...
+                                    ?>
+            <a href="<?= base_url($sub['sub_url'].$subsub['sub_sub_url'].$kategori['kategori_url'])?>" class="btn btn-outline-info 
+                    <?php if ($uri->getSegment(3) == preg_replace("/[^a-zA-Z]/", "", $kategori['kategori_url'])): echo 'active'; 
+                    else: ''; endif ?>
+                    "><?= $kategori['name_kategori_menu'] ?></a>
+            <?php
+                                }
+                            }
+                        }
+                    }
+                }
+            ?>
         </div>
         <div class="card-body">
             <div>

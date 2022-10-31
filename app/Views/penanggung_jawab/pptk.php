@@ -1,3 +1,5 @@
+<?php $session = session();
+$uri = new \CodeIgniter\HTTP\URI(current_url()); ?>
 <!-- Begin Page Content -->
 <div class="container-fluid" ng-controller="Pptk">
 
@@ -21,11 +23,28 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="<?= base_url('/penanggungjawab/kpa_ppk') ?>" class="btn btn-outline-info">KPA PPK</a>
-            <a href="<?= base_url('/penanggungjawab/pptk') ?>" class="btn btn-outline-info active">PPTK</a>
-            <a href="<?= base_url('/penanggungjawab/bendahara') ?>" class="btn btn-outline-info">Bendahara</a>
-            <a href="<?= base_url('/penanggungjawab/pengurus_barang') ?>"
-                class="btn btn-outline-info">Pengurusbarang</a>
+            <?php
+                foreach ($dataUrl as $main) {
+                    # code...
+                    foreach ($main['sub_menu'] as $sub) {
+                        # code...
+                        foreach ($sub['subsub_menu'] as $subsub) {
+                            # code...
+                            if (preg_replace("/[^a-zA-Z]/", "", $subsub['sub_sub_url']) == $uri->getSegment(2)) {
+                                foreach ($subsub['kategori'] as $kategori) {
+                                    # code...
+                                    ?>
+            <a href="<?= base_url($sub['sub_url'].$subsub['sub_sub_url'].$kategori['kategori_url'])?>" class="btn btn-outline-info 
+                    <?php if ($uri->getSegment(3) == preg_replace("/[^a-zA-Z]/", "", $kategori['kategori_url'])): echo 'active'; 
+                    else: ''; endif ?>
+                    "><?= $kategori['name_kategori_menu'] ?></a>
+            <?php
+                                }
+                            }
+                        }
+                    }
+                }
+            ?>
         </div>
         <div class="card-body">
             <div>

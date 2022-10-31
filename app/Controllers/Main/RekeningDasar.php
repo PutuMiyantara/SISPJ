@@ -6,149 +6,86 @@ use App\Models\ModelUrl;
 
 class RekeningDasar extends BaseController
 {
-    public function __construct()
-    {
-        $this->mUrl = new ModelUrl();
-        
-    }
-
     public function index()
     {
-        $main_menu = $this->mUrl->getUrl(null, 'main');
-        $dataUrl = [];
-
-        foreach ($main_menu as $main) {
-            # code...
-            $data_sub_menu = [];
-            $sub_menu = [];
-            $data_sub_menu = $this->mUrl->getUrl(['tb_sub_menu.id_main_menu' => $main['id']], 'sub');
-            foreach ($data_sub_menu as $sub) {
-                # code...
-                array_push($sub_menu,[
-                    'id_sub_menu' => $sub['id'],
-                    'name_sub_menu' => $sub['name_sub_menu'],
-                    'sub_url' => $sub['sub_url'],
-                    'no_urut_sub_menu' => $sub['no_urut_sub_menu'],
-                    'subsub_menu' => $this->mUrl->getUrl(['id_sub_menu' => $sub['id']], 'subsub'),
-                ]);
-            }
-            
-            array_push($dataUrl, [
-                'id_main_menu' => $main['id'],
-                'name_main_menu' => $main['name_main_menu'],
-                'no_urut_main_menu' => $main['no_urut_main_menu'],
-                'sub_menu' => $sub_menu,
-            ]);
-        }
-        // echo json_encode($dataUrl); die;
-        parent::MasterView('rekening_dasar/rekening_dasar', ['data' => $dataUrl]);
+        parent::MasterView('rekening_dasar/rekening_dasar', [
+            'dataUrl' => parent::manageUrl(), 
+        ]);
     }
 
     public function testData (){
-        $main_menu = $this->mUrl->getUrl(null, 'main');
+        $mUrl = new ModelUrl();
+        $levelUrl = 'main';
+
+        $url = $mUrl->getUrl(null, $levelUrl);
         $dataUrl = [];
 
-        foreach ($main_menu as $main) {
+        foreach ($url as $main) {
             # code...
-            $data_sub_menu = [];
             $sub_menu = [];
-            $data_sub_menu = $this->mUrl->getUrl(['tb_sub_menu.id_main_menu' => $main['id']], 'sub');
+            $data_sub_menu = $mUrl->getUrl(['tb_sub_menu.id_main_menu' => $main['id']], 'sub');
             foreach ($data_sub_menu as $sub) {
                 # code...
+                $sub_sub_menu = [];
+                $data_sub_sub_menu = $mUrl->getUrl(['id_sub_menu' => $sub['id']], 'subsub');
+                foreach ($data_sub_sub_menu as $subsub) {
+                    # code...
+                    array_push($sub_sub_menu,[
+                        'id_sub_sub_menu' => $subsub['id'],
+                        'name_sub_sub_menu' => $subsub['name_sub_sub_menu'],
+                        'sub_sub_url' => $subsub['sub_sub_url'],
+                        'no_urut_sub_sub_menu' => $subsub['no_urut_sub_sub_menu'],
+                        'kategori' => $mUrl->getUrl(['id_sub_sub_menu' => $subsub['id']], 'kategori'),
+                    ]);
+                }
                 array_push($sub_menu,[
                     'id_sub_menu' => $sub['id'],
                     'name_sub_menu' => $sub['name_sub_menu'],
                     'sub_url' => $sub['sub_url'],
                     'no_urut_sub_menu' => $sub['no_urut_sub_menu'],
-                    'subsub_menu' => $this->mUrl->getUrl(['id_sub_menu' => $sub['id']], 'subsub'),
+                    'subsub_menu' => $sub_sub_menu,
                 ]);
             }
             
             array_push($dataUrl, [
                 'id_main_menu' => $main['id'],
                 'name_main_menu' => $main['name_main_menu'],
-                // 'main_url' => $main['main_url'],
                 'no_urut_main_menu' => $main['no_urut_main_menu'],
                 'sub_menu' => $sub_menu,
             ]);
         }
-
-        echo json_encode($dataUrl); die;
-        // $main_menu = $this->mUrl->getUrl(null, 'main');
-        // $dataUrl = [];
-
-        // foreach ($main_menu as $main) {
-        //     # code...
-        //     $data_sub_menu = [];
-        //     $sub_menu = [];
-        //     $data_sub_menu = $this->mUrl->getUrl(['tb_sub_menu.id_main_menu' => $main['id']], 'sub');
-        //     foreach ($data_sub_menu as $sub) {
-        //         # code...
-        //         array_push($sub_menu,[
-        //             'id_sub_menu' => $sub['id'],
-        //             'name_sub_menu' => $sub['name_sub_menu'],
-        //             'sub_url' => $sub['sub_url'],
-        //             'no_urut_sub_menu' => $sub['no_urut_sub_menu'],
-        //             'subsub_menu' => $this->mUrl->getUrl(['id_sub_menu' => $sub['id']], 'subsub'),
-        //         ]);
-        //     }
-            
-        //     array_push($dataUrl, [
-        //         'id_main_menu' => $main['id'],
-        //         'name_main_menu' => $main['name_main_menu'],
-        //         // 'main_url' => $main['main_url'],
-        //         'no_urut_main_menu' => $main['no_urut_main_menu'],
-        //         'sub_menu' => $sub_menu,
-        //     ]);
-        // }
-        // // echo json_encode($dataUrl);
-
-        // foreach ($dataUrl as $main) {
-        //     # code...
-        //     foreach ($main['sub_menu'] as $sub) {
-        //         # code...
-        //         if (count($sub['subsub_menu']) != 0) {
-        //             echo "!null : (".$sub['name_sub_menu'].")";
-        //             echo "</br>";
-        //             // foreach ($sub['subsub_menu'] as $subsub) :
-        //                 //     # code...
-        //                 // endforeach;
-        //         } else {
-        //             echo "null: (".$sub['name_sub_menu'].")";
-        //             echo count($sub['subsub_menu']);
-        //             echo "</br>";
-        //         }
-        //     }
-        // }
+		echo json_encode($dataUrl);
     }
 
     public function kodeDinas()
     {
-        parent::MasterView('rekening_dasar/kode_dinas/kode_dinas', []);
+        parent::MasterView('rekening_dasar/kode_dinas/kode_dinas', [
+            'dataUrl' => parent::manageUrl(), 
+        ]);
     }
 
     public function kodeUrusan()
     {
-        parent::MasterView('rekening_dasar/kode_urusan/kode_urusan', []);
+        parent::MasterView('rekening_dasar/kode_urusan/kode_urusan', ['dataUrl' => parent::manageUrl()]);
     }
 
     public function kodeBidang()
     {
-        parent::MasterView('rekening_dasar/kode_bidang/kode_bidang', []);
+        parent::MasterView('rekening_dasar/kode_bidang/kode_bidang', ['dataUrl' => parent::manageUrl(null)]);
     }
 
     public function kodeKegiatan()
     {
-        parent::MasterView('rekening_dasar/kode_kegiatan/kode_kegiatan', []);
+        parent::MasterView('rekening_dasar/kode_kegiatan/kode_kegiatan', ['dataUrl' => parent::manageUrl(null)]);
     }
 
     public function kodeProgram()
     {
-        parent::MasterView('rekening_dasar/kode_program/kode_program', []);
+        parent::MasterView('rekening_dasar/kode_program/kode_program', ['dataUrl' => parent::manageUrl(null)]);
     }
 
     public function kodeUnit()
     {
-        parent::MasterView('rekening_dasar/kode_unit/kode_unit', []);
+        parent::MasterView('rekening_dasar/kode_unit/kode_unit', ['dataUrl' => parent::manageUrl(null)]);
     }
 }

@@ -13,9 +13,9 @@ sispj.controller("auth", function ($scope, $http, $window, $timeout) {
             $scope.error = true;
           } else {
             if (data.data.checkUser == "admin") {
-              $window.location.href = "/home/admin";
+              $window.location.href = "/dashboard/admin";
             } else if (data.data.checkUser == "pegawai") {
-              $window.location.href = "/home/pegawai";
+              $window.location.href = "/dashboard/pegawai";
             }
           }
         },

@@ -9,25 +9,25 @@ class User extends BaseController
 {
     public function index()
     {
-        parent::masterView('user/user', []);
+        parent::masterView('user/user', ['dataUrl' => parent::manageUrl()]);
     }
 
     public function detail()
     {
-        $this->masterView('/user/detail', []);
+        $this->masterView('/user/detail', ['dataUrl' => parent::manageUrl()]);
     }
 
     public function tambah()
     {
-        $this->masterView('/user/tambah', []);
+        $this->masterView('/user/tambah', ['dataUrl' => parent::manageUrl()]);
     }
 
     public function admin()
     {
-        $this->masterView('templates/user/admin', []);
+        $this->masterView('templates/user/admin', ['dataUrl' => parent::manageUrl()]);
     }
     public function pegawai()
     {
-        $this->masterView('templates/user/pegawai', []);
+        $this->masterView('templates/user/pegawai', ['dataUrl' => parent::manageUrl()]);
     }
 }

@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <a href="/user/tambah" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+                <a href="/master/user/tambah" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
                     style="margin-bottom: 10px;"><i class="fas fa-plus fa-sm text-white-50"></i>Tambah
                     Data</a>
                 <table datatable="ng" dt-options="vm.dtOptions" class="table table-bordered" width="100%"
@@ -182,15 +182,7 @@
                         </div>
                         <!-- <li ng-repeat="file in files">{{file.name}}</li> -->
                     </div>
-                    <div class="modal-footer">
-                        <input type="text" name="idUser" ng-model="iduser" ng-hide="true">
-                        <!-- <input type="text" name="file_lama" ng-model="file_lama" ng-hide="false"> -->
-                        <button type="submit" class="btn btn-success col-sm-2 mb-3"><i class="fa fa-save">
-                            </i> {{ modalButton }}</button>
-                        <button type="button" class="btn btn-danger col-sm-2 mb-3"
-                            ng-click="closeModal('#detailEditUser')"><i class="fa fa-right-from-bracket"></i>
-                            Kembali</button>
-                    </div>
+
                 </form>
             </div>
         </div>

@@ -1,18 +1,20 @@
+<?php $session = session();
+$uri = new \CodeIgniter\HTTP\URI(current_url()); ?>
 <!-- Begin Page Content -->
-<div class="container-fluid" ng-controller="HakAksesSubSub">
+<div class="container-fluid" ng-controller="HakAkses">
+
     <!-- Page Heading -->
     <!-- Content Header (Page header) -->
     <section class=" content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Data Menu</h1>
+                    <h1>Detail Data Hak Akses</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Menu</a></li>
-                        <li class="breadcrumb-item"><a href="#">Sub Menu</a></li>
+                        <li class="breadcrumb-item"><a href="#">Hak Akses</a></li>
                     </ol>
                 </div>
             </div>
@@ -21,9 +23,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="<?= base_url('/menu') ?>" class="btn btn-outline-info">Main</a>
-            <a href="<?= base_url('/menu/sub') ?>" class="btn btn-outline-info">Sub Menu</a>
-            <a href="<?= base_url('/menu/subsub') ?>" class="btn btn-outline-info active">Sub Sub Menu</a>
+            <!-- <a href="<?= base_url('/menu') ?>" class="btn btn-outline-info active">Main</a> -->
         </div>
         <div class="card-body">
             <div>
@@ -39,46 +39,39 @@
                     ng-click="tambahData()"><i class="fas fa-plus fa-sm text-white-50"></i>Tambah
                     Data</button>
                 <table datatable="ng" dt-options="vm.dtOptions" class="table table-bordered" width="100%"
-                    cellspacing="0" ng-init="getMenu()">
+                    cellspacing="0" ng-init="detailRoleAkses()">
                     <thead>
                         <tr>
                             <th style="width: 10px;">No</th>
-                            <th>Nama Menu</th>
-                            <th>Sub Menu</th>
                             <th>Main Menu</th>
+                            <th>Main URL</th>
                             <th>Status Menu</th>
-                            <th>Nomor Urut</th>
-                            <th>Url Menu</th>
-                            <th>Action</th>
+                            <th>Hak Akses</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                            <th style="width: 10px;">No</th>
-                            <th>Nama Menu</th>
-                            <th>Sub Menu</th>
+                            <th>No</th>
                             <th>Main Menu</th>
+                            <th>Main URL</th>
                             <th>Status Menu</th>
-                            <th>Nomor Urut</th>
-                            <th>Url Menu</th>
-                            <th>Action</th>
+                            <th>Hak Akses</th>
                         </tr>
                     </tfoot>
                     <tbody>
                         <tr ng-repeat="d in datas">
                             <td>{{ $index +1 }}</td>
-                            <td>{{ d.name_sub_sub_menu }}</td>
                             <td>{{ d.name_sub_menu }}</td>
-                            <td>{{ d.name_main_menu }}</td>
-                            <td ng-if="d.status_sub_sub_menu == '1'">Aktif</td>
-                            <td ng-if="d.status_sub_sub_menu == '0'">Tidak Aktif</td>
-                            <td>{{ d.no_urut_main_menu }}</td>
-                            <td>{{ d.sub_sub_url }}</td>
+                            <td>{{ d.sub_url }}</td>
+                            <td ng-if="d.status_sub_menu == '1'">Aktif</td>
+                            <td ng-if="d.status_sub_menu == '0'">Tidak Aktif</td>
+                            <td ng-if="d.status_sub_menu != ''"></td>
                             <td style="text-align: center; width: 100px;">
-                                <button type="submit" class="btn btn-info" ng-click="getDetail(d.id)"
-                                    style="margin-top: 5px;"><i class="fa fa-edit"></i></button>
-                                <button type="submit" class="btn btn-danger" ng-click="deleteData(d.id)"
-                                    style="margin-top: 5px;"><i class="fa fa-trash"></i></button>
+                                <div
+                                    class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch3">
+                                    <label class="custom-control-label" for="customSwitch3"></label>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
